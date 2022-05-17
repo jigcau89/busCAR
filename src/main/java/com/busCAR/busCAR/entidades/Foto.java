@@ -10,7 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 public class Foto {
-    
+
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -19,12 +19,12 @@ public class Foto {
     private String mime;
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    private Byte[] contenido;
+    private byte[] contenido;
 
     public Foto() {
     }
 
-    public Foto(String nombre, String mime, Byte[] contenido) {
+    public Foto(String nombre, String mime, byte[] contenido) {
         this.nombre = nombre;
         this.mime = mime;
         this.contenido = contenido;
@@ -54,11 +54,11 @@ public class Foto {
         this.mime = mime;
     }
 
-    public Byte[] getContenido() {
+    public byte[] getContenido() {
         return contenido;
     }
 
-    public void setContenido(Byte[] contenido) {
+    public void setContenido(byte[] contenido) {
         this.contenido = contenido;
     }
 

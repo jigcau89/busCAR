@@ -21,6 +21,7 @@ public class Transaccion {
     private Date fechaTransaccion;
     private Double monto;
     private FormaDePago formaDePago;
+    private Boolean alta;
 
     @OneToOne
     private Usuario usuario;
@@ -87,8 +88,16 @@ public class Transaccion {
         this.vehiculo = vehiculo;
     }
 
+    public Boolean getAlta() {
+        return alta;
+    }
+
+    public void setAlta(Boolean alta) {
+        this.alta = alta;
+    }
+
     @Override
     public String toString() {
-        return "Transaccion{" + "id=" + id + ", fechaTransaccion=" + fechaTransaccion + ", monto=" + monto + ", formaDePago=" + formaDePago + ", usuario=" + usuario + ", vehiculo=" + vehiculo + '}';
+        return "Transaccion{" + "id=" + id + ", fechaTransaccion=" + fechaTransaccion + ", monto=" + monto + ", formaDePago=" + formaDePago + ", alta=" + alta + ", usuario=" + usuario + ", vehiculo=" + vehiculo + '}';
     }
 }

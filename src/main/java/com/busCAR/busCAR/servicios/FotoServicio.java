@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,9 +18,8 @@ public class FotoServicio {
     private FotoRepositorio fotoRepositorio;
 
     //si el método se ejecuta sin lazar excepiones, entonces se hace un comit a la base de datos y se aplican todos los cambios
-    //si el método laza una excepion y no es atrapada se vuelve atrás con la transacción y no se aplica nada en la base de datos
-    
-    @Transactional
+    //si el método lanza una excepion y no es atrapada se vuelve atrás con la transacción y no se aplica nada en la base de datos
+    @Transactional(propagation = Propagation.NESTED)
     public Foto guardar(MultipartFile archivo) throws ErrorServicio {
 
         if (archivo != null && !archivo.isEmpty()) {
@@ -38,7 +38,7 @@ public class FotoServicio {
         return null;
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.NESTED)
     public Foto actualizar(String id, MultipartFile archivo) throws ErrorServicio {
         if (archivo != null) {
             try {
@@ -49,7 +49,6 @@ public class FotoServicio {
                     if (respuesta.isPresent()) {
                         foto = respuesta.get();
                     }
-
                 }
 
                 foto.setMime(archivo.getContentType());

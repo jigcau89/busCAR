@@ -61,9 +61,4 @@ public class Foto {
     public void setContenido(byte[] contenido) {
         this.contenido = contenido;
     }
-
-    @Override
-    public String toString() {
-        return "Foto{" + "id=" + id + ", nombre=" + nombre + ", mime=" + mime + ", contenido=" + contenido + '}';
-    }
 }

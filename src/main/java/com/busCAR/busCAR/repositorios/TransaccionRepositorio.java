@@ -10,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TransaccionRepositorio extends JpaRepository<Transaccion, String>{
+public interface TransaccionRepositorio extends JpaRepository<Transaccion, String> {
     
     @Query("SELECT t FROM Transaccion t WHERE t.fechaTransaccion = :fecha")
     public List<Transaccion> buscarPorFechaTransaccion(@Param("fecha") Date fecha);
@@ -26,4 +26,7 @@ public interface TransaccionRepositorio extends JpaRepository<Transaccion, Strin
     
     @Query("SELECT t FROM Transaccion t WHERE t.vehiculo.patente = :patente")
     public List<Transaccion> buscarPorPatenteVehiculo(@Param("patente") String patente);
+    
+    @Query("SELECT t FROM Transaccion t WHERE t.alta = :alta")
+    public List<Transaccion> buscarPorAlta(@Param("alta") Boolean alta);
 }

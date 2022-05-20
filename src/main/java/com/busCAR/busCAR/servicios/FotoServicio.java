@@ -4,7 +4,10 @@ import com.busCAR.busCAR.entidades.Foto;
 import com.busCAR.busCAR.errores.ErrorServicio;
 import com.busCAR.busCAR.repositorios.FotoRepositorio;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -17,25 +20,22 @@ public class FotoServicio {
     @Autowired
     private FotoRepositorio fotoRepositorio;
 
-    //si el método se ejecuta sin lazar excepiones, entonces se hace un comit a la base de datos y se aplican todos los cambios
-    //si el método lanza una excepion y no es atrapada se vuelve atrás con la transacción y no se aplica nada en la base de datos
     @Transactional(propagation = Propagation.NESTED)
     public Foto guardar(MultipartFile archivo) throws ErrorServicio {
 
         if (archivo != null && !archivo.isEmpty()) {
+            Foto foto = new Foto();
+            foto.setMime(archivo.getContentType());
+            foto.setNombre(archivo.getName());
             try {
-                Foto foto = new Foto();
-
-                foto.setMime(archivo.getContentType());
-                foto.setNombre(archivo.getName());
                 foto.setContenido(archivo.getBytes());
-
-                return fotoRepositorio.save(foto);
             } catch (IOException e) {
-                System.err.println(e.getMessage());
+                Logger.getLogger(FotoServicio.class.getName()).log(Level.SEVERE, null, e);
             }
+            return fotoRepositorio.save(foto);
+        } else {
+            throw new ErrorServicio("No se puede cargar la foto.");
         }
-        return null;
     }
 
     @Transactional(propagation = Propagation.NESTED)
@@ -61,5 +61,26 @@ public class FotoServicio {
             }
         }
         return null;
+    }
+    
+    @Transactional(propagation = Propagation.NESTED)
+    public void borrar(String id) {
+        Foto foto = fotoRepositorio.getById(id);
+        fotoRepositorio.delete(foto);
+    }
+    
+    @Transactional(readOnly = true)
+    public List<Foto> buscarTodos() {
+        return fotoRepositorio.findAll();
+    }
+    
+    @Transactional(readOnly = true)
+    public List<Foto> buscarTodosAlta() {
+        return fotoRepositorio.buscarPorAlta();
+    }
+    
+    @Transactional(readOnly = true)
+    public Foto buscarPorId(String id) {
+        return fotoRepositorio.getById(id);
     }
 }

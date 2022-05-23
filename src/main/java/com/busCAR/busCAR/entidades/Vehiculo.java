@@ -15,8 +15,8 @@ import org.hibernate.annotations.GenericGenerator;
 public class Vehiculo {
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name="id",strategy="uuid2")
+    @GeneratedValue(generator="uuid")
+    @GenericGenerator(name="uuid",strategy="uuid2")
     private String id;
     private String patente;
     private String modelo;

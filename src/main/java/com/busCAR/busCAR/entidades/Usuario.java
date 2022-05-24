@@ -1,7 +1,11 @@
 package com.busCAR.busCAR.entidades;
 
+import com.busCAR.busCAR.enumeraciones.Rol;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -36,13 +40,20 @@ public class Usuario {
     private Foto foto;
 
     private Boolean admin;
+    
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
     private String clave;
+    
+    private List<Vehiculo> favoritos;
+    
+    private boolean activo;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String dni, String telefono, String email, String direccion, Date fechaDeNacimiento, Foto foto, Boolean admin, String clave) {
+    public Usuario(String nombre, String apellido, String dni, String telefono, String email, String direccion, Date fechaDeNacimiento, Foto foto, Boolean admin, Rol rol, String clave, List<Vehiculo> favoritos, boolean activo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -52,10 +63,14 @@ public class Usuario {
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.foto = foto;
         this.admin = admin;
+        this.rol = rol;
         this.clave = clave;
+        this.favoritos = favoritos;
+        this.activo = activo;
     }
-
     
+    
+
     /**
      * @return the id
      */
@@ -197,6 +212,20 @@ public class Usuario {
     }
 
     /**
+     * @return the rol
+     */
+    public Rol getRol() {
+        return rol;
+    }
+
+    /**
+     * @param rol the rol to set
+     */
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    /**
      * @return the clave
      */
     public String getClave() {
@@ -210,9 +239,38 @@ public class Usuario {
         this.clave = clave;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", email=" + email + ", direccion=" + direccion + ", fechaDeNacimiento=" + fechaDeNacimiento + ", foto=" + foto + ", admin=" + admin + ", clave=" + clave + '}';
+    /**
+     * @return the favoritos
+     */
+    public List<Vehiculo> getFavoritos() {
+        return favoritos;
     }
 
+    /**
+     * @param favoritos the favoritos to set
+     */
+    public void setFavoritos(List<Vehiculo> favoritos) {
+        this.favoritos = favoritos;
+    }
+
+    /**
+     * @return the activo
+     */
+    public boolean isActivo() {
+        return activo;
+    }
+
+    /**
+     * @param activo the activo to set
+     */
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", email=" + email + ", direccion=" + direccion + ", fechaDeNacimiento=" + fechaDeNacimiento + ", foto=" + foto + ", admin=" + admin + ", rol=" + rol + ", clave=" + clave + ", favoritos=" + favoritos + ", activo=" + activo + '}';
+    }
+
+    
 }

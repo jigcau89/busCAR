@@ -75,11 +75,6 @@ public class FotoServicio {
     }
     
     @Transactional(readOnly = true)
-    public List<Foto> buscarTodosAlta() {
-        return fotoRepositorio.buscarPorAlta();
-    }
-    
-    @Transactional(readOnly = true)
     public Foto buscarPorId(String id) {
         return fotoRepositorio.getById(id);
     }

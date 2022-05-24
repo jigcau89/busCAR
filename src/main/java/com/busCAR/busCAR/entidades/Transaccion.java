@@ -27,16 +27,18 @@ public class Transaccion {
     @OneToOne
     private Vehiculo vehiculo;
 
+    private Boolean alta;
+
     public Transaccion() {
     }
 
-    public Transaccion(Date fechaTransaccion, Double monto, FormaDePago formaDePago, Usuario usuario, Vehiculo vehiculo) {
-        this.id = id;
+    public Transaccion(Date fechaTransaccion, Double monto, FormaDePago formaDePago, Usuario usuario, Vehiculo vehiculo, Boolean alta) {
         this.fechaTransaccion = fechaTransaccion;
         this.monto = monto;
         this.formaDePago = formaDePago;
         this.usuario = usuario;
         this.vehiculo = vehiculo;
+        this.alta = alta;
     }
 
     public String getId() {
@@ -87,8 +89,12 @@ public class Transaccion {
         this.vehiculo = vehiculo;
     }
 
-    @Override
-    public String toString() {
-        return "Transaccion{" + "id=" + id + ", fechaTransaccion=" + fechaTransaccion + ", monto=" + monto + ", formaDePago=" + formaDePago + ", usuario=" + usuario + ", vehiculo=" + vehiculo + '}';
+    public Boolean getAlta() {
+        return alta;
     }
+
+    public void setAlta(Boolean alta) {
+        this.alta = alta;
+    }
+
 }

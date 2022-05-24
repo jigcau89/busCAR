@@ -21,23 +21,24 @@ public class Transaccion {
     private Date fechaTransaccion;
     private Double monto;
     private FormaDePago formaDePago;
-    private Boolean alta;
 
     @OneToOne
     private Usuario usuario;
     @OneToOne
     private Vehiculo vehiculo;
 
+    private Boolean alta;
+
     public Transaccion() {
     }
 
-    public Transaccion(Date fechaTransaccion, Double monto, FormaDePago formaDePago, Usuario usuario, Vehiculo vehiculo) {
-        this.id = id;
+    public Transaccion(Date fechaTransaccion, Double monto, FormaDePago formaDePago, Usuario usuario, Vehiculo vehiculo, Boolean alta) {
         this.fechaTransaccion = fechaTransaccion;
         this.monto = monto;
         this.formaDePago = formaDePago;
         this.usuario = usuario;
         this.vehiculo = vehiculo;
+        this.alta = alta;
     }
 
     public String getId() {
@@ -96,8 +97,4 @@ public class Transaccion {
         this.alta = alta;
     }
 
-    @Override
-    public String toString() {
-        return "Transaccion{" + "id=" + id + ", fechaTransaccion=" + fechaTransaccion + ", monto=" + monto + ", formaDePago=" + formaDePago + ", alta=" + alta + ", usuario=" + usuario + ", vehiculo=" + vehiculo + '}';
-    }
 }

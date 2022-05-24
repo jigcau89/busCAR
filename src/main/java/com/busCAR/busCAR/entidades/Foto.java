@@ -61,4 +61,5 @@ public class Foto {
     public void setContenido(byte[] contenido) {
         this.contenido = contenido;
     }
+
 }

@@ -32,7 +32,7 @@ public class Usuario {
     private String email;
 
     private String direccion;
-    
+
     @Temporal(TemporalType.DATE)
     private Date fechaDeNacimiento;
 
@@ -40,20 +40,20 @@ public class Usuario {
     private Foto foto;
 
     private Boolean admin;
-    
+
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
     private String clave;
-    
-    private List<Vehiculo> favoritos;
-    
+   
+    //private List<Vehiculo> favoritos;
+
     private boolean activo;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String dni, String telefono, String email, String direccion, Date fechaDeNacimiento, Foto foto, Boolean admin, Rol rol, String clave, List<Vehiculo> favoritos, boolean activo) {
+    public Usuario(String nombre, String apellido, String dni, String telefono, String email, String direccion, Date fechaDeNacimiento, Foto foto, Boolean admin, Rol rol, String clave, /*List<Vehiculo> favoritos, */boolean activo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -65,12 +65,10 @@ public class Usuario {
         this.admin = admin;
         this.rol = rol;
         this.clave = clave;
-        this.favoritos = favoritos;
+        //this.favoritos = favoritos;
         this.activo = activo;
     }
     
-    
-
     /**
      * @return the id
      */
@@ -241,18 +239,18 @@ public class Usuario {
 
     /**
      * @return the favoritos
-     */
+     *//*
     public List<Vehiculo> getFavoritos() {
         return favoritos;
     }
-
+*/
     /**
      * @param favoritos the favoritos to set
-     */
+     *//*
     public void setFavoritos(List<Vehiculo> favoritos) {
         this.favoritos = favoritos;
     }
-
+*/
     /**
      * @return the activo
      */
@@ -269,8 +267,6 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", email=" + email + ", direccion=" + direccion + ", fechaDeNacimiento=" + fechaDeNacimiento + ", foto=" + foto + ", admin=" + admin + ", rol=" + rol + ", clave=" + clave + ", favoritos=" + favoritos + ", activo=" + activo + '}';
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", email=" + email + ", direccion=" + direccion + ", fechaDeNacimiento=" + fechaDeNacimiento + ", foto=" + foto + ", admin=" + admin + ", rol=" + rol + ", clave=" + clave + ", favoritos=" /*+ favoritos*/ + ", activo=" + activo + '}';
     }
-
-    
 }

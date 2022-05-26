@@ -37,9 +37,9 @@ public class UsuarioServicio implements UserDetailsService {
     private FotoServicio fotoServicio;
 
     @Transactional
-    public void guardar(MultipartFile archivo, String id, String nombre, String apellido, String dni, String telefono, String mail, String direccion, String clave, String clave2, String rol) throws ErrorServicio {
+    public void guardar(MultipartFile archivo, String id, String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2, String rol) throws ErrorServicio {
 
-        validar(nombre, apellido, dni, telefono, mail, direccion, clave, clave2, rol);
+        validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2, rol);
 
         Usuario usuario = new Usuario();
 
@@ -47,7 +47,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setApellido(apellido);
         usuario.setDni(dni);
         usuario.setTelefono(telefono);
-        usuario.setEmail(mail);
+        usuario.setEmail(email);
         usuario.setDireccion(direccion);
 
         usuario.setRol(Rol.valueOf(rol));
@@ -67,9 +67,9 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, String dni, String telefono, String mail, String direccion, String clave, String clave2, String rol) throws ErrorServicio {
+    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2, String rol) throws ErrorServicio {
 
-        validar(nombre, apellido, dni, telefono, mail, direccion, clave, clave2, rol);
+        validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2, rol);
         Optional<Usuario> repuesta = usuarioRepositorio.findById(id);
         if (repuesta.isPresent()) {
             Usuario usuario = repuesta.get();
@@ -77,7 +77,7 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setApellido(apellido);
             usuario.setDni(dni);
             usuario.setTelefono(telefono);
-            usuario.setEmail(mail);
+            usuario.setEmail(email);
             usuario.setDireccion(direccion);
 
             usuario.setRol(Rol.valueOf(rol));
@@ -123,7 +123,7 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-    private void validar(String nombre, String apellido, String dni, String telefono, String mail, String direccion, String clave, String clave2, String rol) throws ErrorServicio {
+    private void validar(String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2, String rol) throws ErrorServicio {
 
         if (nombre == null || nombre.isEmpty() || nombre.contains("  ")) {
             throw new ErrorServicio("El nombre del usuario no puede ser nulo. ");
@@ -137,10 +137,10 @@ public class UsuarioServicio implements UserDetailsService {
         if (telefono == null || telefono.isEmpty() || telefono.contains("  ")) {
             throw new ErrorServicio("El telefono del usuario no puede ser nulo. ");
         }
-        if (mail == null || mail.isEmpty() || mail.contains("  ")) {
+        if (email == null || email.isEmpty() || email.contains("  ")) {
             throw new ErrorServicio("El mail del usuario no puede ser nulo. ");
         }
-        if (usuarioRepositorio.buscarPorMail(mail) != null) {
+        if (usuarioRepositorio.buscarPorMail(email) != null) {
             throw new ErrorServicio("El Email ya esta en uso");
         }
         if (direccion == null || direccion.isEmpty()) {

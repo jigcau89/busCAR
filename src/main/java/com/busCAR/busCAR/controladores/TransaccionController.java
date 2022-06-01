@@ -8,6 +8,8 @@ import com.busCAR.busCAR.errores.ErrorServicio;
 import com.busCAR.busCAR.servicios.TransaccionServicio;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,14 +24,46 @@ public class TransaccionController {
 
     @Autowired
     private TransaccionServicio servicioTransaccion;
-    
+
+    @GetMapping("/pago")
+    public String pago(ModelMap modelo, @RequestParam Double precio) {
+        if (((precio * 20) / 100) > 100000d) {
+            precio = 100000d;
+        } else if (((precio * 20) / 100) < 15000d) {
+            precio = 15000d;
+        } else {
+            precio = ((precio * 20) / 100); 
+        }
+        modelo.put("reserva", precio.intValue());
+        return null;
+    }
+
+    @PostMapping("/pago")
+    public String pago(ModelMap modelo, @RequestParam Double precio, @RequestParam String idUsuario, @RequestParam String idVehiculo, @RequestParam FormaDePago metodoPago, @RequestParam Double monto) {
+        if (((precio * 20) / 100) > 100000d) {
+            precio = 100000d;
+        } else if (((precio * 20) / 100) < 15000d) {
+            precio = 15000d;
+        } else {
+            precio = ((precio * 20) / 100); 
+        }
+        modelo.put("reserva", precio.intValue());
+        try {
+            servicioTransaccion.venta(idUsuario, idVehiculo, metodoPago, monto);
+            modelo.put("exito", "");
+        } catch (ErrorServicio ex) {
+            modelo.put("error", "");
+        }
+        return null;
+    }
+
     @GetMapping("/gestion")
     public String gestion(ModelMap modelo) {
         List<Transaccion> transacciones = servicioTransaccion.buscarPorAlta(Boolean.TRUE);
         modelo.put("transacciones", transacciones);
         return "gestion_transaccion";
     }
-    
+
     @GetMapping("/editar")
     public String editar(ModelMap modelo, @RequestParam String id) {
         Transaccion transaccion = servicioTransaccion.buscarPorId(id);
@@ -49,7 +83,7 @@ public class TransaccionController {
         modelo.put("autor", transaccion);
         return "transaccion/transaccion_editar";
     }
-    
+
     @GetMapping("/alta")
     public String alta(ModelMap modelo, @RequestParam String id) throws ErrorServicio {
         try {
@@ -59,7 +93,7 @@ public class TransaccionController {
         }
         return "redirect:/transaccion/gestion";
     }
-    
+
     @GetMapping("/baja")
     public String baja(ModelMap modelo, @RequestParam String id) {
         try {

@@ -20,7 +20,7 @@ public class FotoServicio {
     @Autowired
     private FotoRepositorio fotoRepositorio;
 
-    @Transactional(propagation = Propagation.NESTED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public Foto guardar(MultipartFile archivo) throws ErrorServicio {
 
         if (archivo != null && !archivo.isEmpty()) {
@@ -38,7 +38,7 @@ public class FotoServicio {
         }
     }
 
-    @Transactional(propagation = Propagation.NESTED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public Foto actualizar(String id, MultipartFile archivo) throws ErrorServicio {
         if (archivo != null) {
             try {
@@ -63,7 +63,7 @@ public class FotoServicio {
         return null;
     }
     
-    @Transactional(propagation = Propagation.NESTED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void borrar(String id) {
         Foto foto = fotoRepositorio.getById(id);
         fotoRepositorio.delete(foto);

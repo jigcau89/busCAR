@@ -19,6 +19,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -36,10 +37,10 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private FotoServicio fotoServicio;
 
-    @Transactional
-    public void guardar(MultipartFile archivo, String id, String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2, String rol) throws ErrorServicio {
+    @Transactional(propagation = Propagation.NESTED)
+    public void guardar(MultipartFile archivo, String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2/*, String rol*/) throws ErrorServicio {
 
-        validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2, rol);
+        validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2/*, "USUARIO"*/);
 
         Usuario usuario = new Usuario();
 
@@ -50,16 +51,17 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setEmail(email);
         usuario.setDireccion(direccion);
 
-        usuario.setRol(Rol.valueOf(rol));
+        //usuario.setRol(Rol.valueOf(rol));
+        usuario.setRol(Rol.USUARIO);
 
         usuario.setClave(new BCryptPasswordEncoder().encode(clave));
-        usuario.setAdmin(Boolean.TRUE);
+        //usuario.setAdmin(Boolean.TRUE);
         usuario.setFechaDeNacimiento(new Date());
         usuario.setActivo(true);
-
+        
         Foto foto = fotoServicio.guardar(archivo);
         usuario.setFoto(foto);
-
+        
         emailServicio.enviarThread(usuario.getEmail());
 
         usuarioRepositorio.save(usuario);
@@ -67,9 +69,9 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2, String rol) throws ErrorServicio {
+    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2/*, String rol*/) throws ErrorServicio {
 
-        validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2, rol);
+        validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2/*, rol*/);
         Optional<Usuario> repuesta = usuarioRepositorio.findById(id);
         if (repuesta.isPresent()) {
             Usuario usuario = repuesta.get();
@@ -80,7 +82,8 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setEmail(email);
             usuario.setDireccion(direccion);
 
-            usuario.setRol(Rol.valueOf(rol));
+            //usuario.setRol(Rol.valueOf(rol)); 
+            usuario.setRol(Rol.USUARIO);
 
             String encriptada = new BCryptPasswordEncoder().encode(clave);
             usuario.setClave(encriptada);
@@ -123,7 +126,7 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-    private void validar(String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2, String rol) throws ErrorServicio {
+    private void validar(String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2/*, String rol*/) throws ErrorServicio {
 
         if (nombre == null || nombre.isEmpty() || nombre.contains("  ")) {
             throw new ErrorServicio("El nombre del usuario no puede ser nulo. ");
@@ -152,9 +155,9 @@ public class UsuarioServicio implements UserDetailsService {
         if (!clave.equals(clave2)) {
             throw new ErrorServicio("La clave deben ser iguales. ");
         }
-        if (!Rol.ADMIN.toString().equals(rol) && !Rol.USUARIO.toString().equals(rol)) {
-            throw new ErrorServicio("Debe tener un rol valido");
-        }
+//        if (!Rol.ADMIN.toString().equals(rol) && !Rol.USUARIO.toString().equals(rol)) {
+//            throw new ErrorServicio("Debe tener un rol valido");
+//        }
 
     }
 

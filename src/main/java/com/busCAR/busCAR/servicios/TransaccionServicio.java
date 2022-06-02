@@ -33,6 +33,9 @@ public class TransaccionServicio {
         if (usuario == null) {
             throw new ErrorServicio("El usuario no existe.");
         }
+        if (vehiculo == null) {
+            throw new ErrorServicio("El vehiculo no existe.");
+        }
         if (fechaTransaccion == null || fechaTransaccion.before(fechaActual)) {
             throw new ErrorServicio("La fecha de transacción no es válida.");
         }
@@ -42,10 +45,6 @@ public class TransaccionServicio {
         if (formaDePago == null || formaDePago.toString().trim().isEmpty()) {
             throw new ErrorServicio("La forma de pago no es válida");
         }
-        if (vehiculo == null) {
-            throw new ErrorServicio("El vehiculo no existe.");
-        }
-
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
@@ -172,7 +171,7 @@ public class TransaccionServicio {
             Usuario usuario = respuestaUser.get();
             Optional<Vehiculo> respuestaVehiculo = repositorioVehiculo.findById(idVehiculo);
             Vehiculo vehiculo = respuestaVehiculo.get();
-
+            
             Date fechaTransaccion = new Date();
             guardar(fechaTransaccion, monto, metodoPago, usuario, vehiculo);
         } catch (ErrorServicio e) {

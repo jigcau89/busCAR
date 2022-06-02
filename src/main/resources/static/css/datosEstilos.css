@@ -1,0 +1,30 @@
+body{
+    text-align: center;
+    background-color: #666666;
+}
+
+.form-datos{
+    border: 1px solid #666666;
+    border-radius: 15px;
+    text-align: center;
+    padding: 10px 20px;
+    margin: 20px;
+    width: 50%;
+    background-color: #FFFFFF;
+}
+
+.dato{
+    padding: 0.5em;
+    margin: 1em;
+    text-align: justify;
+}
+
+.dato label{
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.dato input{
+    padding: 5px 10px;
+    margin-left: 10px;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="datosEstilos.css">
+    <title>Datos - Efectivo</title>
+</head>
+<body>
+    <header>
+        
+    </header>
+
+    <main>
+        <div>
+            <p>Ingrese sus datos para completar la reserva</p>
+
+            <form class="form-datos">
+                <div class="dato">
+                    <label for="nombre">Nombre y Apellido</label>
+                    <input type="text" id="nombre" class="form-padron" placeholder="Pedro Pérez" required>
+                </div>
+                <div class="dato">    
+                    <label for="domicilio">Domicilio</label>
+                    <input type="text" id="domicilio" class="form-padron" placeholder="Av. Belgrano XXXX" required>
+                </div>
+                <div class="dato">
+                    <label for="dni">DNI</label>
+                    <input type="text" id="dni" class="form-padron" placeholder="XX XXX XXX " required>
+                </div>
+                <div class="dato">
+                    <label for="cuil">CUIL/CUIT</label>
+                    <input type="text" id="cuil" class="form-padron" placeholder="XX-XXXXXXXX-X" required>
+                </div>
+                <div class="dato">
+                    <label for="correo">Correo Electrónico</label>
+                    <input type="email" id="correo" class="form-padron" required placeholder="correo@dominio.com">
+                </div>
+                <div class="dato">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" class="form-padron" required placeholder="(XX) XXX XXXXXXX">
+                </div>
+                <div class="dato">
+                    <label for="telefono">Fecha</label>
+                    <input type="date" id="fecha" class="form-padron" required placeholder="DD-MM-AAAA">
+                </div>     
+                <div class="dato">
+                    <label for="banco">Punto de Pago</label>
+                    <select>
+                        <option>Rapipago</option>
+                        <option>Pagofácil</option>
+                    </select>
+                </div>     
+                    <input type="submit" value="Enviar" class="enviar">
+            </form>
+        </div>  
+    </main>
+
+    <footer>
+
+    </footer>        
+</body>
+</html>

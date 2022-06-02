@@ -1,0 +1,29 @@
+
+.mensaje{
+    background-color:chartreuse;
+    color: gray;
+}
+
+.form-horario{
+    margin: 5px 20px 30px 10px;
+}
+
+.form-contacto{
+    margin: 5px 20px 30px 10px;
+}
+
+.enviar{
+    margin-left: 20px;
+}
+
+.tabla-turno{
+    border: 1px solid #000000;
+    margin: 20px 10px;
+    padding: 10px ;
+    border-collapse: collapse;
+}
+
+.tabla-turno th,td{
+    border: 2px solid;
+    padding: 10px 20px;        
+}

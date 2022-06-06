@@ -121,7 +121,7 @@ public interface VehiculoRepositorio extends JpaRepository<Vehiculo, String> {
     public List<Vehiculo> TraerModeloEstado(@Param("m") String m, @Param("n") Boolean n);/*Modelo y estado*/
 
     
-    @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.modelo LIKE :m AND v.kilometraje BETWEEN :k AND :k2 ORDER BY v.anioFabricacion")
+    @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.modelo LIKE :m AND v.kilometraje BETWEEN :k1 AND :k2 ORDER BY v.anioFabricacion")
     public List<Vehiculo> TraerModeloKilometros(@Param("m") String m, @Param("k1") String k1,@Param("k2")String k2);/*Modelo y Kilometros*/
 
     

@@ -1,5 +1,6 @@
 package com.busCAR.busCAR.servicios;
 
+import com.busCAR.busCAR.entidades.Foto;
 import com.busCAR.busCAR.entidades.Vehiculo;
 import com.busCAR.busCAR.enumeraciones.Color;
 import com.busCAR.busCAR.enumeraciones.TipoDeCombustible;
@@ -12,12 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class VehiculoServicio {
 
     @Autowired
     private VehiculoRepositorio vehiculorepositorio;
+
+    @Autowired
+    private FotoServicio fotoServicio;
 
     public void validar(String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, TipoDeVehiculo tdv) throws ErrorServicio {
 
@@ -69,7 +74,7 @@ public class VehiculoServicio {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void guardar(String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, TipoDeVehiculo tdv) throws ErrorServicio {
+    public void guardar(MultipartFile archivo, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, TipoDeVehiculo tdv) throws ErrorServicio {
 
         try {
             validar(patente, modelo, marca, anioFabricacion, color, precio, nuevo, kilometraje, tdc, tdv);
@@ -84,6 +89,9 @@ public class VehiculoServicio {
             vehiculo.setKilometraje(kilometraje);
             vehiculo.setTipoDeCombustible(tdc);
             vehiculo.setTipoDeVehiculo(tdv);
+            Foto foto = fotoServicio.guardar(archivo);
+            vehiculo.setFotos(foto);
+            vehiculorepositorio.save(vehiculo);
 
         } catch (ErrorServicio e) {
             throw new ErrorServicio(e.getMessage());
@@ -92,7 +100,7 @@ public class VehiculoServicio {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void modificar(String id, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, TipoDeVehiculo tdv) throws ErrorServicio {
+    public void modificar(MultipartFile archivo,String id, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, TipoDeVehiculo tdv) throws ErrorServicio {
         try {
             validar(patente, modelo, marca, anioFabricacion, color, precio, nuevo, kilometraje, tdc, tdv);
             Optional<Vehiculo> respuesta = vehiculorepositorio.findById(id);
@@ -108,6 +116,15 @@ public class VehiculoServicio {
                 vehiculo.setKilometraje(kilometraje);
                 vehiculo.setTipoDeCombustible(tdc);
                 vehiculo.setTipoDeVehiculo(tdv);
+
+                String idFoto = null;
+                if (vehiculo.getFotos() != null) {
+                    idFoto = vehiculo.getFotos().getId();
+                }
+
+                Foto foto = fotoServicio.actualizar(idFoto, archivo);
+                vehiculo.setFotos(foto);
+
                 vehiculorepositorio.save(vehiculo);
 
             }

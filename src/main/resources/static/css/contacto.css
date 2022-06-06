@@ -1,0 +1,139 @@
+body{
+    font-family: 'Questrial', sans-serif;
+    margin: 26px;
+}
+
+h1 {
+    text-align: center;    
+}
+
+p {
+    text-align: center;
+    font-size: 18px;
+}
+
+.contactoPrivado {
+    display: flex;
+}
+
+.cuestionario{    
+    width: 60%;
+    margin: 40px 0;
+}
+
+.foto {
+    padding: 10px 20px 10px;
+    margin-top: 70px;
+}
+
+.cuestionario label{
+    font-size: 18px;
+    display: block;
+    margin: 0 0 5px;
+}
+
+.form-padron{
+    display: block;
+    width: 90%;
+    padding: 10px 20px;
+    margin: 0 0 15px;    
+}
+
+.checkbox{
+    margin: 20px 0;
+}
+
+.enviar{
+    width: 30%;
+    padding: 15px 0;
+    margin: 20px;        
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: rgba(41, 105, 124, 0.904);
+    border: none;
+    border-radius: 5px;
+    transition: 1s all;
+    cursor: pointer; 
+}
+
+.enviar:hover{
+    background: rgb(0, 0, 0);
+    transform: scale(1.1)
+}
+
+.logosContacto{
+    text-align: center;
+}
+
+.logosContacto li{
+    display: inline;
+}
+
+.logosContacto li img:hover{
+    transform: scale(1.2);    
+}
+
+.logos{
+    text-align: center;
+    width: 10%;
+    margin: 50px;
+}
+
+.ubicacion{
+    text-align: center;
+    margin: 20px;
+}
+
+.mapa{
+    width: 80%;
+    height: 320px;
+    margin: 15px;
+}
+
+footer{
+    background: url(img/bg.jpg);
+    position: relative;
+}
+footer img{
+    margin-top: 20px;
+    height: 200px;
+    width: 20%;
+}
+
+.redes{
+    display: inline-block;
+    vertical-align: top;
+    /* margin: 0 0 0 15px; */
+    margin-top: 20px;
+    margin-left: 800px;
+    
+    position: absolute;
+}
+.redes li{
+    color:#FFFFFF;
+    font-size: 1.5em;
+    /* font-weight: bold; */
+    text-decoration: none;
+    list-style: none; 
+    
+}
+
+.redes a{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.redes a:hover{
+    color: rgb(4, 58, 40);
+}
+
+.iconos{
+    width: 1em;
+    height: 1em;
+    
+}
+.copyright{
+    text-align: center;
+    color:#FFFFFF;
+}

@@ -100,7 +100,7 @@ public class VehiculoServicio {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void modificar(MultipartFile archivo,String id, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, TipoDeVehiculo tdv) throws ErrorServicio {
+    public void modificar(MultipartFile archivo, String id, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, TipoDeVehiculo tdv) throws ErrorServicio {
         try {
             validar(patente, modelo, marca, anioFabricacion, color, precio, nuevo, kilometraje, tdc, tdv);
             Optional<Vehiculo> respuesta = vehiculorepositorio.findById(id);

@@ -1,15 +1,14 @@
 package com.busCAR.busCAR.controladores;
 
-import com.busCAR.busCAR.entidades.Transaccion;
 import com.busCAR.busCAR.entidades.Usuario;
 import com.busCAR.busCAR.entidades.Vehiculo;
 import com.busCAR.busCAR.enumeraciones.FormaDePago;
 import com.busCAR.busCAR.errores.ErrorServicio;
+import com.busCAR.busCAR.repositorios.VehiculoRepositorio;
 import com.busCAR.busCAR.servicios.TransaccionServicio;
-import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.busCAR.busCAR.servicios.UsuarioServicio;
+import com.busCAR.busCAR.servicios.VehiculoServicio;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,82 +24,144 @@ public class TransaccionController {
     @Autowired
     private TransaccionServicio servicioTransaccion;
 
+    @Autowired
+    private UsuarioServicio servicioUsuario;
+
+    @Autowired
+    private VehiculoServicio servicioVehiculo;
+
+    @Autowired
+    private VehiculoRepositorio repositorioVehiculo;
+
+    @GetMapping("/producto")
+    public String producto(ModelMap modelo/*, @RequestParam String id*/) {
+//        Optional<Vehiculo> respuesta = repositorioVehiculo.findById(id);
+
+//Como todavia no tengo la vista del catalogo de auto, la busqueda está hardcodeada para agarra siempre el mismo auto
+        Optional<Vehiculo> respuesta = repositorioVehiculo.findById("37d756bc-053b-489a-bcb7-72f4b14a431e");
+        Vehiculo vehiculo = respuesta.get();
+        modelo.put("vehiculo", vehiculo);
+        if (vehiculo.getNuevo()) {
+            modelo.put("condicion", "Nuevo");
+        } else {
+            modelo.put("condicion", "Usado");
+        }
+
+// Necesitaria ver de donde saco las preguntas que van a ir en la vista, y ver que tan dinamico puede ser
+//        String[] preguntas = new String[3];
+//        preguntas[0] = "Pregunta 1";
+//        preguntas[1] = "Pregunta 2";
+//        preguntas[2] = "Pregunta 3";
+//        modelo.put("preguntas", preguntas);
+        return "CompraProducto";
+    }
+
+    @GetMapping("/reserva")
+    public String pago(ModelMap modelo, @RequestParam String id) {
+        Optional<Vehiculo> respuesta = repositorioVehiculo.findById(id);
+        Vehiculo vehiculo = respuesta.get();
+        Double precio = vehiculo.getPrecio();
+
+        /* Saco el 5% del precio del vehiculo, si supera los 100.000, el monto a pagar para reservar se setea en 100.000
+   Si es menor a 50.000, se setea en 50.000*/
+        modelo.put("vehiculo", vehiculo);
+        if (((precio * 5) / 100) > 100000d) {
+            precio = 100000d;
+        } else if (((precio * 5) / 100) < 50000d) {
+            precio = 50000d;
+        } else {
+            precio = ((precio * 5) / 100);
+        }
+        modelo.put("precio", precio.intValue());
+        modelo.put("transferencia", FormaDePago.DEBITO);
+        modelo.put("tarjeta", FormaDePago.TARJETA);
+        modelo.put("rapipago", FormaDePago.EFECTIVO);
+        modelo.put("cripto", FormaDePago.CRIPTOMONEDAS);
+        return "reserva";
+    }
+
     @GetMapping("/pago")
-    public String pago(ModelMap modelo, @RequestParam Double precio) {
-        if (((precio * 20) / 100) > 100000d) {
-            precio = 100000d;
-        } else if (((precio * 20) / 100) < 15000d) {
-            precio = 15000d;
-        } else {
-            precio = ((precio * 20) / 100); 
-        }
-        modelo.put("reserva", precio.intValue());
-        return null;
-    }
-
-    @PostMapping("/pago")
-    public String pago(ModelMap modelo, @RequestParam Double precio, @RequestParam String idUsuario, @RequestParam String idVehiculo, @RequestParam FormaDePago metodoPago, @RequestParam Double monto) {
-        if (((precio * 20) / 100) > 100000d) {
-            precio = 100000d;
-        } else if (((precio * 20) / 100) < 15000d) {
-            precio = 15000d;
-        } else {
-            precio = ((precio * 20) / 100); 
-        }
-        modelo.put("reserva", precio.intValue());
+    public String pago(ModelMap modelo, @RequestParam Double precio, @RequestParam FormaDePago metodoPago, @RequestParam("id_v") String idVehiculo) {
         try {
-            servicioTransaccion.venta(idUsuario, idVehiculo, metodoPago, monto);
-            modelo.put("exito", "");
-        } catch (ErrorServicio ex) {
-            modelo.put("error", "");
+            modelo.put("monto", precio);
+            modelo.put("vehiculo", idVehiculo);
+            modelo.put("metodo", metodoPago);
+
+            switch (metodoPago) {
+                case DEBITO:
+                    return "datos-transferencia";
+                case TARJETA:
+                    return "datos-tarjeta";
+                case EFECTIVO:
+                    return "datos-efectivo";
+                case CRIPTOMONEDAS:
+                    return "datos-cripto";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
-        return null;
+        return "reserva";
     }
 
-    @GetMapping("/gestion")
-    public String gestion(ModelMap modelo) {
-        List<Transaccion> transacciones = servicioTransaccion.buscarPorAlta(Boolean.TRUE);
-        modelo.put("transacciones", transacciones);
-        return "gestion_transaccion";
-    }
-
-    @GetMapping("/editar")
-    public String editar(ModelMap modelo, @RequestParam String id) {
-        Transaccion transaccion = servicioTransaccion.buscarPorId(id);
-        modelo.put("transaccion", transaccion);
-        return "transaccion/transaccion_editar";
-    }
-
-    @PostMapping("/editar") /// no aparecen los mensajes pero funciona
-    public String editar(ModelMap modelo, @RequestParam String id, @RequestParam Date fechaTransaccion, Double monto, FormaDePago formaDePago, Usuario usuario, Vehiculo vehiculo) {
+    // Como todavia no dispongo de los metodos de usuario, tengo la busqueda de un usuario hardcodeada
+    @PostMapping("/transferencia")
+    public String pagoTransferencia(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u", required = false) String idUsuario, @RequestParam Double monto) {
         try {
-            servicioTransaccion.modificar(id, fechaTransaccion, monto, formaDePago, usuario, vehiculo);
-            modelo.put("exito", "El autor se modificó con exito!");
-        } catch (ErrorServicio e) {
-            modelo.put("error", "No se pudo modificar correctamente...");
-        }
-        Transaccion transaccion = servicioTransaccion.buscarPorId(id);
-        modelo.put("autor", transaccion);
-        return "transaccion/transaccion_editar";
-    }
-
-    @GetMapping("/alta")
-    public String alta(ModelMap modelo, @RequestParam String id) throws ErrorServicio {
-        try {
-            servicioTransaccion.habilitar(id);
+//            Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
+            Usuario usuario = servicioUsuario.buscarPorId("123456");
+            Optional<Vehiculo> vehiculo = repositorioVehiculo.findById(idVehiculo);
+            servicioTransaccion.guardar(monto, FormaDePago.DEBITO, usuario, vehiculo.get());
+            modelo.put("exito", "La transacción se realizó con éxito");
         } catch (ErrorServicio e) {
             e.printStackTrace();
+            modelo.put("error", e.getMessage());
         }
-        return "redirect:/transaccion/gestion";
+        return "datos-transferencia";
     }
 
-    @GetMapping("/baja")
-    public String baja(ModelMap modelo, @RequestParam String id) {
+    @PostMapping("/tarjeta")
+    public String pagoTarjeta(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u", required = false) String idUsuario, @RequestParam Double monto) {
         try {
-            servicioTransaccion.deshabilitar(id);
+//            Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
+            Usuario usuario = servicioUsuario.buscarPorId("123456");
+            Optional<Vehiculo> vehiculo = repositorioVehiculo.findById(idVehiculo);
+            servicioTransaccion.guardar(monto, FormaDePago.TARJETA, usuario, vehiculo.get());
+            modelo.put("exito", "La transacción se realizó con éxito");
         } catch (ErrorServicio e) {
             e.printStackTrace();
+            modelo.put("error", e.getMessage());
         }
-        return "redirect:/transaccion/gestion";
+        return "datos-tarjeta";
+    }
+
+    @PostMapping("/efectivo")
+    public String pagoEfectivo(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u", required = false) String idUsuario, @RequestParam Double monto) {
+        try {
+//            Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
+            Usuario usuario = servicioUsuario.buscarPorId("123456");
+            Optional<Vehiculo> vehiculo = repositorioVehiculo.findById(idVehiculo);
+            servicioTransaccion.guardar(monto, FormaDePago.EFECTIVO, usuario, vehiculo.get());
+            modelo.put("exito", "La transacción se realizó con éxito");
+        } catch (ErrorServicio e) {
+            e.printStackTrace();
+            modelo.put("error", e.getMessage());
+        }
+        return "datos-efectivo";
+    }
+
+    @PostMapping("/cripto")
+    public String pagoCripto(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u", required = false) String idUsuario, @RequestParam Double monto) {
+        try {
+//            Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
+            Usuario usuario = servicioUsuario.buscarPorId("123456");
+            Optional<Vehiculo> vehiculo = repositorioVehiculo.findById(idVehiculo);
+            servicioTransaccion.guardar(monto, FormaDePago.CRIPTOMONEDAS, usuario, vehiculo.get());
+            modelo.put("exito", "La transacción se realizó con éxito");
+        } catch (ErrorServicio e) {
+            e.printStackTrace();
+            modelo.put("error", e.getMessage());
+        }
+        return "datos-cripto";
     }
 }

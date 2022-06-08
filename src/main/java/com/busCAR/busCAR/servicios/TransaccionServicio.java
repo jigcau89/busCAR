@@ -48,8 +48,9 @@ public class TransaccionServicio {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void guardar(Date fechaTransaccion, Double monto, FormaDePago formaDePago, Usuario usuario, Vehiculo vehiculo) throws ErrorServicio {
+    public void guardar(Double monto, FormaDePago formaDePago, Usuario usuario, Vehiculo vehiculo) throws ErrorServicio {
         try {
+            Date fechaTransaccion = new Date();
             validar(fechaTransaccion, monto, formaDePago, usuario, vehiculo);
             Transaccion transaccion = new Transaccion();
             transaccion.setFechaTransaccion(fechaTransaccion);
@@ -83,7 +84,7 @@ public class TransaccionServicio {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void borrar(String id) {
+    public void borrar(String id) throws ErrorServicio {
         try {
             Optional<Transaccion> respuesta = repositorioTransaccion.findById(id);
             if (respuesta.isPresent()) {
@@ -92,7 +93,9 @@ public class TransaccionServicio {
             } else {
                 throw new ErrorServicio("La transacción no existe.");
             }
-        } catch (Exception e) {
+        } catch (ErrorServicio e) {
+            e.printStackTrace();
+            throw new ErrorServicio("No se pudo eliminar la transacción");
         }
     }
 
@@ -112,7 +115,7 @@ public class TransaccionServicio {
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void habilitar(String id) throws ErrorServicio {
         Optional<Transaccion> respuesta = repositorioTransaccion.findById(id);
-
+        
         if (respuesta.isPresent()) {
             Transaccion transaccion = respuesta.get();
             transaccion.setAlta(Boolean.TRUE);
@@ -161,44 +164,5 @@ public class TransaccionServicio {
     @Transactional(readOnly = true)
     public List<Transaccion> buscarPorPatenteVehiculo(String patente) {
         return repositorioTransaccion.buscarPorPatenteVehiculo(patente);
-    }
-
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void venta(String idUsuario, String idVehiculo, FormaDePago metodoPago, Double monto) throws ErrorServicio {
-        try {
-            validacionVenta(idUsuario, idVehiculo);
-            Optional<Usuario> respuestaUser = repositorioUsuario.findById(idUsuario);
-            Usuario usuario = respuestaUser.get();
-            Optional<Vehiculo> respuestaVehiculo = repositorioVehiculo.findById(idVehiculo);
-            Vehiculo vehiculo = respuestaVehiculo.get();
-            
-            Date fechaTransaccion = new Date();
-            guardar(fechaTransaccion, monto, metodoPago, usuario, vehiculo);
-        } catch (ErrorServicio e) {
-            e.printStackTrace();
-            throw new ErrorServicio(e.getMessage());
-        }
-    }
-
-    public void validacionVenta(String idUsuario, String idVehiculo) throws ErrorServicio {
-        Optional<Usuario> respuestaUser = repositorioUsuario.findById(idUsuario);
-        Optional<Vehiculo> respuestaVehiculo = repositorioVehiculo.findById(idVehiculo);
-        if (respuestaUser.isPresent()) {
-            Usuario usuario = respuestaUser.get();
-            if (!usuario.isActivo()) {
-                throw new ErrorServicio("El usuario fue dado de baja.");
-            }
-        } else {
-            throw new ErrorServicio("El usuario no existe.");
-        }
-
-        if (respuestaVehiculo.isPresent()) {
-            Vehiculo vehiculo = respuestaVehiculo.get();
-            if (!vehiculo.getAlta()) {
-                throw new ErrorServicio("El vehiculo fue dado de baja o ya no hay stock.");
-            }
-        } else {
-            throw new ErrorServicio("El vehiculo no existe.");
-        }
     }
 }

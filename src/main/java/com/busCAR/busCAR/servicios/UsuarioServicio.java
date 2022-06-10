@@ -5,6 +5,8 @@ import com.busCAR.busCAR.entidades.Usuario;
 import com.busCAR.busCAR.enumeraciones.Rol;
 import com.busCAR.busCAR.errores.ErrorServicio;
 import com.busCAR.busCAR.repositorios.UsuarioRepositorio;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,8 +39,8 @@ public class UsuarioServicio implements UserDetailsService {
     @Autowired
     private FotoServicio fotoServicio;
 
-    @Transactional(propagation = Propagation.NESTED)
-    public void guardar(MultipartFile archivo, String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2/*, String rol*/) throws ErrorServicio {
+    @Transactional
+    public void guardar(MultipartFile archivo, String nombre, String apellido, Date fechaDeNacimiento, String dni, String telefono, String email, String direccion, String clave, String clave2/*, String rol*/) throws ErrorServicio {
 
         validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2/*, "USUARIO"*/);
 
@@ -52,16 +54,16 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setDireccion(direccion);
 
         //usuario.setRol(Rol.valueOf(rol));
-        usuario.setRol(Rol.USUARIO);
+        usuario.setRol(Rol.ADMIN);
 
         usuario.setClave(new BCryptPasswordEncoder().encode(clave));
         //usuario.setAdmin(Boolean.TRUE);
-        usuario.setFechaDeNacimiento(new Date());
+        usuario.setFechaDeNacimiento(fechaDeNacimiento);
         usuario.setActivo(true);
-        
+
         Foto foto = fotoServicio.guardar(archivo);
         usuario.setFoto(foto);
-        
+
         emailServicio.enviarThread(usuario.getEmail());
 
         usuarioRepositorio.save(usuario);
@@ -69,7 +71,7 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2/*, String rol*/) throws ErrorServicio {
+    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Date fechaDeNacimiento, String dni, String telefono, String email, String direccion, String clave, String clave2/*, String rol*/) throws ErrorServicio {
 
         validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2/*, rol*/);
         Optional<Usuario> repuesta = usuarioRepositorio.findById(id);
@@ -81,9 +83,9 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setTelefono(telefono);
             usuario.setEmail(email);
             usuario.setDireccion(direccion);
-
+            usuario.setFechaDeNacimiento(fechaDeNacimiento);
             //usuario.setRol(Rol.valueOf(rol)); 
-            usuario.setRol(Rol.USUARIO);
+            usuario.setRol(Rol.ADMIN);
 
             String encriptada = new BCryptPasswordEncoder().encode(clave);
             usuario.setClave(encriptada);
@@ -190,7 +192,7 @@ public class UsuarioServicio implements UserDetailsService {
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
 
-            session.setAttribute("usuariossession", usuario); //en la variable usuariosession voy a tener guardado mi objeto con todos datos del usuario que esta logeado
+            session.setAttribute("usuariosession", usuario); //en la variable usuariosession voy a tener guardado mi objeto con todos datos del usuario que esta logeado
 
             User user = new User(usuario.getEmail(), usuario.getClave(), permisos);
             return user;

@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Usuario {
@@ -37,6 +38,7 @@ public class Usuario {
     private String direccion;
 
     @Temporal(TemporalType.DATE)
+    //@DateTimeFormat("dd/MM/yyyy")
     private Date fechaDeNacimiento;
 
     @ManyToOne

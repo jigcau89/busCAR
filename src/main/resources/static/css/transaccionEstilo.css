@@ -1,12 +1,23 @@
+body{
+    font-family: 'Questrial', sans-serif;
+    margin: 26px;
+    background-color: #E3E4E3;
+}
+
+#titulo{
+    text-align: center;    
+}
+
 .bloque1{
     display: flex;
+    
 }
 
 .infoProducto{
     width: 35%;
     display: absolute;
-    border: 1px solid #00000044;
-    border-radius: 10px;
+    border: 1px solid #000000;
+    border-radius: 2px;
     text-align: center;
     padding: 10px;
     margin: 20px 20px 20px 0px;
@@ -15,6 +26,7 @@
 #p1{
     text-align: justify;
     margin-bottom: 1.5em;
+    font-size: 18px;
 }
 
 .infoProducto img{
@@ -34,13 +46,18 @@
 }
 
 #precio{
-    font-size: 1.5em;
+    font-size: 2em;
     font-weight: bold;
     border: 1px solid #666666;
-    padding: 5px;
-    margin: 5px;
-    background-color: rgba(127, 255, 212, 0.425);
+    padding: 20px;
+    margin-top: 15px;
+    background-color: #0E8893;
+    color: #E3E4E3;
     display: inline-block;
+}
+
+#parrafo-reserva{
+    font-size: 18px;
 }
 
 .mediosPago{
@@ -66,5 +83,65 @@ form input{
 }
 
 .enviar{
-    text-align: ;
+    width: 30%;
+    padding: 15px 0;
+    margin: 20px;        
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: rgba(41, 105, 124, 0.904);
+    border: none;
+    border-radius: 5px;
+    transition: 1s all;
+    cursor: pointer; 
+}
+
+.enviar:hover{
+    background: rgb(0, 0, 0);
+    transform: scale(1.1)
+}
+
+footer{
+    background: url(/busCAR/src/main/resources/static/img/bg.jpg);
+    /* position: relative; */
+}
+footer img{
+    margin-top: 20px;
+    width: 350px;
+    height: 150px;
+}
+
+.redes{
+    display: inline-block;
+    vertical-align: top;
+    /* margin: 0 0 0 15px; */
+    margin-top: 20px;
+    margin-left: 700px;    
+    position: absolute;
+}
+.redes li{
+    color:#FFFFFF;
+    font-size: 1.5em;
+    /* font-weight: bold; */
+    text-decoration: none;
+    list-style: none;     
+}
+
+.redes a{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.redes a:hover{
+    color: #0e8893;
+}
+
+.iconos{
+    width: 1em;
+    height: 1em;    
+}
+
+.copyright{
+    text-align: center;
+    color:#FFFFFF;
 }

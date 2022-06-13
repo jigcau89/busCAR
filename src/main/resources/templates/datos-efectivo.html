@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="datosEstilos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/busCAR/src/main/resources/static/css/datosEstilos.css">
     <title>Datos - Efectivo</title>
 </head>
 <body>
@@ -14,8 +17,8 @@
 
     <main>
         <div>
-            <p>Ingrese sus datos para completar la reserva</p>
-
+            <h2>Ingrese sus datos para completar la reserva</h2>
+            <div class="formulario">
             <form class="form-datos">
                 <div class="dato">
                     <label for="nombre">Nombre y Apellido</label>
@@ -47,7 +50,7 @@
                 </div>     
                 <div class="dato">
                     <label for="banco">Punto de Pago</label>
-                    <select>
+                    <select class="puntosDePago">
                         <option>Rapipago</option>
                         <option>Pagofácil</option>
                     </select>
@@ -55,6 +58,7 @@
                     <input type="submit" value="Enviar" class="enviar">
             </form>
         </div>  
+        </div>
     </main>
 
     <footer>

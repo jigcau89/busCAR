@@ -92,13 +92,16 @@ p {
 }
 
 footer{
-    background: url(img/bg.jpg);
+    background: url(/busCAR/src/main/resources/static/img/bg.jpg);
     position: relative;
 }
 footer img{
     margin-top: 20px;
-    height: 200px;
-    width: 20%;
+}
+
+.logo{
+    width: 350px;
+    height: 150px;
 }
 
 .redes{
@@ -106,8 +109,7 @@ footer img{
     vertical-align: top;
     /* margin: 0 0 0 15px; */
     margin-top: 20px;
-    margin-left: 800px;
-    
+    margin-left: 700px;    
     position: absolute;
 }
 .redes li{
@@ -115,8 +117,7 @@ footer img{
     font-size: 1.5em;
     /* font-weight: bold; */
     text-decoration: none;
-    list-style: none; 
-    
+    list-style: none;     
 }
 
 .redes a{
@@ -125,14 +126,14 @@ footer img{
 }
 
 .redes a:hover{
-    color: rgb(4, 58, 40);
+    color: #0e8893;
 }
 
 .iconos{
     width: 1em;
-    height: 1em;
-    
+    height: 1em;    
 }
+
 .copyright{
     text-align: center;
     color:#FFFFFF;

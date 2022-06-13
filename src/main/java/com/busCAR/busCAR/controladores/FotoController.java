@@ -24,10 +24,10 @@ public class FotoController {
 
     @Autowired
     private FotoServicio servicioFoto;
-    
+
     @Autowired
     private UsuarioServicio servicioUsuario;
-    
+
     @Autowired
     private VehiculoServicio servicioVehiculo;
 
@@ -35,39 +35,39 @@ public class FotoController {
     public ResponseEntity<byte[]> fotoUsuario(@PathVariable String id) {
         try {
             Usuario usuario = servicioUsuario.buscarPorId(id);
-            if(usuario.getFoto() == null){
+            if (usuario.getFoto() == null) {
                 throw new ErrorServicio("El usuario no tiene una foto asignada");
             }
-              
+
             byte[] foto = usuario.getFoto().getContenido();
-           
+
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_JPEG);
-            
+
             return new ResponseEntity<>(foto, headers, HttpStatus.OK);
         } catch (ErrorServicio ex) {
             Logger.getLogger(FotoController.class.getName()).log(Level.SEVERE, null, ex);
-             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    
-//    @GetMapping("/vehiculo/{id}")
-//    public ResponseEntity<byte[]> fotosVehiculo(@PathVariable String id) {
-//        try {
-//            Vehiculo vehiculo = servicioVehiculo.buscarPorId(id);
-//            if(vehiculo.getFoto() == null){
-//                throw new ErrorServicio("El usuario no tiene una foto asignada");
-//            }
-//              
-//            byte[] foto = vehiculo.getFoto().getContenido();
-//           
-//            HttpHeaders headers = new HttpHeaders();
-//            headers.setContentType(MediaType.IMAGE_JPEG);
-//            
-//            return new ResponseEntity<>(foto, headers, HttpStatus.OK);
-//        } catch (ErrorServicio ex) {
-//            Logger.getLogger(FotoController.class.getName()).log(Level.SEVERE, null, ex);
-//             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//        }
-//    }
+
+    @GetMapping("/vehiculo/{id}")
+    public ResponseEntity<byte[]> fotosVehiculo(@PathVariable String id) {
+        try {
+            Vehiculo vehiculo = servicioVehiculo.buscarPorId(id);
+            if (vehiculo.getFotos() == null) {
+                throw new ErrorServicio("El vehiculo no tiene una foto asignada");
+            }
+
+            byte[] foto = vehiculo.getFotos().getContenido();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG);
+
+            return new ResponseEntity<>(foto, headers, HttpStatus.OK);
+        } catch (ErrorServicio ex) {
+            Logger.getLogger(FotoController.class.getName()).log(Level.SEVERE, null, ex);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

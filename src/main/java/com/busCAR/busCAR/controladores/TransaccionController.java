@@ -4,10 +4,13 @@ import com.busCAR.busCAR.entidades.Usuario;
 import com.busCAR.busCAR.entidades.Vehiculo;
 import com.busCAR.busCAR.enumeraciones.FormaDePago;
 import com.busCAR.busCAR.errores.ErrorServicio;
+import com.busCAR.busCAR.repositorios.TransaccionRepositorio;
 import com.busCAR.busCAR.repositorios.VehiculoRepositorio;
+import com.busCAR.busCAR.servicios.FotoServicio;
 import com.busCAR.busCAR.servicios.TransaccionServicio;
 import com.busCAR.busCAR.servicios.UsuarioServicio;
 import com.busCAR.busCAR.servicios.VehiculoServicio;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +26,9 @@ public class TransaccionController {
 
     @Autowired
     private TransaccionServicio servicioTransaccion;
+    
+    @Autowired
+    private FotoServicio servicioFoto;
 
     @Autowired
     private UsuarioServicio servicioUsuario;
@@ -33,12 +39,15 @@ public class TransaccionController {
     @Autowired
     private VehiculoRepositorio repositorioVehiculo;
 
+    @Autowired
+    private TransaccionRepositorio repositorioTransaccion;
+    
     @GetMapping("/producto")
     public String producto(ModelMap modelo/*, @RequestParam String id*/) {
 //        Optional<Vehiculo> respuesta = repositorioVehiculo.findById(id);
 
 //Como todavia no tengo la vista del catalogo de auto, la busqueda está hardcodeada para agarra siempre el mismo auto
-        Optional<Vehiculo> respuesta = repositorioVehiculo.findById("37d756bc-053b-489a-bcb7-72f4b14a431e");
+        Optional<Vehiculo> respuesta = repositorioVehiculo.findById("c827035a-ff05-44a2-92b3-caeab3fb62ee");
         Vehiculo vehiculo = respuesta.get();
         modelo.put("vehiculo", vehiculo);
         if (vehiculo.getNuevo()) {
@@ -53,6 +62,8 @@ public class TransaccionController {
 //        preguntas[1] = "Pregunta 2";
 //        preguntas[2] = "Pregunta 3";
 //        modelo.put("preguntas", preguntas);
+List<Vehiculo> vehiculosRel = servicioTransaccion.buscarRelacionados(vehiculo.getTipoDeVehiculo());
+        modelo.put("vehiculosRel", vehiculosRel);
         return "CompraProducto";
     }
 

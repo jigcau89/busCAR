@@ -4,6 +4,7 @@ import com.busCAR.busCAR.entidades.Transaccion;
 import com.busCAR.busCAR.entidades.Usuario;
 import com.busCAR.busCAR.entidades.Vehiculo;
 import com.busCAR.busCAR.enumeraciones.FormaDePago;
+import com.busCAR.busCAR.enumeraciones.TipoDeVehiculo;
 import com.busCAR.busCAR.errores.ErrorServicio;
 import com.busCAR.busCAR.repositorios.TransaccionRepositorio;
 import com.busCAR.busCAR.repositorios.UsuarioRepositorio;
@@ -164,5 +165,10 @@ public class TransaccionServicio {
     @Transactional(readOnly = true)
     public List<Transaccion> buscarPorPatenteVehiculo(String patente) {
         return repositorioTransaccion.buscarPorPatenteVehiculo(patente);
+    }
+    
+    @Transactional(readOnly = true)
+    public List<Vehiculo> buscarRelacionados(TipoDeVehiculo tipoVehiculo) {
+        return repositorioTransaccion.buscarRelacionados(tipoVehiculo).subList(0, 2);
     }
 }

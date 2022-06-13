@@ -1,7 +1,9 @@
 package com.busCAR.busCAR.repositorios;
 
 import com.busCAR.busCAR.entidades.Transaccion;
+import com.busCAR.busCAR.entidades.Vehiculo;
 import com.busCAR.busCAR.enumeraciones.FormaDePago;
+import com.busCAR.busCAR.enumeraciones.TipoDeVehiculo;
 import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -29,4 +31,8 @@ public interface TransaccionRepositorio extends JpaRepository<Transaccion, Strin
     
     @Query("SELECT t FROM Transaccion t WHERE t.alta = :alta")
     public List<Transaccion> buscarPorAlta(@Param("alta") Boolean alta);
+    
+//    @Query("SELECT t FROM Transaccion t WHERE t.alta = true AND t")
+    @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.tipoDeVehiculo LIKE :tv ORDER BY v.anioFabricacion")
+    public List<Vehiculo> buscarRelacionados(@Param("tv") TipoDeVehiculo tv);
 }

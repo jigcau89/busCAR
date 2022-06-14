@@ -7,38 +7,94 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link rel="icon" href="">
+    <link rel="stylesheet"  type= "text/css" href="/css/normalize.css">
+    <link rel="stylesheet"  type= "text/css" href="/css/registro.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
     <script src='main.js'></script>
 </head>
 <body>
     <header>
         <nav>
-         
         </nav>
     </header>
-    <div>
-        <form>
-        <h2><b>Registro</b></h2>
-        <p>Ingrese su nombre</p>
-        <input type="text" name="nombre" required="">
-        <p>Ingrese su apellido</p>
-        <input type="text" name="apellido"required="">
-        <p>Ingrese su fecha de nacimiento</p>
-        <input type="date" name="fechaNacimiento"required="">
-        <p>Ingrese su DNI</p>
-        <input type="number" name="dni"required="">
-        <p>Ingrese su E-mail</p>
-        <input type="email" name="email"required="">
-        <p>Ingrese su num. telefónico</p>
-        <input type="tel" name="telefono"required="">
-        <p>Ingrese su domicilio</p>
-        <input type="text" name="direccion"required="">
-        <p>Ingrese su contraseña</p>
-        <input type="password" name="contraseña"required=""><br>
-        <input type="submit" value="Registrarse"required="">
-        <p>¿Ya tenés cuenta?</p>
-        <a href="inicioSesion.html">Iniciá Sesión</a>
+    <div class="registro">
+        <h1><b>Registro</b></h1>
+        <form >
+            <div class="user-box">
+                <input type="text" name="nombre" required>
+                <label >Ingrese su nombre</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="apellido" required>
+                <label >Ingrese su apellido</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="fechaNacimiento" required>
+                <label >Ingrese su fecha de nacimiento</label>
+            </div>
+            <div class="user-box">
+                <input type="number" name="dni" required>
+                <label >Ingrese su dni</label>
+            </div>
+            <div class="user-box">
+                <input type="email" name="email" required>
+                <label >Ingrese su E-mail</label>
+            </div>
+            <div class="user-box">
+                <input type="tel" name="telefono" required>
+                <label >Ingrese su núm. telefónico</label>
+            </div>
+            <div class="user-box">
+                <input type="text" name="direccion" required>
+                <label >Ingrese su domicilio</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="clave" required>
+                <label >Ingrese su contraseña</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="clave" required>
+                <label >Confirme su contraseña</label>
+            </div>
+            <br>
+            <div class="user-box">
+                <input type="file"> 
+                <label >Foto de perfil</label> 
+                </div>
+               <!--<a href="#">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                Guardar foto de perfil
+                </a>--> 
+            <a href="#">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <b>Registrarse</b> 
+            </a>
+           
+            <br>
+            <br>
+            <p>¿Ya tenés cuenta?</p>
+            <a class="link" href="inicioSesion.html">Inicia sesión</a>
+            <br>
+            <a class="link" href="index.html">Volver a inicio</a>
         </form>
-        <a href="index.html">Volver a inicio</a>
-    </div>
+       
+    <!-- <footer>
+        <img src="\busCAR\src\main\resources\static\img\—Pngtree—fashion car private car orange_4484916.png">
+        <ul class="redes">
+             <li><img src="/img/logoinsta.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
+             <li><img src="\busCAR\src\main\resources\static\img\facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
+             <li><img src="\busCAR\src\main\resources\static\img\twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
+         </ul>
+         
+         <p class="copyright">&copy Copyright BusCar - 2022</p>
+    </footer>-->
 </body>
 </html>

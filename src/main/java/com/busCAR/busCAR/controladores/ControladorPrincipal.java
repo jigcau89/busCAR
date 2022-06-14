@@ -28,6 +28,46 @@ public class ControladorPrincipal {
     public String index() {
         return "index";
     }
+    @GetMapping("/producto")
+    public String indexp() {
+        return "producto";
+    }
+    @GetMapping("/compra")
+    public String indexc() {
+        return "compra";
+    }
+    @GetMapping("/contacto")
+    public String indexco() {
+        return "contacto";
+    }
+    @GetMapping("/datos-cripto")
+    public String indexdc() {
+        return "datos-cripto";
+    }
+    @GetMapping("/datos-efectivo")
+    public String indexde() {
+        return "datos-efectivo";
+    }
+    @GetMapping("/datos-tarjeta")
+    public String indexdt() {
+        return "datos-tarjeta";
+    }
+    @GetMapping("/datos-transferencia")
+    public String indexdtt() {
+        return "datos-transferencia";
+    }
+    @GetMapping("/registro")
+    public String indexreg() {
+        return "registro";
+    }
+    @GetMapping("/reserva")
+    public String indexres() {
+        return "reserva";
+    }
+    @GetMapping("/visita")
+    public String indexvis() {
+        return "visita";
+    }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/inicio")

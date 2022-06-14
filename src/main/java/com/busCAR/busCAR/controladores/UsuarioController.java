@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +24,14 @@ public class UsuarioController {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    @GetMapping("/modificar-usuario-datos/{idUsuarioModif}")
+    public String datosUsuario(ModelMap model, @PathVariable String idUsuarioModif) {
+        Usuario usuario = usuarioServicio.buscarPorId(idUsuarioModif);
+        model.addAttribute("usuarioModif", usuario);
+        return "modif-usuario.html";
+    }
+    
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/editar-perfil")
     public String editarPerfil(HttpSession session, @RequestParam String id, ModelMap model) {

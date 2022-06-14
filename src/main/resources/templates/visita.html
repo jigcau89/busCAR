@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/busCAR/src/main/resources/static/css/visitaEstilo.css">
+    <title>Turno - Sucursal</title>
+</head>
+<body>
+    <header>
+        <div class="mensaje">
+            <h1>Reserva realizada correctamente</h1>
+            <p>Para terminar de realizar la compra, deberá acercarse a nuestra <a href="/busCAR/src/main/resources/templates/contacto.html" id="link-contacto">sucursal</a>.</p>
+        </div>
+    </header>
+    <main>
+        <div class="turno">
+            <h2>Elija un turno!</h2>
+            
+            <form class="form-turno">
+                <fieldset class="form-horario">
+                    <legend>¿En qué horario desea ser atendido?</legend>
+                    <select class="opciones-horario">
+                        <option class="opcion-horario">Mañana</option>
+                        <option class="opcion-horario">Tarde</option>
+                        <option class="opcion-horario">Noche</option>
+                    </select>
+                </fieldset>
+                
+                <fieldset class="form-contacto">
+                    <legend>¿Cómo le gustaría ser contactado?</legend>
+                    <label for="radio-email"><input type="radio" name="contacto" value="email" class="radio-contacto">Email</label>                    
+                    
+                    <label for="radio-telefono"><input type="radio" name="contacto" value="telefono" class="radio-contacto">Teléfono</label>                    
+
+                    <label for="radio-wpp"><input type="radio" name="contacto" value="whatsapp" class="radio-contacto" checked>Whatsapp</label>                    
+                </fieldset>
+                <input type="submit" value="Finalizar" class="enviar">
+            </form>
+
+            <hr>
+            <div class="tableta">
+            <table class="tabla-turno">
+                <thead>
+                    <th>Turno</th>
+                    <th>Horario de Atención</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>Mañana</th>
+                    <td>08:00 hs. - 12:00 hs.</td>
+                </tr>
+                <tr>
+                    <th>Tarde</th>
+                    <td>14:00 hs. - 18:00 hs.</td>
+                </tr>
+                <tr>
+                    <th>Noche</th>
+                    <td>18:00 hs. - 21:00 hs.</td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

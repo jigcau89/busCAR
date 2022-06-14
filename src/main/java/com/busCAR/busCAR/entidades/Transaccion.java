@@ -2,6 +2,7 @@ package com.busCAR.busCAR.entidades;
 
 import com.busCAR.busCAR.enumeraciones.FormaDePago;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,9 +18,12 @@ public class Transaccion {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fechaTransaccion;
+    @Column(nullable = false)
     private Double monto;
+    @Column(nullable = false)
     private FormaDePago formaDePago;
 
     @OneToOne
@@ -96,5 +100,4 @@ public class Transaccion {
     public void setAlta(Boolean alta) {
         this.alta = alta;
     }
-
 }

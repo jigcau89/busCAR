@@ -5,6 +5,8 @@ import com.busCAR.busCAR.entidades.Usuario;
 import com.busCAR.busCAR.enumeraciones.Rol;
 import com.busCAR.busCAR.errores.ErrorServicio;
 import com.busCAR.busCAR.repositorios.UsuarioRepositorio;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,6 +21,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -37,9 +40,9 @@ public class UsuarioServicio implements UserDetailsService {
     private FotoServicio fotoServicio;
 
     @Transactional
-    public void guardar(MultipartFile archivo, String id, String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2, String rol) throws ErrorServicio {
+    public void guardar(MultipartFile archivo, String nombre, String apellido, Date fechaDeNacimiento, String dni, String telefono, String email, String direccion, String clave, String clave2/*, String rol*/) throws ErrorServicio {
 
-        validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2, rol);
+        validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2/*, "USUARIO"*/);
 
         Usuario usuario = new Usuario();
 
@@ -50,11 +53,12 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setEmail(email);
         usuario.setDireccion(direccion);
 
-        usuario.setRol(Rol.valueOf(rol));
+        //usuario.setRol(Rol.valueOf(rol));
+        usuario.setRol(Rol.ADMIN);
 
         usuario.setClave(new BCryptPasswordEncoder().encode(clave));
-        usuario.setAdmin(Boolean.TRUE);
-        usuario.setFechaDeNacimiento(new Date());
+        //usuario.setAdmin(Boolean.TRUE);
+        usuario.setFechaDeNacimiento(fechaDeNacimiento);
         usuario.setActivo(true);
 
         Foto foto = fotoServicio.guardar(archivo);
@@ -67,9 +71,9 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2, String rol) throws ErrorServicio {
+    public void modificar(MultipartFile archivo, String id, String nombre, String apellido, Date fechaDeNacimiento, String dni, String telefono, String email, String direccion, String clave, String clave2/*, String rol*/) throws ErrorServicio {
 
-        validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2, rol);
+        validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2/*, rol*/);
         Optional<Usuario> repuesta = usuarioRepositorio.findById(id);
         if (repuesta.isPresent()) {
             Usuario usuario = repuesta.get();
@@ -79,8 +83,9 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setTelefono(telefono);
             usuario.setEmail(email);
             usuario.setDireccion(direccion);
-
-            usuario.setRol(Rol.valueOf(rol));
+            usuario.setFechaDeNacimiento(fechaDeNacimiento);
+            //usuario.setRol(Rol.valueOf(rol)); 
+            usuario.setRol(Rol.ADMIN);
 
             String encriptada = new BCryptPasswordEncoder().encode(clave);
             usuario.setClave(encriptada);
@@ -123,7 +128,7 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-    private void validar(String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2, String rol) throws ErrorServicio {
+    private void validar(String nombre, String apellido, String dni, String telefono, String email, String direccion, String clave, String clave2/*, String rol*/) throws ErrorServicio {
 
         if (nombre == null || nombre.isEmpty() || nombre.contains("  ")) {
             throw new ErrorServicio("El nombre del usuario no puede ser nulo. ");
@@ -152,9 +157,9 @@ public class UsuarioServicio implements UserDetailsService {
         if (!clave.equals(clave2)) {
             throw new ErrorServicio("La clave deben ser iguales. ");
         }
-        if (!Rol.ADMIN.toString().equals(rol) && !Rol.USUARIO.toString().equals(rol)) {
-            throw new ErrorServicio("Debe tener un rol valido");
-        }
+//        if (!Rol.ADMIN.toString().equals(rol) && !Rol.USUARIO.toString().equals(rol)) {
+//            throw new ErrorServicio("Debe tener un rol valido");
+//        }
 
     }
 
@@ -187,7 +192,7 @@ public class UsuarioServicio implements UserDetailsService {
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
 
-            session.setAttribute("usuariossession", usuario); //en la variable usuariosession voy a tener guardado mi objeto con todos datos del usuario que esta logeado
+            session.setAttribute("usuariosession", usuario); //en la variable usuariosession voy a tener guardado mi objeto con todos datos del usuario que esta logeado
 
             User user = new User(usuario.getEmail(), usuario.getClave(), permisos);
             return user;

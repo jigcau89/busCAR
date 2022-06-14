@@ -1,0 +1,255 @@
+body{
+    font-family: 'Questrial', sans-serif;
+}
+
+
+/* ------------------------------------FOTOS DEL AUTO------------------------------------------ */
+.vidriera{
+    width: 100%;
+    margin: 20px;
+    display: flex;    
+}
+
+.galeria{
+    width: 60%;    
+    display: absolute;    
+}
+
+.product-small-img img{
+    width: 100%;
+    padding: 8px;
+    margin: 10px 10px 15px;
+    cursor: pointer;    
+}
+
+.product-small-img img:hover{
+    transform: scale(1.2)
+}
+
+.product-small-img{
+    width: 22%;
+    display: flex;    
+}
+
+.img-container img{    
+    height: 280px;   
+    width: 100%;      
+}
+
+.img-container{
+    padding: 10px;
+    width: 85%;    
+}
+/* ------------------------------------CARACTERISTICAS------------------------------------------ */
+
+.placaDatos{
+    width: 35%;       
+    /* border: solid #cac6c6;   */
+    border-radius: 20px;
+    display: relative;
+    box-shadow: 0px 5px 10px 0px #0E8893;
+    margin: 10px;
+    
+}
+
+.placaDatos h2{
+    font-size: 36px;
+    text-align: center;
+    margin-right: 20px;
+    margin-left: 20px;     
+}
+
+.datosSec{
+    font-size: 18px;
+    color: #555555;
+    margin: 20px;
+    text-align: center;
+}
+
+.precio{
+    font-size: 40px;
+    font-weight: bold;
+    color: #0E8893;
+    text-align: center;
+}
+
+.bloqueBoton{
+    text-align: center;
+    margin-top: 50px;
+}
+.bloqueBoton a{
+    text-decoration: none;
+    
+}
+.botones{    
+        width: 30%;
+        padding: 15px 0;
+        margin: 20px;        
+        font-size: 18px;
+        font-weight: bold;
+        color: #FFFFFF;
+        background: rgba(41, 105, 124, 0.904);
+        border: none;
+        border-radius: 5px;
+        transition: 1s all;
+        cursor: pointer;        
+}
+    
+    .botones:hover{
+        background: rgb(0, 0, 0);
+        transform: scale(1.1)
+    }
+    
+/* ------------------------------------TABLA CARACTERISTICAS------------------------------------------ */
+h1{
+    text-align: center;
+}
+
+.tablaCaracteristicas{
+    margin: 10px;
+}
+
+.tablaCaracteristicas table{
+    border: 1px solid;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th{
+    border: 1px solid;
+    /* border-radius: 10px; */
+    padding: 15px 20px;
+    font-size: 20px;
+    /* border-collapse: ; */
+    /* border-spacing: 10px 5px; */
+}
+
+tr{
+    border: 1px solid; 
+}
+
+th{
+    background-color: #E3E4E3;
+    width: 30%;
+}
+
+/* ------------------------------------Descripción------------------------------------------ */
+
+.descripcion{
+    margin: 10px;
+}
+.descripcion p{
+    border: 2px solid #555555;
+    border-radius: 10px;
+    width: 100%;
+    height: 240px;
+    padding: 0px;
+}
+
+
+
+/* ------------------------------------Relacionados------------------------------------------ */
+
+
+
+.prod-relacionados{
+    width: 80%;
+    margin: 0 auto;
+    padding: 50px; /*espacio entre el encabezado y los productos*/
+}
+
+.prod-relacionados li{
+    display: inline-block;
+    text-align: center;
+    width: 30%; /*espacio que ocupara cada uno de los items de la lista*/
+    vertical-align:top; /*alineacion de los items, respescto a la vertical*/
+    margin: 0 1.5%;
+    box-sizing: border-box;    
+    padding: 30px 20px;
+    border-color: #000000;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    box-shadow: 5px 10px 50px 5px #000000;
+}
+
+.prod-relacionados li:hover{
+    border-color: darkgoldenrod;    
+}
+
+.prod-relacionados li:active{
+    border-color: darkgreen;
+}
+
+.prod-relacionados h2{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.prod-relacionados li:hover{
+    transform: scale(1.1);
+}
+
+.fotos{
+    width: 80%;
+    height: 120px;
+}
+
+.prDescripcion{
+    font-size: 18px;
+    font-style: bold;
+}
+
+.prPrecio{
+    font-size: 20px ;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+footer{
+    background: url(/busCAR/src/main/resources/static/img/bg.jpg);
+    /* position: relative; */
+}
+footer img{
+    margin-top: 20px;
+}
+
+.logo{
+    width: 350px;
+    height: 150px;
+}
+
+.redes{
+    display: inline-block;
+    vertical-align: top;
+    /* margin: 0 0 0 15px; */
+    margin-top: 20px;
+    margin-left: 700px;    
+    position: absolute;
+}
+.redes li{
+    color:#FFFFFF;
+    font-size: 1.5em;
+    /* font-weight: bold; */
+    text-decoration: none;
+    list-style: none;     
+}
+
+.redes a{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.redes a:hover{
+    color: rgb(4, 58, 40);
+}
+
+.iconos{
+    width: 1em;
+    height: 1em;    
+}
+
+.copyright{
+    text-align: center;
+    color:#FFFFFF;
+}

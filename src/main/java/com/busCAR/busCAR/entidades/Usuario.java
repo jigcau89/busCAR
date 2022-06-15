@@ -3,6 +3,7 @@ package com.busCAR.busCAR.entidades;
 import com.busCAR.busCAR.enumeraciones.Rol;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Usuario {
@@ -20,26 +22,27 @@ public class Usuario {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-
+    
+    @Column(nullable = false)  //no se permiten valores nulos
     private String nombre;
-
+    
     private String apellido;
 
     private String dni;
 
     private String telefono;
-
-    private String email;
+    
+    @Column(unique = true) //es opcional, indica que los valores de esta columna son unicos.
+    private String email; //no se puede repetir el valor
 
     private String direccion;
 
     @Temporal(TemporalType.DATE)
+    //@DateTimeFormat("dd/MM/yyyy")
     private Date fechaDeNacimiento;
 
     @ManyToOne
     private Foto foto;
-
-    private Boolean admin;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;
@@ -53,7 +56,7 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String dni, String telefono, String email, String direccion, Date fechaDeNacimiento, Foto foto, Boolean admin, Rol rol, String clave, /*List<Vehiculo> favoritos, */boolean activo) {
+    public Usuario(String nombre, String apellido, String dni, String telefono, String email, String direccion, Date fechaDeNacimiento, Foto foto, Rol rol, String clave, /*List<Vehiculo> favoritos, */boolean activo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -62,7 +65,6 @@ public class Usuario {
         this.direccion = direccion;
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.foto = foto;
-        this.admin = admin;
         this.rol = rol;
         this.clave = clave;
         //this.favoritos = favoritos;
@@ -196,20 +198,6 @@ public class Usuario {
     }
 
     /**
-     * @return the admin
-     */
-    public Boolean getAdmin() {
-        return admin;
-    }
-
-    /**
-     * @param admin the admin to set
-     */
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
-    }
-
-    /**
      * @return the rol
      */
     public Rol getRol() {
@@ -267,6 +255,6 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", email=" + email + ", direccion=" + direccion + ", fechaDeNacimiento=" + fechaDeNacimiento + ", foto=" + foto + ", admin=" + admin + ", rol=" + rol + ", clave=" + clave + ", favoritos=" /*+ favoritos*/ + ", activo=" + activo + '}';
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", email=" + email + ", direccion=" + direccion + ", fechaDeNacimiento=" + fechaDeNacimiento + ", foto=" + foto + ", rol=" + rol + ", clave=" + clave + ", favoritos=" /*+ favoritos*/ + ", activo=" + activo + '}';
     }
 }

@@ -1,55 +1,72 @@
 <!DOCTYPE html>
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/styles.css" />
     <script src="scripts.js"></script>
 </head>
 <body>
-    <div class="page-nav">
-        <h1>Mi tienda</h1>
-        <button id="checkout" class="button-checkout" onclick="pay()">Pagar</button>
-    </div>
+    <header>
+        <div class="container">
+
+                <img src="/static/img/Logo_Nombre.png" alt="logo" class="logo">
+                    <nav>
+                       <ul>
+                            <li><a href="#">Contacto</a></li>
+                            <li><a href="">Comprar</a></li>
+                            <li><a href="">Mi cuenta</a>
+                                 <ul>
+                                     <li><a href="">Iniciar Sesion</a></li>
+                                  <li><a href="">Registrarte</a></li>
+                                 </ul>
+                          </li>
+                       </ul>
+              </nav>
+       </div>
+</header>
+    
     <div class="page-content">
         <div class="product-container">
-            <h3>nombre</h3>
-            <img src="images/product-1.jpeg" />
-            <h1>$50</h1>
-            <button class="button-add" onclick="add('product-1', 50)">Agregar</button>
+            <h3>titulo</h3>
+            <img src="/static/img/product-1.jpeg" />
+            <h1>$500.000</h1>
+            <button class="button-add" onclick="add('product-1', 50)">Favoritos</button>
         </div>
 
         <div class="product-container">
-            <h3>nombre</h3>
-            <img src="images/product-2.jpeg" />
-            <h1>$300</h1>
-            <button class="button-add" onclick="add('product-2', 300)">Agregar</button>
+            <h3>titulo</h3>
+            <img src="/static/img/product-2.jpeg" />
+            <h1>$300.000</h1>
+            <button class="button-add" onclick="add('product-2', 300)">Favoritos</button>
         </div>
 
         <div class="product-container">
-            <h3>nombre</h3>
-            <img src="images/product-3.jpeg" />
-            <h1>$250</h1>
-            <button class="button-add" onclick="add('product-3', 250)">Agregar</button>
+            <h3>titulo</h3>
+            <img src="/static/img/product-3.jpeg" />
+            <h1>$250.000</h1>
+            <button class="button-add" onclick="add('product-3', 250)">Favoritos</button>
         </div>
 
         <div class="product-container">
-            <h3>nombre</h3>
-            <img src="images/product-4.jpeg" />
-            <h1>$200</h1>
-            <button class="button-add" onclick="add('product-4', 200)">Agregar</button>
+            <h3>titulo</h3>
+            <img src="/static/img/product-4.jpeg" />
+            <h1>$200.000</h1>
+            <button class="button-add" onclick="add('product-4', 200)">Favoritos</button>
         </div>
 
         <div class="product-container">
-            <h3>nombre</h3>
-            <img src="images/product-5.jpeg" />
-            <h1>$10</h1>
-            <button class="button-add" onclick="add('product-5', 10)">Agregar</button>
+            <h3>titulo</h3>
+            <img src="/static/img/product-5.jpeg" />
+            <h1>$100.000</h1>
+            <button class="button-add" onclick="add('product-5', 10)">Favoritos</button>
         </div>
 
         <div class="product-container">
-            <h3>nombre</h3>
-            <img src="images/product-6.jpeg" />
-            <h1>$650</h1>
-            <button class="button-add" onclick="add('product-6', 650)">Agregar</button>
+            <h3>titulo</h3>
+            <img src="/static/img/product-6.jpeg" />
+            <h1>$650.000</h1>
+            <button class="button-add" onclick="add('product-6', 650)">Favoritos</button>
         </div>
     </div>
 </body>

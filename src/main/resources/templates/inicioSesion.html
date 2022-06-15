@@ -1,29 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BusCAR-Iniciar Sesión </title>
+    <link rel="stylesheet"  type= "text/css" href="/static/css/normalize.css">
+    <link rel="stylesheet" href="/static/css/inicioSesion.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <title>BusCAR-Iniciar Sesión</title>
 </head>
 <body>
     <header>
         <nav>
-             
+
         </nav>
     </header>
-    <div>
+    
+    <div class="login">
+        <h1>Iniciar Sesión</h1>
         <form>
-        <h2><b>Iniciar Sesión</b></h2>
-        <p>Ingrese su E-mail</p>
-        <input type="email" name="email"required="">
-        <p>Ingrese su contraseña</p>
-        <input type="password" name="contraseña"required=""><br>
-        <input type="submit" value="Iniciar Sesión"required="">
-        <p>¿No tenés cuenta?</p>
-        <a href="registro.html">Registrate acá</a>
+            <div class="user-box">
+                <input type="email" name="" required="">
+                <label >Ingrese su E-mail</label>
+            </div>
+            <div class="user-box">
+                <input type="password" name="" required="">
+                <label> Contraseña</label>
+            </div>
+            <a href="#">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <b>Iniciar sesión</b> 
+            </a><br>
+            <br>
+            <p>¿No tenés cuenta?</p>
+            <a class="link" href="registro.html">Registrate acá</a>
+            <br>
+            <a class="link" href="Index.html">Volver a inicio</a>
         </form>
-        <a href="index.html">Volver a inicio</a>
+       
     </div>
+  
+    
+
 </body>
 </html>

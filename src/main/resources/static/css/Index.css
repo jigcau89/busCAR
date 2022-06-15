@@ -88,7 +88,7 @@ header li :hover{
         rgba(0,0,0,0.5),
         rgba(0,0,0,0.5)
     )
-    ,url("media/autosfila.jpg");
+    ,url("/static/img/autosfila.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -104,6 +104,12 @@ header li :hover{
     background-color: rgb(247, 247, 247);
 }
 
+#somos-buscar .img-container{
+    background-image: url("/static/img/somos-buscar.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
 #somos-buscar .container{
     text-align: center;
     padding: 100px 12px;
@@ -290,7 +296,7 @@ footer .container{
             0deg,
             rgba(19, 19, 19, 0.23),
             rgba(19, 19, 19, 0)
-        ), url("media/somos-buscar.jpg");
+        ), url("/static/img/");
         background-size: cover;
         background-position: center center;
         height: 500px;

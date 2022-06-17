@@ -1,26 +1,35 @@
-html{
-    height: 100%;
-}
+*{
+    box-sizing: border-box;
+  }
+  html{
+      scroll-behavior: smooth;
+  }
 body{
     margin: 0;
     padding: 0;
     font-family: 'Questrial', sans-serif;
     background: #fff;
 }
+.home{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+ 
+}
 
 .login{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 400px;
-    padding: 40px;
-    transform: translate(-50%, -50%);
+ 
     background: rgba(255, 255, 255, 0.5);
     box-sizing: border-box;
     box-shadow: 0 15px 25px rgba(0,0,0,.6);
     border-radius: 7px;
 }
-
+.login:first-child{
+    flex: 2;
+    padding: 25px;
+    margin: 20px;
+}
 .login h1{
     margin: 0 0 30px;
     padding: 0;
@@ -32,11 +41,12 @@ body{
 }
 .login .user-box input{
     width: 100%;
-    padding: 10px 0;
+    padding: 10px ;
     font-size: 18px;
     color: rgb(0, 0, 0);
     margin-bottom: 30px;
     border: none;
+    border-color: #0e8893;
     border-bottom: 1px solid ;
     background: transparent;
 }
@@ -69,6 +79,7 @@ overflow:hidden ;
 transition: .5s;
 margin-top: 40px;
 letter-spacing: 4px;
+
 }
 .login a:hover {
     background: #0e8893;
@@ -248,4 +259,45 @@ p{
     margin: 5px;
     padding-left: 5px;
     text-align: left;
+}
+footer{
+   
+    background-color: black;
+  
+   
+}
+footer .container{
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+footer p{
+    color: rgb(245, 245, 245);
+    margin: 0;
+    padding: 12px;
+}
+
+
+header{
+    background-color: rgb(245, 245, 245);
+    
+}
+header .logo{
+   margin: 0;
+   padding: 25px 30px; 
+}
+header .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header nav{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 25px;
+}
+header p{
+   padding: 5px 12px;
 }

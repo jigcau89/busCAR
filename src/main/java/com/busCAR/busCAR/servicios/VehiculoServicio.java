@@ -27,48 +27,48 @@ public class VehiculoServicio {
     public void validar(String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, TipoDeVehiculo tdv) throws ErrorServicio {
 
         if (patente == null || patente.trim().isEmpty()) {
-            throw new ErrorServicio("La patente no es válida.");
+            throw new ErrorServicio("La patente no es válida. SERVICE");
         }
         if (modelo == null || modelo.trim().isEmpty()) {
-            throw new ErrorServicio("El modelo no es válido.");
+            throw new ErrorServicio("El modelo no es válido. SERVICE");
         }
         if (marca == null || marca.trim().isEmpty()) {
-            throw new ErrorServicio("La marca no es válida.");
+            throw new ErrorServicio("La marca no es válida. SERVICE");
         }
         if (anioFabricacion == null) {
-            throw new ErrorServicio("El Año de fabricación está vacío");
+            throw new ErrorServicio("El Año de fabricación está vacío. SERVICE");
         }
         if (anioFabricacion < 1920 || anioFabricacion > 2022) {
-            throw new ErrorServicio("El Año de fabricación no es válido");
+            throw new ErrorServicio("El Año de fabricación no es válido. SERVICE");
         }
 
         if (color == null) {
-            throw new ErrorServicio("Color está vacío");
+            throw new ErrorServicio("Color está vacío. SERVICE");
         }
         if (precio == null || precio < 0) {
-            throw new ErrorServicio("El precio no es válido.");
+            throw new ErrorServicio("El precio no es válido. SERVICE");
         }
         if (nuevo == null) {
-            throw new ErrorServicio("Debe indicar estado de uso del vehículo");
+            throw new ErrorServicio("Debe indicar estado de uso del vehículo. SERVICE");
         }
         if (kilometraje == null || kilometraje.trim().isEmpty()) {
-            throw new ErrorServicio("El kilometraje no es válido.");
+            throw new ErrorServicio("El kilometraje no es válido. SERVICE");
         }
         if (kilometraje.length() < 2 || kilometraje.length() > 7) {
-            throw new ErrorServicio("El rango del Kilometraje es incorrecto");
+            throw new ErrorServicio("El rango del Kilometraje es incorrecto. SERVICE");
         }
         for (int x = 0; x < kilometraje.length(); x++) {
             char c = kilometraje.charAt(x);
             if (!(c >= '0' && c <= '9')) {
-                throw new ErrorServicio("El kilometraje no puede tener caracteres no numéricos");
+                throw new ErrorServicio("El kilometraje no puede tener caracteres no numéricos. SERVICE");
                 /* valida si hay caracteres no numericos en kilometraje "PROBAR"*/
             }
         }
         if (tdc == null) {
-            throw new ErrorServicio("El tipo de combustible está vacío");
+            throw new ErrorServicio("El tipo de combustible está vacío. SERVICE");
         }
         if (tdv == null) {
-            throw new ErrorServicio("El tipo de vehículo está vacío");
+            throw new ErrorServicio("El tipo de vehículo está vacío. SERVICE");
         }
 
     }

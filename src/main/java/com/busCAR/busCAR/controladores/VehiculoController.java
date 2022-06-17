@@ -6,6 +6,7 @@ import com.busCAR.busCAR.entidades.Usuario;
 import com.busCAR.busCAR.entidades.Vehiculo;
 import com.busCAR.busCAR.enumeraciones.Color;
 import com.busCAR.busCAR.enumeraciones.FormaDePago;
+import com.busCAR.busCAR.enumeraciones.Marca;
 import com.busCAR.busCAR.enumeraciones.TipoDeCombustible;
 import com.busCAR.busCAR.enumeraciones.TipoDeVehiculo;
 import com.busCAR.busCAR.errores.ErrorServicio;
@@ -31,117 +32,38 @@ public class VehiculoController {
     private VehiculoServicio serviciovehiculo;
 
     /*ENUMS*/
-    @GetMapping("/colores")
+    @GetMapping("/registro")
     public String colorear(ModelMap vista) {
         vista.addAttribute("Colores", Color.values());
-        return "vehiculo_registro_colores";
-    }
-
-    @GetMapping("/tipo_combustible")
-    public String combustear(ModelMap vista) {
-        vista.addAttribute("Tipos de combustible", TipoDeCombustible.values());
-        return "vehiculo_tdc";
-    }
-
-    @GetMapping("/tipo_vehiculo")
-    public String tipoVehiculo(ModelMap vista) {
-        vista.addAttribute("Tipo de vehículo", TipoDeVehiculo.values());
-        return "vehiculo_tdv";
+        vista.addAttribute("Tdc", TipoDeCombustible.values());
+        vista.addAttribute("Marcas", Marca.values());
+        vista.addAttribute("Tdv", TipoDeVehiculo.values());
+        return "Registro_auto";
     }
 
     /*ABMS*/
     @PostMapping("/registro")
     public String registro(ModelMap model, @RequestParam MultipartFile archivo, @RequestParam String patente, @RequestParam String modelo, @RequestParam String marca, @RequestParam Integer anio,
             @RequestParam Color color, @RequestParam Double precio, @RequestParam Boolean nuevo, @RequestParam String kilometraje, @RequestParam TipoDeCombustible tdc, @RequestParam String descripcion,
-            @RequestParam Boolean alta, @RequestParam TipoDeVehiculo tdv) throws ErrorServicio {
-        serviciovehiculo.guardar(archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, alta, tdv);
-        model.put("Registro exitoso", "Vehículo guardado correctamente");
-        return "vehiculo_registro";
-
-    }
-
-    @PostMapping("/modificar")
-    public String modificar(ModelMap model, @RequestParam String id, @RequestParam MultipartFile archivo, @RequestParam String patente, @RequestParam String modelo, @RequestParam String marca, @RequestParam Integer anio,
-            @RequestParam Color color, @RequestParam Double precio, @RequestParam Boolean nuevo, @RequestParam String kilometraje, @RequestParam TipoDeCombustible tdc, @RequestParam String descripcion,
-            @RequestParam Boolean alta, @RequestParam TipoDeVehiculo tdv) throws ErrorServicio {
-        serviciovehiculo.modificar(id, archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, alta, tdv);
-        model.put("modificación exitosa", "Vehículo modificado correctamente");
-        return "vehiculo_modificar";
-    }
-
-    /*HABILITAR / DESHABILITAR */
-    @GetMapping("/deshabilitar/{id}")
-    public String baja(@PathVariable String id) {
+             @RequestParam TipoDeVehiculo tdv) throws ErrorServicio {
 
         try {
-            serviciovehiculo.deshabilitar(id);
-            return "redirect:/vehiculo";
+            serviciovehiculo.guardar(archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv);
+            model.put("exito", "Vehículo guardado correctamente");
+            return "Registro_auto";
         } catch (ErrorServicio e) {
-            return "redirect:/";
+            
+            e.printStackTrace();
+            model.put("error", "falló el registro");
+            model.addAttribute("Colores", Color.values());
+            model.addAttribute("Tdc", TipoDeCombustible.values());
+            model.addAttribute("Marcas", Marca.values());
+            model.addAttribute("Tdv", TipoDeVehiculo.values());
+            return "Registro_auto";
+           
+            
         }
+
     }
 
-    @GetMapping("/habilitar/{id}")
-    public String alta(@PathVariable String id) {
-
-        try {
-            serviciovehiculo.habilitar(id);
-            return "redirect:/vehiculo";
-        } catch (ErrorServicio e) {
-            return "redirect:/";
-        }
-    }
-
-    /*LISTAS*/
-    @GetMapping("/lista")
-    public String ListarTodoPorAnio(ModelMap model) {
-
-        List<Vehiculo> listar = serviciovehiculo.ListaVehiculosOrdenadoAnio();
-
-        model.addAttribute("Lista de vehículos por año", listar);
-
-        return "lista-vehiculo";
-    }
-
-    @GetMapping("/lista")
-
-    public String ListarTodoPorMarca(ModelMap model) {
-
-        List<Vehiculo> listar = serviciovehiculo.ListaVehiculosOrdenadoMarca();
-
-        model.addAttribute("Lista de vehículos por Marca", listar);
-
-        return "lista-vehiculo";
-    }
-
-    public String ListarTodoPorModelo(ModelMap model) {
-
-        List<Vehiculo> listar = serviciovehiculo.ListaVehiculosOrdenadoModelo();
-
-        model.addAttribute("Lista de vehículos por Modelo", listar);
-
-        return "lista-vehiculo";
-    }
-
-    public String ListarTodoPorTipo(ModelMap model) {
-
-        List<Vehiculo> listar = serviciovehiculo.ListaVehiculosOrdenadoTipo();
-
-        model.addAttribute("Lista de vehículos por Tipo", listar);
-
-        return "lista-vehiculo";
-    }
-
-    public String ListarTodoPorKm(ModelMap model) {
-
-        List<Vehiculo> listar = serviciovehiculo.ListaVehiculosOrdenadoKm();
-
-        model.addAttribute("Lista de vehículos por Kilometraje", listar);
-
-        return "lista-vehiculo";
-        
-    }
-    
-    
-    
 }

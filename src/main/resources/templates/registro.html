@@ -7,8 +7,8 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link rel="icon" href="">
-    <link rel="stylesheet"  type= "text/css" href="/css/normalize.css">
-    <link rel="stylesheet"  type= "text/css" href="/css/registro.css">
+    <link rel="stylesheet"  type= "text/css" href="/static/css/normalize.css">
+    <link rel="stylesheet"  type= "text/css" href="/static/css/registro.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
@@ -19,49 +19,60 @@
         <nav>
         </nav>
     </header>
-    <div class="registro">
+    <section class="home">
+        <div class="registro">
         <h1><b>Registro</b></h1>
         <form >
             <div class="user-box">
                 <input type="text" name="nombre" required>
                 <label >Ingrese su nombre</label>
+                <br>
             </div>
             <div class="user-box">
                 <input type="text" name="apellido" required>
                 <label >Ingrese su apellido</label>
+                <br>
             </div>
             <div class="user-box">
                 <input type="text" name="fechaNacimiento" required>
                 <label >Ingrese su fecha de nacimiento</label>
+                <br>
             </div>
             <div class="user-box">
                 <input type="number" name="dni" required>
                 <label >Ingrese su dni</label>
+                <br>
             </div>
             <div class="user-box">
                 <input type="email" name="email" required>
                 <label >Ingrese su E-mail</label>
+                <br>
             </div>
             <div class="user-box">
                 <input type="tel" name="telefono" required>
                 <label >Ingrese su núm. telefónico</label>
+                <br>
             </div>
             <div class="user-box">
                 <input type="text" name="direccion" required>
                 <label >Ingrese su domicilio</label>
+                <br>
             </div>
             <div class="user-box">
                 <input type="password" name="clave" required>
                 <label >Ingrese su contraseña</label>
+                <br>
             </div>
             <div class="user-box">
                 <input type="password" name="clave" required>
                 <label >Confirme su contraseña</label>
+                <br>
             </div>
             <br>
             <div class="user-box">
                 <input type="file"> 
-                <label >Foto de perfil</label> 
+                <label >Foto de perfil</label>
+                <br> 
                 </div>
                <!--<a href="#">
                     <span></span>
@@ -70,31 +81,29 @@
                     <span></span>
                 Guardar foto de perfil
                 </a>--> 
-            <a href="#">
+            <button href="#">
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
                 <b>Registrarse</b> 
-            </a>
+            </button>
            
             <br>
             <br>
             <p>¿Ya tenés cuenta?</p>
-            <a class="link" href="inicioSesion.html">Inicia sesión</a>
+            <a class="link" href="inicioSesion">Inicia sesión</a>
             <br>
-            <a class="link" href="index.html">Volver a inicio</a>
+            <a class="link" href="index">Volver a inicio</a>
         </form>
-       
-    <!-- <footer>
-        <img src="\busCAR\src\main\resources\static\img\—Pngtree—fashion car private car orange_4484916.png">
-        <ul class="redes">
-             <li><img src="/img/logoinsta.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
-             <li><img src="\busCAR\src\main\resources\static\img\facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
-             <li><img src="\busCAR\src\main\resources\static\img\twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
-         </ul>
-         
-         <p class="copyright">&copy Copyright BusCar - 2022</p>
-    </footer>-->
+        </div>
+    </section>
+    <div class="container">
+        <footer>
+            <div >
+                <p>&copy; busCar2022</p>
+            </div>
+        </footer>
+    </div>  
 </body>
 </html>

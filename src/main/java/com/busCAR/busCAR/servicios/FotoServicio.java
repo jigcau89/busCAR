@@ -62,18 +62,18 @@ public class FotoServicio {
         }
         return null;
     }
-    
+
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void borrar(String id) {
         Foto foto = fotoRepositorio.getById(id);
         fotoRepositorio.delete(foto);
     }
-    
+
     @Transactional(readOnly = true)
     public List<Foto> buscarTodos() {
         return fotoRepositorio.findAll();
     }
-    
+
     @Transactional(readOnly = true)
     public Foto buscarPorId(String id) {
         return fotoRepositorio.getById(id);

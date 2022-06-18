@@ -4,12 +4,9 @@ import com.busCAR.busCAR.entidades.Usuario;
 import com.busCAR.busCAR.entidades.Vehiculo;
 import com.busCAR.busCAR.enumeraciones.FormaDePago;
 import com.busCAR.busCAR.errores.ErrorServicio;
-import com.busCAR.busCAR.repositorios.TransaccionRepositorio;
 import com.busCAR.busCAR.repositorios.VehiculoRepositorio;
-import com.busCAR.busCAR.servicios.FotoServicio;
 import com.busCAR.busCAR.servicios.TransaccionServicio;
 import com.busCAR.busCAR.servicios.UsuarioServicio;
-import com.busCAR.busCAR.servicios.VehiculoServicio;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,45 +23,31 @@ public class TransaccionController {
 
     @Autowired
     private TransaccionServicio servicioTransaccion;
-    
-    @Autowired
-    private FotoServicio servicioFoto;
 
     @Autowired
     private UsuarioServicio servicioUsuario;
 
     @Autowired
-    private VehiculoServicio servicioVehiculo;
-
-    @Autowired
     private VehiculoRepositorio repositorioVehiculo;
-
-    @Autowired
-    private TransaccionRepositorio repositorioTransaccion;
     
     @GetMapping("/producto")
-    public String producto(ModelMap modelo/*, @RequestParam String id*/) {
-//        Optional<Vehiculo> respuesta = repositorioVehiculo.findById(id);
+    public String producto(ModelMap modelo/*, @RequestParam("id_v") String idVehiculo*/) {
+//        Optional<Vehiculo> respuesta = repositorioVehiculo.findById(idVehiculo);
 
 //Como todavia no tengo la vista del catalogo de auto, la busqueda está hardcodeada para agarra siempre el mismo auto
-        Optional<Vehiculo> respuesta = repositorioVehiculo.findById("c827035a-ff05-44a2-92b3-caeab3fb62ee");
+        Optional<Vehiculo> respuesta = repositorioVehiculo.findById("cd7ede50-7387-4842-b509-11060c407d92");
         Vehiculo vehiculo = respuesta.get();
         modelo.put("vehiculo", vehiculo);
+
         if (vehiculo.getNuevo()) {
-            modelo.put("condicion", "Nuevo");
+            modelo.put("estado", "Nuevo");
         } else {
-            modelo.put("condicion", "Usado");
+            modelo.put("estado", "Usado");
         }
 
-// Necesitaria ver de donde saco las preguntas que van a ir en la vista, y ver que tan dinamico puede ser
-//        String[] preguntas = new String[3];
-//        preguntas[0] = "Pregunta 1";
-//        preguntas[1] = "Pregunta 2";
-//        preguntas[2] = "Pregunta 3";
-//        modelo.put("preguntas", preguntas);
-List<Vehiculo> vehiculosRel = servicioTransaccion.buscarRelacionados(vehiculo.getTipoDeVehiculo());
+        List<Vehiculo> vehiculosRel = servicioTransaccion.buscarRelacionados(vehiculo.getTipoDeVehiculo());
         modelo.put("vehiculosRel", vehiculosRel);
-        return "CompraProducto";
+        return "Producto";
     }
 
     @GetMapping("/reserva")
@@ -83,7 +66,7 @@ List<Vehiculo> vehiculosRel = servicioTransaccion.buscarRelacionados(vehiculo.ge
         } else {
             precio = ((precio * 5) / 100);
         }
-        modelo.put("precio", precio.intValue());
+        modelo.put("precio", precio);
         modelo.put("transferencia", FormaDePago.DEBITO);
         modelo.put("tarjeta", FormaDePago.TARJETA);
         modelo.put("rapipago", FormaDePago.EFECTIVO);
@@ -92,9 +75,9 @@ List<Vehiculo> vehiculosRel = servicioTransaccion.buscarRelacionados(vehiculo.ge
     }
 
     @GetMapping("/pago")
-    public String pago(ModelMap modelo, @RequestParam Double precio, @RequestParam FormaDePago metodoPago, @RequestParam("id_v") String idVehiculo) {
+    public String pago(ModelMap modelo, @RequestParam Double precio, @RequestParam("pago") FormaDePago metodoPago, @RequestParam("id_v") String idVehiculo) {
         try {
-            modelo.put("monto", precio);
+            modelo.put("precio", precio);
             modelo.put("vehiculo", idVehiculo);
             modelo.put("metodo", metodoPago);
 
@@ -114,16 +97,17 @@ List<Vehiculo> vehiculosRel = servicioTransaccion.buscarRelacionados(vehiculo.ge
         }
         return "reserva";
     }
-
-    // Como todavia no dispongo de los metodos de usuario, tengo la busqueda de un usuario hardcodeada
+    
     @PostMapping("/transferencia")
-    public String pagoTransferencia(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u", required = false) String idUsuario, @RequestParam Double monto) {
+    public String pagoTransferencia(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u") String idUsuario,
+            @RequestParam Double precio, @RequestParam String nombre, @RequestParam String dni, @RequestParam String telefono, @RequestParam String email,
+            @RequestParam String direccion, @RequestParam String cuil, @RequestParam String banco, @RequestParam String cbu, @RequestParam String alias) {
         try {
-//            Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
-            Usuario usuario = servicioUsuario.buscarPorId("123456");
+            Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
             Optional<Vehiculo> vehiculo = repositorioVehiculo.findById(idVehiculo);
-            servicioTransaccion.guardar(monto, FormaDePago.DEBITO, usuario, vehiculo.get());
-            modelo.put("exito", "La transacción se realizó con éxito");
+            servicioTransaccion.validarDatosTransaccion(usuario, nombre, dni, telefono, email, direccion, cuil, banco, cbu, alias);
+            servicioTransaccion.guardar(precio, FormaDePago.DEBITO, usuario, vehiculo.get());
+            return "redirect://localhost:8080/transaccion/visita";
         } catch (ErrorServicio e) {
             e.printStackTrace();
             modelo.put("error", e.getMessage());
@@ -132,13 +116,16 @@ List<Vehiculo> vehiculosRel = servicioTransaccion.buscarRelacionados(vehiculo.ge
     }
 
     @PostMapping("/tarjeta")
-    public String pagoTarjeta(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u", required = false) String idUsuario, @RequestParam Double monto) {
+    public String pagoTarjeta(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u") String idUsuario, 
+            @RequestParam Double precio, @RequestParam String nombre, @RequestParam String dni, @RequestParam String telefono, @RequestParam String email, 
+            @RequestParam String direccion, @RequestParam String cuil, @RequestParam String numeroTarjeta, @RequestParam String vencimiento, 
+            @RequestParam String codigoSeguridad) {
         try {
-//            Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
-            Usuario usuario = servicioUsuario.buscarPorId("123456");
+            Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
             Optional<Vehiculo> vehiculo = repositorioVehiculo.findById(idVehiculo);
-            servicioTransaccion.guardar(monto, FormaDePago.TARJETA, usuario, vehiculo.get());
-            modelo.put("exito", "La transacción se realizó con éxito");
+            servicioTransaccion.validarDatosTarjeta(usuario, nombre, dni, telefono, email, direccion, cuil, numeroTarjeta, vencimiento, codigoSeguridad);
+            servicioTransaccion.guardar(precio, FormaDePago.TARJETA, usuario, vehiculo.get());
+            return "redirect://localhost:8080/transaccion/visita";
         } catch (ErrorServicio e) {
             e.printStackTrace();
             modelo.put("error", e.getMessage());
@@ -147,32 +134,42 @@ List<Vehiculo> vehiculosRel = servicioTransaccion.buscarRelacionados(vehiculo.ge
     }
 
     @PostMapping("/efectivo")
-    public String pagoEfectivo(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u", required = false) String idUsuario, @RequestParam Double monto) {
+    public String pagoEfectivo(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u") String idUsuario, 
+            @RequestParam Double precio, @RequestParam String nombre, @RequestParam String dni, @RequestParam String telefono, @RequestParam String email, 
+            @RequestParam String direccion, @RequestParam String cuil, @RequestParam String puntoPago) {
         try {
-//            Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
-            Usuario usuario = servicioUsuario.buscarPorId("123456");
+            Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
             Optional<Vehiculo> vehiculo = repositorioVehiculo.findById(idVehiculo);
-            servicioTransaccion.guardar(monto, FormaDePago.EFECTIVO, usuario, vehiculo.get());
-            modelo.put("exito", "La transacción se realizó con éxito");
+            servicioTransaccion.validarDatosEfectivo(usuario, nombre, dni, telefono, email, direccion, cuil, puntoPago);
+            servicioTransaccion.guardar(precio, FormaDePago.EFECTIVO, usuario, vehiculo.get());
+            return "redirect://localhost:8080/transaccion/visita";
         } catch (ErrorServicio e) {
             e.printStackTrace();
             modelo.put("error", e.getMessage());
         }
         return "datos-efectivo";
     }
-
+    
     @PostMapping("/cripto")
-    public String pagoCripto(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u", required = false) String idUsuario, @RequestParam Double monto) {
+    public String pagoCripto(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u") String idUsuario, 
+            @RequestParam Double precio, @RequestParam String nombre, @RequestParam String dni, @RequestParam String telefono, @RequestParam String email, 
+            @RequestParam String direccion, @RequestParam String cuil, @RequestParam String direccionWallet, @RequestParam String red, 
+            @RequestParam String moneda) {
         try {
-//            Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
-            Usuario usuario = servicioUsuario.buscarPorId("123456");
+            Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
             Optional<Vehiculo> vehiculo = repositorioVehiculo.findById(idVehiculo);
-            servicioTransaccion.guardar(monto, FormaDePago.CRIPTOMONEDAS, usuario, vehiculo.get());
-            modelo.put("exito", "La transacción se realizó con éxito");
+            servicioTransaccion.validarDatosCripto(usuario, nombre, dni, telefono, email, direccion, cuil, direccionWallet, red, moneda);
+            servicioTransaccion.guardar(precio, FormaDePago.CRIPTOMONEDAS, usuario, vehiculo.get());
+            return "redirect://localhost:8080/transaccion/visita";
         } catch (ErrorServicio e) {
             e.printStackTrace();
             modelo.put("error", e.getMessage());
         }
         return "datos-cripto";
+    }
+    
+    @GetMapping("/visita")
+    public String visita() {
+        return "visita";
     }
 }

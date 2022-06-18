@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/foto")
 public class FotoController {
-
-    @Autowired
-    private FotoServicio servicioFoto;
-
+    
     @Autowired
     private UsuarioServicio servicioUsuario;
 
@@ -56,7 +53,7 @@ public class FotoController {
         try {
             Vehiculo vehiculo = servicioVehiculo.buscarPorId(id);
             if (vehiculo.getFotos() == null) {
-                throw new ErrorServicio("El vehiculo no tiene una foto asignada");
+                throw new ErrorServicio("El vehículo no tiene una foto asignada");
             }
 
             byte[] foto = vehiculo.getFotos().getContenido();

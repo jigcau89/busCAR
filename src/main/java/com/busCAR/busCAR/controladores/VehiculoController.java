@@ -40,6 +40,12 @@ public class VehiculoController {
         vista.addAttribute("Tdv", TipoDeVehiculo.values());
         return "Registro_auto";
     }
+    
+    @GetMapping("/producto")
+    public String producto()
+    {
+        return "Producto";
+    }
 
     /*ABMS*/
     @PostMapping("/registro")

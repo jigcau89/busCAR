@@ -1,1 +1,1 @@
-{"elements":{},"attributes":{"th:if":{"context":"div"},"th:text":{"context":"p"},"th:each":{"context":"option"}}}
+{"elements":{},"attributes":{"th:if":{"context":"div"},"th:text":{"context":"p"},"th:src":{"context":"img"},"th:each":{"context":"option"},"th:href":{"context":"a"}}}

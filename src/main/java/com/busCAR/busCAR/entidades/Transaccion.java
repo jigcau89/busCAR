@@ -10,7 +10,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Transaccion {
@@ -21,7 +20,6 @@ public class Transaccion {
     private String id;
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date fechaTransaccion;
     @Column(nullable = false)
     private Double monto;

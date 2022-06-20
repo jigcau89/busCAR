@@ -32,7 +32,6 @@ public interface TransaccionRepositorio extends JpaRepository<Transaccion, Strin
     @Query("SELECT t FROM Transaccion t WHERE t.alta = :alta")
     public List<Transaccion> buscarPorAlta(@Param("alta") Boolean alta);
     
-//    @Query("SELECT t FROM Transaccion t WHERE t.alta = true AND t")
-    @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.tipoDeVehiculo LIKE :tv ORDER BY v.anioFabricacion")
-    public List<Vehiculo> buscarRelacionados(@Param("tv") TipoDeVehiculo tv);
+    @Query("SELECT v FROM Vehiculo v WHERE v.id != :id_v AND v.alta = true AND v.tipoDeVehiculo LIKE :tv ORDER BY v.anioFabricacion")
+    public List<Vehiculo> buscarRelacionados(@Param("tv") TipoDeVehiculo tv, @Param("id_v") String idVehiculo);
 }

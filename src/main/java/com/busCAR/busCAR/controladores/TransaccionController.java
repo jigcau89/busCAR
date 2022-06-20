@@ -29,13 +29,10 @@ public class TransaccionController {
 
     @Autowired
     private VehiculoRepositorio repositorioVehiculo;
-    
-    @GetMapping("/producto")
-    public String producto(ModelMap modelo/*, @RequestParam("id_v") String idVehiculo*/) {
-//        Optional<Vehiculo> respuesta = repositorioVehiculo.findById(idVehiculo);
 
-//Como todavia no tengo la vista del catalogo de auto, la busqueda está hardcodeada para agarra siempre el mismo auto
-        Optional<Vehiculo> respuesta = repositorioVehiculo.findById("cd7ede50-7387-4842-b509-11060c407d92");
+    @GetMapping("/producto")
+    public String producto(ModelMap modelo, @RequestParam("id_v") String idVehiculo) {
+        Optional<Vehiculo> respuesta = repositorioVehiculo.findById(idVehiculo);
         Vehiculo vehiculo = respuesta.get();
         modelo.put("vehiculo", vehiculo);
 
@@ -45,20 +42,19 @@ public class TransaccionController {
             modelo.put("estado", "Usado");
         }
 
-        List<Vehiculo> vehiculosRel = servicioTransaccion.buscarRelacionados(vehiculo.getTipoDeVehiculo());
+        List<Vehiculo> vehiculosRel = servicioTransaccion.buscarRelacionados(vehiculo.getTipoDeVehiculo(), vehiculo.getId());
         modelo.put("vehiculosRel", vehiculosRel);
         return "Producto";
     }
 
     @GetMapping("/reserva")
-    public String pago(ModelMap modelo, @RequestParam String id) {
+    public String pagoReserva(ModelMap modelo, @RequestParam String id) {
         Optional<Vehiculo> respuesta = repositorioVehiculo.findById(id);
         Vehiculo vehiculo = respuesta.get();
         Double precio = vehiculo.getPrecio();
 
         /* Saco el 5% del precio del vehiculo, si supera los 100.000, el monto a pagar para reservar se setea en 100.000
    Si es menor a 50.000, se setea en 50.000*/
-        modelo.put("vehiculo", vehiculo);
         if (((precio * 5) / 100) > 100000d) {
             precio = 100000d;
         } else if (((precio * 5) / 100) < 50000d) {
@@ -66,7 +62,23 @@ public class TransaccionController {
         } else {
             precio = ((precio * 5) / 100);
         }
+        
+        modelo.put("vehiculo", vehiculo);
         modelo.put("precio", precio);
+        modelo.put("transferencia", FormaDePago.DEBITO);
+        modelo.put("tarjeta", FormaDePago.TARJETA);
+        modelo.put("rapipago", FormaDePago.EFECTIVO);
+        modelo.put("cripto", FormaDePago.CRIPTOMONEDAS);
+        return "reserva";
+    }
+    
+    @GetMapping("/compra")
+    public String pagoCompra(ModelMap modelo, @RequestParam String id) {
+        Optional<Vehiculo> respuesta = repositorioVehiculo.findById(id);
+        Vehiculo vehiculo = respuesta.get();
+        
+        modelo.put("vehiculo", vehiculo);
+        modelo.put("precio", vehiculo.getPrecio());
         modelo.put("transferencia", FormaDePago.DEBITO);
         modelo.put("tarjeta", FormaDePago.TARJETA);
         modelo.put("rapipago", FormaDePago.EFECTIVO);
@@ -97,7 +109,7 @@ public class TransaccionController {
         }
         return "reserva";
     }
-    
+
     @PostMapping("/transferencia")
     public String pagoTransferencia(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u") String idUsuario,
             @RequestParam Double precio, @RequestParam String nombre, @RequestParam String dni, @RequestParam String telefono, @RequestParam String email,
@@ -116,14 +128,16 @@ public class TransaccionController {
     }
 
     @PostMapping("/tarjeta")
-    public String pagoTarjeta(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u") String idUsuario, 
-            @RequestParam Double precio, @RequestParam String nombre, @RequestParam String dni, @RequestParam String telefono, @RequestParam String email, 
-            @RequestParam String direccion, @RequestParam String cuil, @RequestParam String numeroTarjeta, @RequestParam String vencimiento, 
+    public String pagoTarjeta(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u") String idUsuario,
+            @RequestParam Double precio, @RequestParam String nombre, @RequestParam String dni, @RequestParam String telefono, @RequestParam String email,
+            @RequestParam String direccion, @RequestParam String cuil, @RequestParam String numeroTarjeta, @RequestParam String vencimiento,
             @RequestParam String codigoSeguridad) {
         try {
             Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
             Optional<Vehiculo> vehiculo = repositorioVehiculo.findById(idVehiculo);
+            System.out.println(vencimiento);
             servicioTransaccion.validarDatosTarjeta(usuario, nombre, dni, telefono, email, direccion, cuil, numeroTarjeta, vencimiento, codigoSeguridad);
+            System.out.println(vencimiento);
             servicioTransaccion.guardar(precio, FormaDePago.TARJETA, usuario, vehiculo.get());
             return "redirect://localhost:8080/transaccion/visita";
         } catch (ErrorServicio e) {
@@ -134,8 +148,8 @@ public class TransaccionController {
     }
 
     @PostMapping("/efectivo")
-    public String pagoEfectivo(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u") String idUsuario, 
-            @RequestParam Double precio, @RequestParam String nombre, @RequestParam String dni, @RequestParam String telefono, @RequestParam String email, 
+    public String pagoEfectivo(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u") String idUsuario,
+            @RequestParam Double precio, @RequestParam String nombre, @RequestParam String dni, @RequestParam String telefono, @RequestParam String email,
             @RequestParam String direccion, @RequestParam String cuil, @RequestParam String puntoPago) {
         try {
             Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
@@ -149,11 +163,11 @@ public class TransaccionController {
         }
         return "datos-efectivo";
     }
-    
+
     @PostMapping("/cripto")
-    public String pagoCripto(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u") String idUsuario, 
-            @RequestParam Double precio, @RequestParam String nombre, @RequestParam String dni, @RequestParam String telefono, @RequestParam String email, 
-            @RequestParam String direccion, @RequestParam String cuil, @RequestParam String direccionWallet, @RequestParam String red, 
+    public String pagoCripto(ModelMap modelo, @RequestParam("id_v") String idVehiculo, @RequestParam(name = "id_u") String idUsuario,
+            @RequestParam Double precio, @RequestParam String nombre, @RequestParam String dni, @RequestParam String telefono, @RequestParam String email,
+            @RequestParam String direccion, @RequestParam String cuil, @RequestParam String direccionWallet, @RequestParam String red,
             @RequestParam String moneda) {
         try {
             Usuario usuario = servicioUsuario.buscarPorId(idUsuario);
@@ -167,7 +181,7 @@ public class TransaccionController {
         }
         return "datos-cripto";
     }
-    
+
     @GetMapping("/visita")
     public String visita() {
         return "visita";

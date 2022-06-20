@@ -98,7 +98,8 @@ public class TransaccionServicio {
             String numeroTarjeta, String vencimiento, String codigoSeguridad) throws ErrorServicio {
         validarDatosUsuario(usuario, nombre, dni, cuil, telefono, email, direccion);
         
-        Date fechaVenc = new Date(vencimiento);
+//        vencimiento = vencimiento.replaceAll("-", "/");
+//        Date fechaVenc = new Date(vencimiento);
         if (numeroTarjeta == null || numeroTarjeta.trim().isEmpty()) {
             throw new ErrorServicio("El campo del número de la tarjeta no puede estar vacío.");
         } else if (numeroTarjeta.length() != 16) {
@@ -106,9 +107,9 @@ public class TransaccionServicio {
         }
         if (vencimiento == null || vencimiento.trim().isEmpty()) {
             throw new ErrorServicio("El campo de vencimiento no puede estar vacío.");
-        } else if (fechaVenc.before(new Date())) {
+        } /*else if (fechaVenc.before(new Date())) {
             throw new ErrorServicio("La tarjeta ya caducó.");
-        }
+        }*/
         if (codigoSeguridad == null || codigoSeguridad.trim().isEmpty()) {
             throw new ErrorServicio("El campo del código de seguridad no puede estar vacío.");
         } else if (codigoSeguridad.length() != 3) {
@@ -262,7 +263,7 @@ public class TransaccionServicio {
     }
 
     @Transactional(readOnly = true)
-    public List<Vehiculo> buscarRelacionados(TipoDeVehiculo tipoVehiculo) {
-        return repositorioTransaccion.buscarRelacionados(tipoVehiculo).subList(0, 2);
+    public List<Vehiculo> buscarRelacionados(TipoDeVehiculo tipoVehiculo, String idVehiculo) {
+        return repositorioTransaccion.buscarRelacionados(tipoVehiculo, idVehiculo).subList(0, 3);
     }
 }

@@ -1,0 +1,12 @@
+#Color:checked ~ #img .Combustible, #Color:checked ~ #img .Modelo, #Color:checked ~ #img .Marca{
+    display: none; 
+}
+#Combustible:checked ~ #img .Color, #Combustible:checked ~ #img .Modelo, #Combustible:checked ~ #img .Marca{
+    display: none; 
+}    
+#Modelo:checked ~ #img .Combustible, #Modelo:checked ~ #img .Color, #Modelo:checked ~ #img .Marca{
+    display: none; 
+}    
+#Marca:checked ~ #img .Combustible, #Marca:checked ~ #img .Modelo, #Marca:checked ~ #img .Color{
+    display: none; 
+}    

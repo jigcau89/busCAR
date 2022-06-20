@@ -27,13 +27,6 @@ public class UsuarioController {
     private UsuarioServicio usuarioServicio;
 
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
-//    @GetMapping("/modificar-usuario-datos/{idUsuarioModif}")
-//    public String datosUsuario(ModelMap model, @PathVariable String idUsuarioModif) throws ErrorServicio {
-//        Usuario usuario = usuarioServicio.buscarPorId(idUsuarioModif);
-//        model.addAttribute("usuarioModif", usuario);
-//        return "modDatosUsuario";
-//    }
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     @GetMapping("/editar-perfil")
     public String editarPerfil(HttpSession session, /*@RequestParam String id,*/ ModelMap model) {
 
@@ -53,8 +46,11 @@ public class UsuarioController {
         model.put("apellido", login.getApellido());
         model.put("fechaDeNacimiento", login.getFechaDeNacimiento());
         model.put("dni", login.getDni());
+        model.put("email", login.getEmail());
         model.put("telefono", login.getTelefono());
         model.put("direccion", login.getDireccion());
+        model.put("clave", login.getClave());
+        model.put("clave2", login.getClave());
 
         return "modDatosUsuario";
     }
@@ -63,19 +59,22 @@ public class UsuarioController {
     @PostMapping("/actualizar-perfil")
     public String registrar(ModelMap modelo, HttpSession session, MultipartFile archivo,
             @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido,
-            @RequestParam String dni, @RequestParam String telefono,/* @RequestParam String email,*/
+            @RequestParam String dni, @RequestParam String telefono, @RequestParam String email,
             @RequestParam String direccion, @RequestParam Date fechaDeNacimiento) {
         Usuario usuario = null;
         try {
             Usuario login = (Usuario) session.getAttribute("usuariosession");//recupero el usuario de la seccion 
             if (login == null || !login.getId().equals(id)) { //si es null en la seccion no hay ningun usuario
-                return "redirect:/inicio";
+               // return "redirect:/inicio";
+               return "index";
             }
 
             usuario = usuarioServicio.buscarPorId(id);
-            usuarioServicio.modificar(archivo, id, nombre, apellido, dni, telefono, direccion, fechaDeNacimiento);
+
+            usuarioServicio.modificar(archivo, id, nombre, apellido, dni, telefono, direccion, fechaDeNacimiento, usuario.getClave(), usuario.getClave());
             session.setAttribute("usuariosession", usuario);
-            return "redirect:/inicio";
+            //return "redirect:/inicio";
+            return "index";
         } catch (ErrorServicio ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("perfil", usuario);

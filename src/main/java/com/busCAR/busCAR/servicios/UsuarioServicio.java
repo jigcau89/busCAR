@@ -77,11 +77,11 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional
     public void modificar(MultipartFile archivo, String id, String nombre, String apellido,
              String dni, String telefono, /*String email, */String direccion,
-             Date fechaDeNacimiento /* String clave,
-            String clave2*/ /*, String rol*/) throws ErrorServicio {
+             Date fechaDeNacimiento, String clave,
+            String clave2 /*, String rol*/) throws ErrorServicio {
 
         Optional<Usuario> repuesta = usuarioRepositorio.findById(id);
-        validar(nombre, apellido, dni, telefono, repuesta.get().getEmail(), direccion, repuesta.get().getClave(), repuesta.get().getClave()/*, rol*/);
+        validar(nombre, apellido, dni, telefono, repuesta.get().getEmail(), direccion, clave, clave2/*, rol*/);
 
         if (repuesta.isPresent()) {
             Usuario usuario = repuesta.get();
@@ -190,6 +190,9 @@ public class UsuarioServicio implements UserDetailsService {
         if (apellido == null || apellido.isEmpty() || apellido.contains("  ")) {
             throw new ErrorServicio("El apellido del usuario no puede ser nulo. ");
         }
+//        if (fechaDeNacimiento == null || fechaDeNacimiento.toString().trim().isEmpty()) {
+//            throw new ErrorServicio("La fecha de nacimiento no puede ser nulo. ");
+//        }
         if (dni == null || dni.isEmpty() || dni.contains("  ")) {
             throw new ErrorServicio("El DNI del usuario no puede ser nulo. ");
         }
@@ -205,7 +208,8 @@ public class UsuarioServicio implements UserDetailsService {
         if (direccion == null || direccion.isEmpty()) {
             throw new ErrorServicio("La dirección del usuario no puede ser nulo. ");
         }
-        if (clave == null || clave.isEmpty() || clave.contains("  ") || clave.length() <= 6 || clave.length() >= 12) {
+        System.out.println(clave);
+        if (clave == null || clave.trim().isEmpty() /*|| clave.length() <= 6 || clave.length() >= 12*/) {
             throw new ErrorServicio("La clave del usuario no puede ser nulo y tiene que tener entre 6 y 12 digitos. ");
         }
         if (!clave.equals(clave2)) {

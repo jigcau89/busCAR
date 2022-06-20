@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/static/css/Index.css">
+    <link rel="stylesheet" href="/css/Index.css">
 
 </head>
 
@@ -15,16 +15,26 @@
     <header>
         <div class="container">
 
-            <img src="/static/img/Logo_Nombre.png" alt="logo" class="logo">
+            <img src="/img/Logo_Nombre.png" alt="logo" class="logo">
 
             <nav>
                 <ul>
-                    <li><a href="/templates/contacto.html">Contacto</a></li>
+                    <li><a href="/contacto">Contacto</a></li>
                     <li><a href="/templates/">Comprar</a></li>
-                    <li><a href="/templates/">Mi cuenta</a>
+                    <li sec:authorize="hasAnyRole('ROLE_USUARIO')">
+                        <a href="/"  role="button" th:text="${nombreUsuario}"> </a>
+                        <div>
+                            <a  href="/usuario/editar-perfil">Editar perfil</a>
+                            <a  href="/usuario/editar-clave">Cambiar contraseña</a>
+                            <a  href="#">Ver Reservas</a>
+                            <a  href="/logout">Logout</a>
+                        </div>
+                    </li>
+                    <li th:if="${session.usuariosession != null}"><a href="/usuario/modDatosUsuario">Mi cuenta</a>
+                  
                         <ul>
-                            <li><a href="/templates/inicioSesion.html">Iniciar Sesion</a></li>
-                            <li><a href="/templates/registro.html">Registrarte</a></li>
+                            <li th:if="${session.usuariosession == null}"><a href="/login">Iniciar Sesion</a></li>
+                            <li><a th:if="${session.usuariosession == null}" href="/registroUsuario">Registrarte</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -67,21 +77,21 @@
 
                 <div class="categoria">
                     <div class="img-container">
-                        <a href="#"><img src="/static/img/car_degra.png" alt="cat-auto"></a>
+                        <a href="#"><img src="/img/car_degra.png" alt="cat-auto"></a>
                     </div>
                     <h3>Autos</h3>
                 </div>
 
                 <div class="categoria">
                     <div class="img-container">
-                        <a href="#"><img src="/static/img/moto_degra.png" alt="cat-moto"></a>
+                        <a href="#"><img src="/img/moto_degra.png" alt="cat-moto"></a>
                     </div>
                     <h3>Motos</h3>
                 </div>
 
                 <div class="categoria">
                     <div class="img-container">
-                        <a href="#"><img src="/static/img/camioneta_degra.png" alt="cat-camioneta"></a>
+                        <a href="#"><img src="/img/camioneta_degra.png" alt="cat-camioneta"></a>
                     </div>
                     <h3>Camionetas</h3>
                 </div>
@@ -101,27 +111,27 @@
             <div class="marquita">
 
                 <div class="marcas1"><a href="">
-                        <img src="/static/img/Chevrolet-logo.png" alt="Chevrolet"></a>
+                        <img src="/img/Chevrolet-logo.png" alt="Chevrolet"></a>
                 </div>
 
                 <div class="marcas2"><a href="">
-                        <img src="/static/img/Peugeot-logo.png" alt="Peugeot"></a>
+                        <img src="/img/Peugeot-logo.png" alt="Peugeot"></a>
                 </div>
 
                 <div class="marcas3"><a href="">
-                        <img src="/static/img/Renault-Logo.png" alt="Renault"></a>
+                        <img src="/img/Renault-Logo.png" alt="Renault"></a>
                 </div>
 
                 <div class="marcas4"><a href="">
-                        <img src="/static/img/Toyota-logo.png" alt="Toyota"></a>
+                        <img src="/img/Toyota-logo.png" alt="Toyota"></a>
                 </div>
 
                 <div class="marcas5"><a href="">
-                        <img src="/static/img/Volkswagen-logo.png" alt="Volkswagen"></a>
+                        <img src="/img/Volkswagen-logo.png" alt="Volkswagen"></a>
                 </div>
 
                 <div class="marcas6"><a href="">
-                        <img src="/static/img/Fiat-logo.png" alt="Fiat"></a>
+                        <img src="/img/Fiat-logo.png" alt="Fiat"></a>
 
                 </div>
 

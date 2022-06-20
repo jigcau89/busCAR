@@ -28,8 +28,8 @@ public class ControladorPrincipal {
     public String index() {
         return "index";
     }
-
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+  
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/inicio")
     public String inicio() {
         return "inicio";
@@ -78,7 +78,7 @@ public class ControladorPrincipal {
             @RequestParam String email, @RequestParam String direccion, @RequestParam Date fechaDeNacimiento,
             @RequestParam String clave, @RequestParam String clave2) {
         try {
-            usuarioServicio.guardar(archivo, nombre, apellido, fechaDeNacimiento, dni, telefono, email, direccion, clave, clave2);
+            usuarioServicio.guardar(archivo, nombre, apellido, dni, telefono, email, direccion, fechaDeNacimiento, clave, clave2);
         } catch (ErrorServicio ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
@@ -96,5 +96,10 @@ public class ControladorPrincipal {
         modelo.put("titulo", "Bienvenido a busCAR");
         modelo.put("descripcion", "Tu usuario fue registrado de manera satisfactoria.");
         return "exito";
+    }
+    
+    @GetMapping("/contacto")
+    public String contacto(){
+        return "/contacto";
     }
 }

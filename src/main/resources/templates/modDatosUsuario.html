@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  type= "text/css" href="/static/css/normalize.css">
-    <link rel="stylesheet" href="/static/css/modDatosUsuario.css">
+    <link rel="stylesheet"  type= "text/css" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/modDatosUsuario.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
@@ -20,64 +20,69 @@
             <p>hola gente</p>
         </nav>    
     </header>
-    <section class="home"> 
-        <div class="login">
-            <h1><b>Mis datos</b></h1>
-            <form > 
-                    <div class="user-box">      
-                        <input type="text" name="nombre" required>
-                        <label>Nombre</label>
+    <div class="login">
+        <h1><b>Mis datos</b></h1>
+        <form action="/usuario/actualizar-perfil" method="POST" enctype="multipart/form-data"> 
+            
+            <input type="hidden" name="id" th:value="${perfil.id}">
+                <div class="user-box">      
+                    <input type="text" name="nombre" th:value="${perfil.nombre}" >
+                    <label>Nombre</label>
+                   
+                </div>
+                
+                <div class="user-box">
+                    <input type="text" name="apellido" th:value="${perfil.apellido}"  >
+                    <label >Apellido</label>
+                </div>
+
+                <div class="user-box">
+                    <input type="text" name="fechaDeNacimiento" th:value="${perfil.fechaDeNacimiento}" >
+                    <label >Fecha de nacimiento</label>
+                </div>
+
+                <div class="user-box">
+                    <input type="number" name="dni" th:value="${perfil.dni}" >
+                    <label> DNI</label>
+                </div>
+
+                <div class="user-box">
+                    <input type="email" name="email"th:value="${perfil.email}" >
+                    <label >E-mail</label>
+                </div> 
+
+                <div class="user-box">
+                    <input type="tel" name="telefono" th:value="${perfil.telefono}" >
+                    <label >Num. telefónico</label>
+                </div>
+
+                <div class="user-box">
+                    <input type="text" name="direccion" th:value="${perfil.direccion}" >
+                    <label > Domicilio</label>
                     
-                    </div>
+                <div class="user-box">
+                <input type="file" name="archivo" th:src="${'/foto/usuario/'+perfil.id}"> 
+                <img th:src="${'/foto/usuario/'+perfil.id}">
+                <label >Foto de perfil</label>
+                <br> 
+                </div>
+            <input type="hidden" name="clave" th:value="${perfil.getClave()}">
+            <input type="hidden" name="clave2" th:value="${perfil.getClave()}">
+                </div>
+             <p th:if="${error != null}" th:text="${error}" style=color:red;></p>
+             <p th:if="${mensaje != null}" th:text="${mensaje}" style="color:green;"> </p>
+                <button type="submit">
                     
-                    <div class="user-box">
-                        <input type="text" name="apellido" required >
-                        <label >Apellido</label>
-                    </div>
-
-                    <div class="user-box">
-                        <input type="text" name="fechaNacimiento" required>
-                        <label >Fecha de nacimiento</label>
-                    </div>
-
-                    <div class="user-box">
-                        <input type="number" name="dni" required>
-                        <label> DNI</label>
-                    </div>
-
-                    <div class="user-box">
-                        <input type="email" name=""required="">
-                        <label >E-mail</label>
-                    </div> 
-
-                    <div class="user-box">
-                        <input type="tel" name="" required="">
-                        <label >Num. telefónico</label>
-                    </div>
-
-                    <div class="user-box">
-                        <input type="text" name="" required="">
-                        <label > Domicilio</label>
-                    </div>
-                    <button href="#">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    Guardar datos
-                    </button>
-                    <br>
-                    <br>
-            </form>
-        </div>
-    </section>
-    <footer>
-        <div class="container">
-            <p>&copy; busCar2022</p>
-        </div>
-    </footer>
-
-   
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                Editar datos
+                </button>
+                <br>
+                <br>
+        </form>
+       
+    </div>
 </body>     
-
 </html>

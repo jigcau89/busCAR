@@ -75,10 +75,12 @@ public class ControladorPrincipal {
     @PostMapping("/registro")
     public String registrar(ModelMap modelo, MultipartFile archivo, @RequestParam String nombre,
             @RequestParam String apellido, @RequestParam String dni, @RequestParam String telefono,
-            @RequestParam String email, @RequestParam String direccion, @RequestParam Date fechaDeNacimiento,
+            @RequestParam String email, @RequestParam String direccion, @RequestParam String fechaDeNacimiento,
             @RequestParam String clave, @RequestParam String clave2) {
         try {
-            usuarioServicio.guardar(archivo, nombre, apellido, dni, telefono, email, direccion, fechaDeNacimiento, clave, clave2);
+            fechaDeNacimiento = fechaDeNacimiento.replaceAll("-", "/");
+            Date fdn = new Date(fechaDeNacimiento);
+            usuarioServicio.guardar(archivo, nombre, apellido, dni, telefono, email, direccion, fdn, clave, clave2);
         } catch (ErrorServicio ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);

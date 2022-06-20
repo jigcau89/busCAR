@@ -1,0 +1,329 @@
+@font-face{
+    font-family: Questrial;
+    src: url(Questrial-Regular.ttf);
+}
+
+*{
+    box-sizing: border-box;  
+}
+
+h1{  font-size: 3.5em; }
+h2{  font-size: 2.7em; }
+h3{  font-size: 2em; }
+p{ font-size: 1.25em;} 
+
+.color-acento{ color: #109BA8; }
+
+body{
+    margin: 0%;
+    font-family: Questrial;
+}
+
+.container{
+    max-width:  1400px;
+    margin: auto;
+}
+
+
+/* - - - HEADER - - - */
+header{
+    background-color: rgb(245, 245, 245);
+}
+
+header .logo{
+    margin: 0;
+    padding: 10px 30px ;
+    height: 90px;
+}
+
+header .container{
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+}
+
+  header nav{
+    display: flex;
+    /* flex-direction: column; */
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+header nav li a{
+    display: block;
+    /* display: inline-flex */
+}
+header nav > li {
+    float: left;
+}
+
+header li{
+    padding: 5px 10px;
+    text-decoration: none;
+    list-style-type: none;
+    font-weight: bold;
+}
+
+header li a{
+    text-decoration: none;
+    color: black;
+}
+
+header li :hover{
+    color: #109BA8;
+}
+
+
+/* - - - - HERO - - - - */
+#hero{
+    top: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    height: 80vh;
+    background-image: linear-gradient(
+        0deg,
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+    )
+
+    ,url("/static/img/autosfila.jpg");
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+#hero h1{
+    color: white;
+}
+
+
+/* - - - - - SOMOS BUSCAR - - - - - */
+#somos-buscar{
+    background-color: rgb(247, 247, 247);
+}
+
+
+#somos-buscar .img-container{
+    background-image: url("/static/img/somos-buscar.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+#somos-buscar .container{
+    text-align: center;
+    padding: 100px 12px;
+}
+
+
+/* - - - - - CATEGORIA - - - - - */
+#categoria{
+    background-color: rgb(30, 30,30);
+    padding: 80px 0;
+}
+
+#categoria .container{
+    text-align: center;
+}
+
+#categoria h3{
+    color: white;
+    margin-top: 0;
+    padding-bottom: 20px;
+ }
+
+#categoria h1{
+    color: white;
+    margin-top: 0;
+}
+#categoria .container img{
+    height: 10em;
+}
+
+#categoria .categoria{
+    margin-left: 70px;
+    margin-right: 70px;
+    background-position: center center;
+    background-size: cover;
+    border-radius: 50px;
+    background-image: linear-gradient(
+        0deg,
+        rgba(19, 19, 19, 0.057),
+        rgba(19, 19, 19, 0.122)
+    );
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.497);
+}
+
+
+
+/* - - - - -  MARCAS - - - - - */
+#marcas{
+    background-color: rgb(247, 247, 247);
+    padding: 80px 0;
+}
+#marcas .container{
+    text-align: center;
+
+}
+#marcas .container h1{
+    padding-bottom: 10px;
+    margin-bottom: 0%;
+    margin-left: 120px;
+    margin-right: 120px;
+    background-image: linear-gradient(
+        0deg,
+        rgba(19, 19, 19, 0.074),
+        rgba(19, 19, 19, 0.013),
+        rgba(19, 19, 19, 0)
+    );
+    border-bottom-left-radius: 20px ;
+    border-bottom-right-radius: 20px ;
+}
+#marcas .container img{
+    margin-top: 30px;
+
+}
+#marcas .marcas1 img{
+    height: 150px;
+    padding: 20px 20px;
+    margin-top: 60px;
+}
+
+#marcas .marcas2 img{
+    height: 170px;
+}
+#marcas .marcas3 img{
+    height: 220px;
+}
+#marcas .marcas4 img{
+    height: 150px;
+}
+#marcas .marcas5 img{
+    height: 210px;
+}
+#marcas .marcas6 img{
+    height: 180px;
+}
+
+
+/* - - - - -  RESEÑAS - - - -  */
+#reseñas{
+    padding: 60px 0px;
+    background-color: #109BA8; 
+}
+
+#reseñas .container h1{
+    color:rgb(235, 235, 235);
+    text-align: center;
+    padding-bottom: 20px;
+}
+#reseñas .resenia{
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 30px;
+    padding: 20px 30px;
+    background-color: rgb(235, 235, 235);
+    border-radius: 50px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.497);
+}
+
+
+
+/* - - - - -  FOOTER - - - -  */
+footer{
+    height: 140px;
+    background-color: black;
+}
+footer p{
+    color: rgb(245, 245, 245);
+}
+footer .container{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+
+@media (min-width: 720px){
+
+
+    /* - - - HEADER - - - */
+    header{
+        position: fixed;
+        width: 100%;
+    }
+
+    header .container{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    header nav{
+        flex-direction: row;
+        padding-bottom: 0;
+        padding-right: 30px;
+    }
+
+
+    /* - - - SOMOS BUSCAR - - - */
+
+  
+    nav li a{
+        background-color: #109BA8;    
+        padding: 10px 15px;
+        display: block;
+    }
+    nav > li{
+        float: left;
+    }
+    #somos-buscar .container{
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    #somos-buscar .texto{
+        width: 50%;
+        text-align: initial;
+        padding: 0px 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    #somos-buscar .img-container{
+        background-image:  linear-gradient(
+            0deg,
+            rgba(19, 19, 19, 0.23),
+            rgba(19, 19, 19, 0)
+        ), url("/static/img/somos-buscar.jpg");
+        background-size: cover;
+        background-position: center center;
+        height: 500px;
+        width: 800px;
+        border-radius: 10px;
+        justify-content: center;
+    }
+
+    /* - - - CATEGORIAS - - - */
+    #categoria .categorias{
+        display: flex;
+        justify-content: center;
+    }
+
+    #categoria {
+        padding-top: 120px;
+        padding-bottom: 120px ;
+    }
+
+    #marcas .marquita{
+        display: flex;
+        justify-content: center;
+        padding:  0 60px;
+    }
+}
+   

@@ -13,6 +13,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VehiculoRepositorio extends JpaRepository<Vehiculo, String> {
 
+    @Query("Select v From Vehiculo v where v.id LIKE :i")
+    public Vehiculo vehiculoPorId(@Param("i") String i);
+    
     /*Consultas mv*/
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true ORDER BY  v.anioFabricacion")
     public List<Vehiculo> ListaVehiculosOrdenadoAnio();

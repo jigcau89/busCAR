@@ -14,7 +14,12 @@ import com.busCAR.busCAR.servicios.TransaccionServicio;
 import com.busCAR.busCAR.servicios.VehiculoServicio;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +35,9 @@ public class VehiculoController {
 
     @Autowired
     private VehiculoServicio serviciovehiculo;
+    
+    
+    
 
     /*ENUMS*/
     @GetMapping("/registro")
@@ -38,8 +46,38 @@ public class VehiculoController {
         vista.addAttribute("Tdc", TipoDeCombustible.values());
         vista.addAttribute("Marcas", Marca.values());
         vista.addAttribute("Tdv", TipoDeVehiculo.values());
+        vista.addAttribute("id");
         return "Registro_auto";
     }
+    
+    @GetMapping("/modificar_vehiculo")
+    public String modificar(ModelMap vista)
+    {
+        
+        
+        Vehiculo prueba;
+        String id = "e1a398fa-501a-403b-ab00-bea886d95d49";
+        prueba = serviciovehiculo.buscarPorId(id);
+        
+        vista.addAttribute("Colores", prueba.getColor());
+        vista.addAttribute("Tdc", prueba.getTipoDeCombustible());
+        vista.addAttribute("Marcas", prueba.getMarca());
+        vista.addAttribute("Tdv", prueba.getTipoDeVehiculo());
+        
+        vista.addAttribute("modelo" , prueba.getModelo() );
+        vista.addAttribute("patente" , prueba.getPatente());
+        vista.addAttribute("anio" , prueba.getAnioFabricacion());
+        vista.addAttribute("kilometraje" ,prueba.getKilometraje());
+        vista.addAttribute("precio" , prueba.getPrecio());
+        vista.addAttribute("descripcion" , prueba.getDescripcion());
+        vista.addAttribute("id", id);
+        
+        return "Mis-datos_vehiculo";
+    }
+    
+    
+    
+    
     
     @GetMapping("/producto")
     public String producto()

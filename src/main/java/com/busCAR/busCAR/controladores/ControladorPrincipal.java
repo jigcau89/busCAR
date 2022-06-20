@@ -28,7 +28,7 @@ public class ControladorPrincipal {
     public String index() {
         return "index";
     }
-  
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/inicio")
     public String inicio() {
@@ -99,9 +99,55 @@ public class ControladorPrincipal {
         modelo.put("descripcion", "Tu usuario fue registrado de manera satisfactoria.");
         return "exito";
     }
-    
+
     @GetMapping("/contacto")
-    public String contacto(){
+    public String contacto() {
         return "/contacto";
     }
+
+    @GetMapping("/catalogoAuto")
+    public String catalogoAuto() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoMoto")
+    public String catalogoMoto() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoCamioneta")
+    public String catalogoCamioneta() {
+        return "catalogo";
+    }
+    /*Marcas*/
+    @GetMapping("/catalogoChevrolet")
+    public String catalogoChevrolet() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoPeugeot")
+    public String catalogoPeugeot() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoRenault")
+    public String catalogoRenault() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoToyota")
+    public String catalogoToyota() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoVolkswagen")
+    public String catalogoVolkswagen() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoFiat")
+    public String catalogoFiat() {
+        return "catalogo";
+    }
+
 }

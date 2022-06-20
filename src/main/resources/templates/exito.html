@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/extras/spring-security">
-    <head>
-        <title>busCAR - Exito login</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div> 
-            <p>exito</p>
-            <h2 th:text="${titulo}"></h2>
-            <p th:text="${descripcion}"></p>
-            <a class="link" href="/">Volver a inicio</a>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  type= "text/css" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/inicioSesion.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <title>BusCAR-Iniciar Sesión</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <p class="logo">BusCAR</p>
         </div>
-    </body>
+        <nav>
+            <p></p>
+        </nav>    
+    </header>
+    <section class="home">
+    <div class="login">
+        
+      
+        <div class="user-box"> 
+                            
+                            <h2 th:text="${titulo}"></h2>
+                            <p th:text="${descripcion}"></p>
+                            <a class="link" href="/">Volver a inicio</a>
+                        </div>
+       
+    </div>
+    </section>
+
+</body>
 </html>

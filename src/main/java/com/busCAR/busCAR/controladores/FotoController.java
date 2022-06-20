@@ -1,5 +1,6 @@
 package com.busCAR.busCAR.controladores;
 
+
 import com.busCAR.busCAR.entidades.Usuario;
 import com.busCAR.busCAR.entidades.Vehiculo;
 import com.busCAR.busCAR.errores.ErrorServicio;
@@ -8,6 +9,7 @@ import com.busCAR.busCAR.servicios.UsuarioServicio;
 import com.busCAR.busCAR.servicios.VehiculoServicio;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/foto")
@@ -67,4 +70,5 @@ public class FotoController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 }

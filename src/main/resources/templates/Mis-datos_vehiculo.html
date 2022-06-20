@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Auto</title>
+    <title>Modificar Vehículo</title>
     <link rel="stylesheet" href="/css/Registro_auto.css">
+    
 </head>
 
 <body>
@@ -24,8 +25,8 @@
 
     <section class="formulario_content">
 
-        <form action="/vehiculo/registro"   method="POST" enctype="multipart/form-data">
-            <h1>Registro Vehiculo</h1><br>
+        <form action="/vehiculo/actualizar_vehiculo"  method="POST" enctype="multipart/form-data">
+            <h1>Modificar Vehículo</h1><br>
 
             <div class="car-box">
                 
@@ -39,7 +40,7 @@
                 
                 
                 <select name="tdv" required>
-                    <option th:each="tipo : ${Tdv}" th:text="${tipo}"></option>
+                    <option th:each="tipo : ${Tdv}" th:text="${tipo}" ></option>
                 </select>
                 <label>Tipo de vehículo</label>
                 <br><br><br>
@@ -74,50 +75,59 @@
                 <select name="tdc" required>
                     <option th:each="tipo : ${Tdc}" th:text="${tipo}"></option> 
                 </select>
-                  <label>Tipo de conbustible</label>
+                  <label>Tipo de combustible</label>
                 <br><br><br>
             </div>
 
             <div class="car-box">
-                <input type="text" name="modelo" required>
-                <label>Modelo</label><br><br>
+                <label>Modelo</label>
+                <input class="prueba"  type="text" name="modelo" >
+               
             </div>
 
             <div class="car-box">
-                <input type="text" name="patente" required>
                 <label>Patente</label>
+                <input type="text" name="patente" required>
+                
                 <br><br>
             </div>
 
             <div class="car-box">
-                <input type="number" name="anio" required>
                 <label>Año</label>
+                <input type="number" name="anio" required>
+               
+                
                 <br><br>
             </div>
 
            
 
             <div class="car-box">
-                <input type="number" name="kilometraje" required>
                 <label>Kilometros</label>
+                <input type="number" name="kilometraje" required>
+              
+                
                 <br><br>
             </div>
 
             
 
             <div class="car-box">
-                <input type="number" name="precio" required>
                 <label>Precio</label>
+                <input type="number" name="precio" required>
+               
                 <br><br>
             </div>
 
             <div class="car-box">
                 <h3>Descripcion</h3>
-                <textarea name="descripcion" rows="10" cols="40"> Agrega una descripcion del Vehiculo</textarea>
+                <textarea name="descripcion" rows="10" cols="40" > </textarea>
                 <br><br>
             </div>
-
+                <img th:src="${'/foto/vehiculo?id='+id}"  alt="auto" class="logo">
             <div class="car-box">
+                
+                
                 <h3>Imagenes</h3>
                 <input type="file" name="archivo">
                 <br>

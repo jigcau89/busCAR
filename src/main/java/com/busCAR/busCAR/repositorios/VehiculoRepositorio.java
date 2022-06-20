@@ -13,6 +13,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface VehiculoRepositorio extends JpaRepository<Vehiculo, String> {
 
+    @Query("Select v From Vehiculo v where v.id LIKE :i")
+    public Vehiculo vehiculoPorId(@Param("i") String i);
+    
     /*Consultas mv*/
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true ORDER BY  v.anioFabricacion")
     public List<Vehiculo> ListaVehiculosOrdenadoAnio();
@@ -35,11 +38,11 @@ public interface VehiculoRepositorio extends JpaRepository<Vehiculo, String> {
 
     /* Traer por año */
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.modelo LIKE :m ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerPorModelo(@Param("m") Integer m);
+    public List<Vehiculo> TraerPorModelo(@Param("m") String m);/* Traer por Modelo*/
 
-    /* Traer por Modelo*/
+
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.marca LIKE :mar ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerPorMarca(@Param("mar") Integer mar);
+    public List<Vehiculo> TraerPorMarca(@Param("mar") String mar);
 
     /* Traer por Marca*/
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.color LIKE :c ORDER BY v.anioFabricacion")
@@ -53,13 +56,13 @@ public interface VehiculoRepositorio extends JpaRepository<Vehiculo, String> {
     public List<Vehiculo> TraerUsados();/* Traer usados*/
 
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.tipoDeCombustible LIKE :tc ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerPorTcombustible(@Param("tc") TipoDeCombustible tc);
+    public List<Vehiculo> TraerPorTcombustible(@Param("tc") TipoDeCombustible tc);/* Traer por Tipo combustible*/
 
-    /* Traer por Tipo combustible*/
+
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.tipoDeVehiculo LIKE :tv ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerPorTipov(@Param("tv") TipoDeVehiculo tv);
+    public List<Vehiculo> TraerPorTipov(@Param("tv") TipoDeVehiculo tv);/* Traer por Tipo de rodado*/
 
-    /* Traer por Tipo de rodado*/
+
  /*Año de fabricacion*/
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.anioFabricacion LIKE :a AND v.marca LIKE :m ORDER BY v.anioFabricacion")
     public List<Vehiculo> TraerAnioMarca(@Param("a") Integer a, @Param("m") String m);/*Año y marca*/
@@ -93,13 +96,13 @@ public interface VehiculoRepositorio extends JpaRepository<Vehiculo, String> {
     public List<Vehiculo> TraerMarcaColor(@Param("m") String m, @Param("c") Color c);/*Marca y Color*/
 
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.marca LIKE :m AND v.precio BETWEEN :p1 AND :p2 ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerMarcaPrecio(@Param("m") String m,@Param("p1") Double p1, @Param("p2") Double p2);/*Marca y Precio*/
+    public List<Vehiculo> TraerMarcaPrecio(@Param("m") String m, @Param("p1") Double p1, @Param("p2") Double p2);/*Marca y Precio*/
 
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.marca LIKE :m AND v.nuevo LIKE :n ORDER BY v.anioFabricacion")
     public List<Vehiculo> TraerMarcaEstado(@Param("m") String m, @Param("n") Boolean n);/*Marca y Estado*/
 
-    @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.marca LIKE :m AND v.kilometraje LIKE :k ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerMarcaKilometro(@Param("m") String m, @Param("k") String k);/*Marca y Kilometros*/
+    @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.marca LIKE :m AND v.kilometraje BETWEEN :k1 AND :k2 ORDER BY v.anioFabricacion")
+    public List<Vehiculo> TraerMarcaKilometro(@Param("m") String m, @Param("k1") String k1,@Param("k2") String k2);/*Marca y Kilometros*/
 
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.marca LIKE :m AND v.tipoDeCombustible LIKE :tdc ORDER BY v.anioFabricacion")
     public List<Vehiculo> TraerMarcaTipoCombustible(@Param("m") String m, @Param("tdc") TipoDeCombustible tdc);/*Marca y TipoCombustible*/
@@ -110,93 +113,74 @@ public interface VehiculoRepositorio extends JpaRepository<Vehiculo, String> {
  /*Modelo*/
 
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.modelo LIKE :m AND v.color LIKE :c ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerModeloColor(@Param("m") String m, @Param("c") Color c);
+    public List<Vehiculo> TraerModeloColor(@Param("m") String m, @Param("c") Color c);/*Modelo y color*/
 
-    /*Modelo y color*/
-
+    
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.modelo LIKE :m AND v.precio BETWEEN :p1 AND :p2 ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerModeloPrecio(@Param("m") String m,@Param("p1") Double p1, @Param("p2") Double p2);
+    public List<Vehiculo> TraerModeloPrecio(@Param("m") String m, @Param("p1") Double p1, @Param("p2") Double p2);/*Modelo y precio*/
 
-    /*Modelo y precio*/
-
+    
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.modelo LIKE :m AND v.nuevo LIKE :n ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerModeloEstado(@Param("m") String m, @Param("n") Boolean n);
+    public List<Vehiculo> TraerModeloEstado(@Param("m") String m, @Param("n") Boolean n);/*Modelo y estado*/
 
-    /*Modelo y estado*/
+    
+    @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.modelo LIKE :m AND v.kilometraje BETWEEN :k1 AND :k2 ORDER BY v.anioFabricacion")
+    public List<Vehiculo> TraerModeloKilometros(@Param("m") String m, @Param("k1") String k1,@Param("k2")String k2);/*Modelo y Kilometros*/
 
-    @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.modelo LIKE :m AND v.kilometraje LIKE :k ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerModeloKilometros(@Param("m") String m, @Param("k") Double k);
-
-    /*Modelo y Kilometros*/
-
+    
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.modelo LIKE :m AND v.tipoDeCombustible LIKE :tdc ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerModeloTipoCombustible(@Param("m") String m, @Param("tdc") TipoDeCombustible tdc);
+    public List<Vehiculo> TraerModeloTipoCombustible(@Param("m") String m, @Param("tdc") TipoDeCombustible tdc);/*Modelo y TipoCombustible*/
 
-    /*Modelo y TipoCombustible*/
-
+    
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.modelo LIKE :m AND v.tipoDeVehiculo LIKE :tdv ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerModeloTipoVehiculo(@Param("m") String m, @Param("tdv") TipoDeVehiculo tdv);
+    public List<Vehiculo> TraerModeloTipoVehiculo(@Param("m") String m, @Param("tdv") TipoDeVehiculo tdv);/*Modelo y Tipo de vehiculo*/
 
-    /*Modelo y Kilometros*/
-
-
+    
  /*Color*/
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.color LIKE :c AND v.precio BETWEEN :p1 AND :p2 ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerColorPrecio(@Param("c") Color c, @Param("p1") Double p1, @Param("p2") Double p2);
+    public List<Vehiculo> TraerColorPrecio(@Param("c") Color c, @Param("p1") Double p1, @Param("p2") Double p2);/*Color y Precio*/
 
-    /*Color y Precio*/
-
+    
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.color LIKE :c AND v.nuevo LIKE :e ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerColorEstado(@Param("c") Color c, @Param("e") Boolean e);
-
-    /*Color y Estado*/
+    public List<Vehiculo> TraerColorEstado(@Param("c") Color c, @Param("e") Boolean e);/*Color y Estado*/
 
     
 
-    /*Color y Kilometraje*/
-
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.color LIKE :c AND v.tipoDeCombustible LIKE :tdc ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerColorTipoCombustible(@Param("c") Color c, @Param("tdc") TipoDeCombustible tdc);
+    public List<Vehiculo> TraerColorTipoCombustible(@Param("c") Color c, @Param("tdc") TipoDeCombustible tdc); /*Color y tdc*/
 
-    /*Color y tdc*/
-
+    
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.color LIKE :c AND v.tipoDeVehiculo LIKE :tdv ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerColorTipoVehiculo(@Param("c") Color c, @Param("tdv") TipoDeVehiculo tdv);
+    public List<Vehiculo> TraerColorTipoVehiculo(@Param("c") Color c, @Param("tdv") TipoDeVehiculo tdv);/*Color y Tipo de vehiculo*/
 
-    /*Color y Tipo de vehiculo*/
+    
 
  /*Precio*/
-
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.precio BETWEEN :p1 AND :p2 AND v.nuevo LIKE :e ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerPrecioEstado(@Param("p1") Double p1, @Param("p2") Double p2, @Param("e") Boolean e);
+    public List<Vehiculo> TraerPrecioEstado(@Param("p1") Double p1, @Param("p2") Double p2, @Param("e") Boolean e);/*Precio y estado*/
 
-    /*Precio y estado*/
+    
+    @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.precio BETWEEN :p1 AND :p2 AND v.kilometraje BETWEEN :k1 AND :k2 ORDER BY v.anioFabricacion")
+    public List<Vehiculo> TraerPrecioKilometraje(@Param("p1") Double p1, @Param("p2") Double p2, @Param("k1") String k1, @Param("k2") String k2);  /*Precio y Kilometros*/
 
-    @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.precio BETWEEN :p1 AND :p2 AND v.kilometraje LIKE :k ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerPrecioKilometraje(@Param("p1") Double p1, @Param("p2") Double p2, @Param("k") String k);
-
-    /*Precio y Kilometros*/
-
+   
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.precio BETWEEN :p1 AND :p2 AND v.tipoDeCombustible LIKE :tdc ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerPrecioTipoCombustible(@Param("p1") Double p1, @Param("p2") Double p2, @Param("tdc") TipoDeCombustible tdc);
+    public List<Vehiculo> TraerPrecioTipoCombustible(@Param("p1") Double p1, @Param("p2") Double p2, @Param("tdc") TipoDeCombustible tdc);/*Precio y tdc*/
 
-    /*Precio y tdc*/
-
+    
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.precio BETWEEN :p1 AND :p2 AND v.tipoDeVehiculo LIKE :tdv ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerPrecioTipoVehiculo(@Param("p1") Double p1, @Param("p2") Double p2, @Param("tdv") TipoDeCombustible tdv);
+    public List<Vehiculo> TraerPrecioTipoVehiculo(@Param("p1") Double p1, @Param("p2") Double p2, @Param("tdv") TipoDeVehiculo tdv);/*Precio y tipo Veh*/
 
-    /*Precio y tipo Veh*/
+    
 
-
- /*Marca y modelo*/
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.marca LIKE :m AND v.modelo LIKE :mod AND v.anioFabricacion LIKE :af ORDER BY v.anioFabricacion")
     public List<Vehiculo> TraerMarcaModeloMarcaAnio(@Param("m") String m, @Param("mod") String mod, @Param("af") Integer af);/*Marca y modelo Anio*/
 
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.marca LIKE :m AND v.color LIKE :c AND v.modelo LIKE :mod ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerMarcaModeloColor(@Param("m") String m, @Param("c") Color c, @Param("mod") String mod);/*Marca Modelo y color*/
+    public List<Vehiculo> TraerMarcaModeloColor(@Param("m") String m, @Param("c") Color c, @Param("mod") String mod);/*Marca Color y modelo*/
 
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.marca LIKE :m AND v.precio BETWEEN :p1 AND :p2 AND v.modelo LIKE :mod ORDER BY v.anioFabricacion")
-    public List<Vehiculo> TraerMarcaModeloPrecio(@Param("m") String m,@Param("p1") Double p1, @Param("p2") Double p2, @Param("mod") String mod);/*Marca modelo y Precio*/
+    public List<Vehiculo> TraerMarcaModeloPrecio(@Param("m") String m, @Param("p1") Double p1, @Param("p2") Double p2, @Param("mod") String mod);/*Marca modelo y Precio*/
 
     @Query("SELECT v FROM Vehiculo v WHERE v.alta = true AND v.marca LIKE :m AND v.nuevo LIKE :n AND v.modelo LIKE :mod ORDER BY v.anioFabricacion")
     public List<Vehiculo> TraerMarcaEstadoModelo(@Param("m") String m, @Param("n") Boolean n, @Param("mod") String mod);/*Marca modelo y estado*/

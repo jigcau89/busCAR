@@ -11,6 +11,7 @@ import com.busCAR.busCAR.enumeraciones.TipoDeCombustible;
 import com.busCAR.busCAR.enumeraciones.TipoDeVehiculo;
 import com.busCAR.busCAR.errores.ErrorServicio;
 import com.busCAR.busCAR.servicios.TransaccionServicio;
+import com.busCAR.busCAR.servicios.UsuarioServicio;
 import com.busCAR.busCAR.servicios.VehiculoServicio;
 import java.util.Date;
 import java.util.List;
@@ -35,9 +36,8 @@ public class VehiculoController {
 
     @Autowired
     private VehiculoServicio serviciovehiculo;
-    
-    
-    
+    @Autowired
+    private UsuarioServicio usuarioservicio;
 
     /*ENUMS*/
     @GetMapping("/registro")
@@ -49,39 +49,59 @@ public class VehiculoController {
         vista.addAttribute("id");
         return "Registro_auto";
     }
-    
+
     @GetMapping("/modificar_vehiculo")
-    public String modificar(ModelMap vista)
-    {
-        
-        
-        Vehiculo prueba;
-        String id = "e1a398fa-501a-403b-ab00-bea886d95d49";
-        prueba = serviciovehiculo.buscarPorId(id);
-        
-        vista.addAttribute("Colores", prueba.getColor());
-        vista.addAttribute("Tdc", prueba.getTipoDeCombustible());
-        vista.addAttribute("Marcas", prueba.getMarca());
-        vista.addAttribute("Tdv", prueba.getTipoDeVehiculo());
-        
-        vista.addAttribute("modelo" , prueba.getModelo() );
-        vista.addAttribute("patente" , prueba.getPatente());
-        vista.addAttribute("anio" , prueba.getAnioFabricacion());
-        vista.addAttribute("kilometraje" ,prueba.getKilometraje());
-        vista.addAttribute("precio" , prueba.getPrecio());
-        vista.addAttribute("descripcion" , prueba.getDescripcion());
+    public String editarPerfil(@RequestParam(required = false) String id, ModelMap vista) {
+        Vehiculo vehiculo = new Vehiculo();
+
+        id = "e1a398fa-501a-403b-ab00-bea886d95d49";
+        vehiculo = serviciovehiculo.buscarPorId(id);
+
+        vista.put("perfil", vehiculo);
         vista.addAttribute("id", id);
-        
-        return "Mis-datos_vehiculo";
+        vista.addAttribute("modelo", vehiculo.getModelo());
+        vista.addAttribute("patente", vehiculo.getPatente());
+        vista.addAttribute("anio", vehiculo.getAnioFabricacion());
+        vista.addAttribute("kilometraje", vehiculo.getKilometraje());
+        vista.addAttribute("precio", vehiculo.getPrecio());
+        vista.addAttribute("descripcion", vehiculo.getDescripcion());
+        vista.addAttribute("Colores", Color.values());
+        vista.addAttribute("Tdc", TipoDeCombustible.values());
+        vista.addAttribute("Marcas", Marca.values());
+        vista.addAttribute("Tdv", TipoDeVehiculo.values());
+
+        return "Mis-Datos_vehiculo";
+
     }
-    
-    
-    
-    
-    
+
+    @PostMapping("/actualizar_vehiculo")
+    public String actualizar(ModelMap vista, @RequestParam(required = false) String id, MultipartFile archivo, String patente, String modelo, String marca, Integer anio,
+            Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, String descripcion,
+            Boolean alta, TipoDeVehiculo tdv) throws ErrorServicio {
+        Vehiculo vehiculo;
+
+        id = "e1a398fa-501a-403b-ab00-bea886d95d49";
+        vehiculo = serviciovehiculo.buscarPorId(id);
+        try {
+
+            serviciovehiculo.modificar(id, archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv);
+            return "redirect:/";
+        } catch (ErrorServicio e) {
+            e.printStackTrace();
+
+            vista.put("error", e.getMessage());
+            vista.addAttribute("Colores", Color.values());
+            vista.addAttribute("Tdc", TipoDeCombustible.values());
+            vista.addAttribute("Marcas", Marca.values());
+            vista.addAttribute("Tdv", TipoDeVehiculo.values());
+            return "Registro_auto";
+
+        }
+
+    }
+
     @GetMapping("/producto")
-    public String producto()
-    {
+    public String producto() {
         return "Producto";
     }
 
@@ -89,14 +109,16 @@ public class VehiculoController {
     @PostMapping("/registro")
     public String registro(ModelMap model, @RequestParam MultipartFile archivo, @RequestParam String patente, @RequestParam String modelo, @RequestParam String marca, @RequestParam Integer anio,
             @RequestParam Color color, @RequestParam Double precio, @RequestParam Boolean nuevo, @RequestParam String kilometraje, @RequestParam TipoDeCombustible tdc, @RequestParam String descripcion,
-             @RequestParam TipoDeVehiculo tdv) throws ErrorServicio {
-
+            @RequestParam TipoDeVehiculo tdv, Usuario us) throws ErrorServicio {
+        String idu = "";
         try {
-            serviciovehiculo.guardar(archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv);
+
+            us = usuarioservicio.buscarPorId(idu);
+            serviciovehiculo.guardar(archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv, us);
             model.put("exito", "Vehículo guardado correctamente");
             return "Registro_auto";
         } catch (ErrorServicio e) {
-            
+
             e.printStackTrace();
             model.put("error", "falló el registro");
             model.addAttribute("Colores", Color.values());
@@ -104,8 +126,7 @@ public class VehiculoController {
             model.addAttribute("Marcas", Marca.values());
             model.addAttribute("Tdv", TipoDeVehiculo.values());
             return "Registro_auto";
-           
-            
+
         }
 
     }

@@ -1,6 +1,7 @@
 package com.busCAR.busCAR.servicios;
 
 import com.busCAR.busCAR.entidades.Foto;
+import com.busCAR.busCAR.entidades.Usuario;
 import com.busCAR.busCAR.entidades.Vehiculo;
 import com.busCAR.busCAR.enumeraciones.Color;
 import com.busCAR.busCAR.enumeraciones.TipoDeCombustible;
@@ -74,7 +75,7 @@ public class VehiculoServicio {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void guardar(MultipartFile archivo, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc,String descripcion,boolean alta, TipoDeVehiculo tdv) throws ErrorServicio {
+    public void guardar(MultipartFile archivo, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc,String descripcion,boolean alta, TipoDeVehiculo tdv,Usuario us) throws ErrorServicio {
 
         try {
             validar(patente, modelo, marca, anioFabricacion, color, precio, nuevo, kilometraje, tdc, tdv);
@@ -93,6 +94,7 @@ public class VehiculoServicio {
             vehiculo.setTipoDeVehiculo(tdv);
             Foto foto = fotoServicio.guardar(archivo);
             vehiculo.setFotos(foto);
+            vehiculo.setUsuario(us);
             vehiculorepositorio.save(vehiculo);
 
         } catch (ErrorServicio e) {
@@ -131,10 +133,13 @@ public class VehiculoServicio {
 
                 vehiculorepositorio.save(vehiculo);
 
+            }else 
+            {
+                throw new ErrorServicio("MODIFICAR: No se encontró vehículo solicitado");
             }
 
         } catch (ErrorServicio e) {
-            throw new ErrorServicio("MODIFICAR: No se encontró vehículo solicitado");
+            throw new ErrorServicio(e.getMessage());
         }
     }
 

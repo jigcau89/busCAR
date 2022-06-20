@@ -31,21 +31,22 @@ public class SeguridadConfiguracion extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-				.antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll()
-				.and().formLogin()
-					.loginPage("/login")
-						.loginProcessingUrl("/logincheck")
-						.usernameParameter("email")
-						.passwordParameter("clave")
-						.defaultSuccessUrl("/")
-						.failureUrl("/login?error=error")
-						.permitAll()
-				.and().logout()
-					.logoutUrl("/logout")
-					.logoutSuccessUrl("/login?logout")
-					.permitAll()
-				.and().csrf()
-					.disable();
+                        //.antMatchers("/admin/*").hasRole("ADMIN")
+			.antMatchers("/css/*", "/js/*", "/img/*", "/**").permitAll()
+			.and().formLogin()
+			.loginPage("/login")
+			.loginProcessingUrl("/logincheck")
+			.usernameParameter("email")
+			.passwordParameter("clave")
+			.defaultSuccessUrl("/")
+			.failureUrl("/login?error=error")
+			.permitAll()
+			.and().logout()
+			.logoutUrl("/logout")
+			.logoutSuccessUrl("/login?logout")
+			.permitAll()
+			.and().csrf()
+			.disable();
 	}
 
 }

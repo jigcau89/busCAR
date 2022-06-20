@@ -41,9 +41,8 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Transactional
     public void guardar(MultipartFile archivo, String nombre, String apellido,
-            Date fechaDeNacimiento, String dni, String telefono,
-            String email, String direccion, String clave,
-            String clave2/*, String rol*/) throws ErrorServicio {
+            String dni, String telefono, String email, String direccion, 
+            Date fechaDeNacimiento, String clave, String clave2/*, String rol*/) throws ErrorServicio {
 
         validar(nombre, apellido, dni, telefono, email, direccion, clave, clave2/*, "USUARIO"*/);
 
@@ -77,9 +76,9 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Transactional
     public void modificar(MultipartFile archivo, String id, String nombre, String apellido,
-            Date fechaDeNacimiento, String dni, String telefono,
-            String email, String direccion, String clave,
-            String clave2/*, String rol*/) throws ErrorServicio {
+             String dni, String telefono, /*String email, */String direccion,
+             Date fechaDeNacimiento /* String clave,
+            String clave2*/ /*, String rol*/) throws ErrorServicio {
 
         Optional<Usuario> repuesta = usuarioRepositorio.findById(id);
         validar(nombre, apellido, dni, telefono, repuesta.get().getEmail(), direccion, repuesta.get().getClave(), repuesta.get().getClave()/*, rol*/);
@@ -90,14 +89,14 @@ public class UsuarioServicio implements UserDetailsService {
             usuario.setApellido(apellido);
             usuario.setDni(dni);
             usuario.setTelefono(telefono);
-            //usuario.setEmail(email);
+//            usuario.setEmail(email);
             usuario.setDireccion(direccion);
             usuario.setFechaDeNacimiento(fechaDeNacimiento);
             //usuario.setRol(Rol.valueOf(rol)); 
             //usuario.setRol(Rol.USUARIO);
 
-            //String encriptada = new BCryptPasswordEncoder().encode(clave);
-            //usuario.setClave(encriptada);
+//            String encriptada = new BCryptPasswordEncoder().encode(clave);
+//            usuario.setClave(encriptada);
             if (!archivo.isEmpty()) {
                 String idFoto = null;
                 if (usuario.getFoto() != null) {
@@ -131,8 +130,7 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Transactional
-    public void editarClave(String id, String clave,
-            String clave2) throws ErrorServicio {
+    public void editarClave(String id, String clave, String clave2) throws ErrorServicio {
         Optional<Usuario> respuesta = usuarioRepositorio.findById(id);
         validar(respuesta.get().getNombre(), respuesta.get().getApellido(), respuesta.get().getDni(), respuesta.get().getTelefono(), respuesta.get().getEmail(), respuesta.get().getDireccion(), clave, clave2);
 
@@ -198,12 +196,12 @@ public class UsuarioServicio implements UserDetailsService {
         if (telefono == null || telefono.isEmpty() || telefono.contains("  ")) {
             throw new ErrorServicio("El telefono del usuario no puede ser nulo. ");
         }
-        if (email == null || email.isEmpty() || email.contains("  ")) {
+        if (email == null || email.trim().isEmpty() || email.contains("  ")) {
             throw new ErrorServicio("El mail del usuario no puede ser nulo. ");
         }
-        if (usuarioRepositorio.buscarPorMail(email) != null) {
-            throw new ErrorServicio("El Email ya esta en uso");
-        }
+//        if (usuarioRepositorio.buscarPorMail(email) != null) {
+//            throw new ErrorServicio("El Email ya esta en uso");
+//        }
         if (direccion == null || direccion.isEmpty()) {
             throw new ErrorServicio("La dirección del usuario no puede ser nulo. ");
         }
@@ -244,13 +242,17 @@ public class UsuarioServicio implements UserDetailsService {
         }
     }
 
-    public List<Usuario> buscarActivos() {
-        return usuarioRepositorio.buscarActivos();
-    }
-
-    public List<Usuario> buscarInactivos() {
-        return usuarioRepositorio.buscarInactivos();
-    }
+    public Usuario getById(String id) {
+        return usuarioRepositorio.getById(id);
+    }    
+    
+//    public List<Usuario> buscarActivos() {
+//        return usuarioRepositorio.buscarActivos();
+//    }
+//
+//    public List<Usuario> buscarInactivos() {
+//        return usuarioRepositorio.buscarInactivos();
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {

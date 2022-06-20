@@ -28,48 +28,8 @@ public class ControladorPrincipal {
     public String index() {
         return "index";
     }
-    @GetMapping("/producto")
-    public String indexp() {
-        return "producto";
-    }
-    @GetMapping("/compra")
-    public String indexc() {
-        return "compra";
-    }
-    @GetMapping("/contacto")
-    public String indexco() {
-        return "contacto";
-    }
-    @GetMapping("/datos-cripto")
-    public String indexdc() {
-        return "datos-cripto";
-    }
-    @GetMapping("/datos-efectivo")
-    public String indexde() {
-        return "datos-efectivo";
-    }
-    @GetMapping("/datos-tarjeta")
-    public String indexdt() {
-        return "datos-tarjeta";
-    }
-    @GetMapping("/datos-transferencia")
-    public String indexdtt() {
-        return "datos-transferencia";
-    }
-    @GetMapping("/registro")
-    public String indexreg() {
-        return "registro";
-    }
-    @GetMapping("/reserva")
-    public String indexres() {
-        return "reserva";
-    }
-    @GetMapping("/visita")
-    public String indexvis() {
-        return "visita";
-    }
-
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+  
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/inicio")
     public String inicio() {
         return "inicio";
@@ -118,7 +78,7 @@ public class ControladorPrincipal {
             @RequestParam String email, @RequestParam String direccion, @RequestParam Date fechaDeNacimiento,
             @RequestParam String clave, @RequestParam String clave2) {
         try {
-            usuarioServicio.guardar(archivo, nombre, apellido, fechaDeNacimiento, dni, telefono, email, direccion, clave, clave2);
+            usuarioServicio.guardar(archivo, nombre, apellido, dni, telefono, email, direccion, fechaDeNacimiento, clave, clave2);
         } catch (ErrorServicio ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
@@ -136,5 +96,10 @@ public class ControladorPrincipal {
         modelo.put("titulo", "Bienvenido a busCAR");
         modelo.put("descripcion", "Tu usuario fue registrado de manera satisfactoria.");
         return "exito";
+    }
+    
+    @GetMapping("/contacto")
+    public String contacto(){
+        return "/contacto";
     }
 }

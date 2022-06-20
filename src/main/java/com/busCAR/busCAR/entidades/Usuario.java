@@ -32,7 +32,7 @@ public class Usuario {
 
     private String telefono;
     
-    @Column(unique = true) //es opcional, indica que los valores de esta columna son unicos.
+   // @Column(unique = true) //es opcional, indica que los valores de esta columna son unicos.
     private String email; //no se puede repetir el valor
 
     private String direccion;

@@ -39,6 +39,11 @@ public class VehiculoController {
     @Autowired
     private UsuarioServicio usuarioservicio;
 
+    @GetMapping("/producto")
+    public String producto() {
+        return "Producto";
+    }
+
     /*ENUMS*/
     @GetMapping("/registro")
     public String colorear(ModelMap vista) {
@@ -50,6 +55,7 @@ public class VehiculoController {
         return "Registro_auto";
     }
 
+    /*ABMS*/
     @GetMapping("/modificar_vehiculo")
     public String editarPerfil(@RequestParam(required = false) String id, ModelMap vista) {
         Vehiculo vehiculo = new Vehiculo();
@@ -100,12 +106,6 @@ public class VehiculoController {
 
     }
 
-    @GetMapping("/producto")
-    public String producto() {
-        return "Producto";
-    }
-
-    /*ABMS*/
     @PostMapping("/registro")
     public String registro(ModelMap model, @RequestParam MultipartFile archivo, @RequestParam String patente, @RequestParam String modelo, @RequestParam String marca, @RequestParam Integer anio,
             @RequestParam Color color, @RequestParam Double precio, @RequestParam Boolean nuevo, @RequestParam String kilometraje, @RequestParam TipoDeCombustible tdc, @RequestParam String descripcion,
@@ -130,5 +130,7 @@ public class VehiculoController {
         }
 
     }
+    
+    
 
 }

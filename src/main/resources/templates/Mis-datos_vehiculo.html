@@ -82,20 +82,20 @@
             <div class="car-box">
                 <label>Modelo</label>
                 <input class="prueba"  type="text" name="modelo" >
-                <label th:text="${modelo}"></label><br><br>
+               
             </div>
 
             <div class="car-box">
                 <label>Patente</label>
                 <input type="text" name="patente" required>
-                <label th:text="${patente}"></label>
+                
                 <br><br>
             </div>
 
             <div class="car-box">
                 <label>Año</label>
                 <input type="number" name="anio" required>
-                <label th:text="${anio}"></label>
+               
                 
                 <br><br>
             </div>
@@ -105,7 +105,7 @@
             <div class="car-box">
                 <label>Kilometros</label>
                 <input type="number" name="kilometraje" required>
-                 <label th:text="${kilometraje}"></label>
+              
                 
                 <br><br>
             </div>
@@ -115,13 +115,13 @@
             <div class="car-box">
                 <label>Precio</label>
                 <input type="number" name="precio" required>
-                  <label th:text="${precio}"></label>
+               
                 <br><br>
             </div>
 
             <div class="car-box">
                 <h3>Descripcion</h3>
-                <textarea name="descripcion" rows="10" cols="40" th:text="${descripcion}"> </textarea>
+                <textarea name="descripcion" rows="10" cols="40" > </textarea>
                 <br><br>
             </div>
                 <img th:src="${'/foto/vehiculo?id='+id}"  alt="auto" class="logo">

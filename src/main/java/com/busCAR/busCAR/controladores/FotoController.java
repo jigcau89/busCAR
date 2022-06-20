@@ -28,19 +28,17 @@ public class FotoController {
     @GetMapping("/vehiculo")
     public ResponseEntity<byte[]> fotoVehiculo(@RequestParam String id) {
         try {
-            
+
             Vehiculo vehiculo = serviciovehiculo.buscarPorId(id);
-            if(vehiculo.getFotos()== null)
-            {
+            if (vehiculo.getFotos() == null) {
                 throw new ErrorServicio("El vehiculo no tiene foto");
             }
             byte[] foto = vehiculo.getFotos().getContenido();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.IMAGE_JPEG);
             return new ResponseEntity<>(foto, headers, HttpStatus.OK);
-        }
-        catch (ErrorServicio e) {
-            
+        } catch (ErrorServicio e) {
+
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }

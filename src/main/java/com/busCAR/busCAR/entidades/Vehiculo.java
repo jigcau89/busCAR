@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -33,13 +34,12 @@ public class Vehiculo {
     private TipoDeVehiculo tipoDeVehiculo;
     @ManyToOne
     private Foto fotos;
-    @ManyToOne
-    private Usuario usuario;
+    private String id_usuario;
 
     public Vehiculo() {
     }
 
-    public Vehiculo(String id, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tipoDeCombustible, String descripcion, Boolean alta, TipoDeVehiculo tipoDeVehiculo, Foto fotos, Usuario usuario) {
+    public Vehiculo(String id, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tipoDeCombustible, String descripcion, Boolean alta, TipoDeVehiculo tipoDeVehiculo, Foto fotos, String id_usuario) {
         this.id = id;
         this.patente = patente;
         this.modelo = modelo;
@@ -54,7 +54,8 @@ public class Vehiculo {
         this.alta = alta;
         this.tipoDeVehiculo = tipoDeVehiculo;
         this.fotos = fotos;
-        this.usuario = usuario;
+        
+        this.id_usuario = id_usuario;
     }
 
     public String getId() {
@@ -169,19 +170,20 @@ public class Vehiculo {
         this.fotos = fotos;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public String getId_usuario() {
+        return id_usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setId_usuario(String id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
     @Override
     public String toString() {
-        return "Vehiculo{" + "id=" + id + ", patente=" + patente + ", modelo=" + modelo + ", marca=" + marca + ", anioFabricacion=" + anioFabricacion + ", color=" + color + ", precio=" + precio + ", nuevo=" + nuevo + ", kilometraje=" + kilometraje + ", tipoDeCombustible=" + tipoDeCombustible + ", descripcion=" + descripcion + ", alta=" + alta + ", tipoDeVehiculo=" + tipoDeVehiculo + ", fotos=" + fotos + ", usuario=" + usuario + '}';
+        return "Vehiculo{" + "id=" + id + ", patente=" + patente + ", modelo=" + modelo + ", marca=" + marca + ", anioFabricacion=" + anioFabricacion + ", color=" + color + ", precio=" + precio + ", nuevo=" + nuevo + ", kilometraje=" + kilometraje + ", tipoDeCombustible=" + tipoDeCombustible + ", descripcion=" + descripcion + ", alta=" + alta + ", tipoDeVehiculo=" + tipoDeVehiculo + ", fotos=" + fotos + ", id_usuario=" + id_usuario + '}';
     }
-    
+
+
     
 
    

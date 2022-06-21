@@ -1,170 +1,81 @@
 *{
-  box-sizing: border-box;
-}
-html{
-    scroll-behavior: smooth;
-}
-body{
-    margin: 0px;
-    padding: 0px;
-    font-family: 'Questrial', sans-serif;
-    background: #fff;
-}
-.home{
+    box-sizing: border-box;
+  }
+  html{
+      scroll-behavior: smooth;
+  }
+  body{
+      margin: 0px;
+      padding: 0px;
+      font-family: 'Questrial', sans-serif;
+      background: #fff;
+  }
+  .home{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+   
+  }
+  
+  .registro{
+  
+      background: rgba(255, 255, 255, 0.5);
+      box-sizing: border-box;
+      box-shadow: 0 15px 25px rgba(0,0,0,.6);
+      border-radius: 7px;
+  }
+  .registro:first-child{
+      flex: 2;
+      padding: 25px;
+      margin: 20px;
+  }
+  .registro button{
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
- 
-}
-
-.registro{
-
-    background: rgba(255, 255, 255, 0.5);
-    box-sizing: border-box;
-    box-shadow: 0 15px 25px rgba(0,0,0,.6);
-    border-radius: 7px;
-}
-.registro:first-child{
-    flex: 2;
-    padding: 25px;
-    margin: 20px;
-}
-
-.registro h1{
-    margin: 0 0 30px;
-    padding: 0;
-    color: rgb(0, 0, 0);
-    text-align: center;
-}
-.registro .user-box{
-    position: relative;
-}
-.registro .user-box input{
-    width: 100%;
-    padding: 10px ;
-    font-size: 18px;
-    color: rgb(0, 0, 0);
-    margin-bottom: 30px;
-    border: none;
-    border-bottom: 1px solid ;
-    background: transparent;
-}
-.registro .user-box label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 5px 0;
-    font-size: 18px;
-    color: rgb(116, 116, 116);
-    pointer-events: none;
-    transition: .5s;
-}
-.registro .user-box input:focus ~ label,
-.registro .user-box input:valid ~ label {
-    top: -27px;
-    left: 0;
-    color: #0e8893;
-    font-size: 15px;
-}
-.registro form button{
-position: relative;
-display: inline-block;
-padding: 10px 20px;
-color: #0e8893;
-font-size: 16px;
-text-decoration: none;
-text-transform: uppercase;
-overflow:hidden ;
-transition: .5s;
-margin-top: 40px;
-letter-spacing: 4px;
-border: transparent;
-}
-.registro button:hover {
-    background: #0e8893;
-    color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 5px #0e8893,
-                0 0 25px #0e8893,
-                0 0 50px #0e8893,
-                0 0 100px #0e8893;
-}
-.registro button span {
-    position: absolute;
-    display: block;
-}
-.registro button span :nth-child(1){
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #0e8893);
-    animation: btn-anim1 1s linear infinite;
-}
-@keyframes btn-anim1 {
-    0%{
-        left: -100%;
-    }
-    50%,100%{
-        left: 100%;
-    }
-}
-.registro button span:nth-child(2){
-    top: -100%;
-    right: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(100deg, transparent, #0e8893);
-    animation: btn-anim2 1s linear infinite;
-    animation-delay: .25s;
-}
-@keyframes btn-anim2 {
-    0%{
-        top: -100%;
-    }
-    50%,100%{
-        top: 100%;
-    }
-}
-.registro button span:nth-child(3){
-    bottom: 0;
-    right: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(270deg, transparent, #0e8893);
-    animation: btn-anim3 1s linear infinite;
-    animation-delay: .5s;
-}
-@keyframes btn-anim3 {
-    0%{
-        right: -100%;
-    }
-    50%,100%{
-        right: 100%;
-    }
-}
-.registro button span:nth-child(4){
-    bottom: -100%;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(360deg, transparent,#0e8893);
-    animation: btn-anim4 1s linear infinite;
-    animation-delay: .75s;
-}
-@keyframes btn-anim4 {
-    0%{
-        bottom: -100%;
-    }
-    50%,100%{
-        bottom: 100%;
-    }
-}
-.registro form a{
+  }
+  .registro h1{
+      margin: 0 0 30px;
+      padding: 0;
+      color: rgb(0, 0, 0);
+      text-align: center;
+  }
+  .registro .user-box{
+      position: relative;
+  }
+  .registro .user-box input{
+      width: 100%;
+      padding: 10px ;
+      font-size: 18px;
+      color: rgb(0, 0, 0);
+      margin-bottom: 30px;
+      border: none;
+      border-bottom: 1px solid ;
+      background: transparent;
+  }
+  .registro .user-box label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 5px 0;
+      font-size: 18px;
+      color: rgb(116, 116, 116);
+      pointer-events: none;
+      transition: .5s;
+  }
+  .registro .user-box input:focus ~ label,
+  .registro .user-box input:valid ~ label {
+      top: -27px;
+      left: 0;
+      color: #0e8893;
+      font-size: 15px;
+  }
+  .registro form button{
     position: relative;
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px 10px;
     color: #0e8893;
     font-size: 16px;
     text-decoration: none;
@@ -173,94 +84,188 @@ border: transparent;
     transition: .5s;
     margin-top: 40px;
     letter-spacing: 4px;
-    }
-    .registro a:hover {
-        background: #0e8893;
-        color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 5px #0e8893,
-                    0 0 25px #0e8893,
-                    0 0 50px #0e8893,
-                    0 0 100px #0e8893;
-    }
-    .registro a span {
-        position: absolute;
-        display: block;
-    }
-    .registro a span :nth-child(1){
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(90deg, transparent, #0e8893);
-        animation: btn-anim1 1s linear infinite;
-    }
-    @keyframes btn-anim1 {
-        0%{
-            left: -100%;
-        }
-        50%,100%{
-            left: 100%;
-        }
-    }
-    .registro a span:nth-child(2){
-        top: -100%;
-        right: 0;
-        width: 2px;
-        height: 100%;
-        background: linear-gradient(100deg, transparent, #0e8893);
-        animation: btn-anim2 1s linear infinite;
-        animation-delay: .25s;
-    }
-    @keyframes btn-anim2 {
-        0%{
-            top: -100%;
-        }
-        50%,100%{
-            top: 100%;
-        }
-    }
-    .registro a span:nth-child(3){
-        bottom: 0;
-        right: -100%;
-        width: 100%;
-        height: 2px;
-        background: linear-gradient(270deg, transparent, #0e8893);
-        animation: btn-anim3 1s linear infinite;
-        animation-delay: .5s;
-    }
-    @keyframes btn-anim3 {
-        0%{
-            right: -100%;
-        }
-        50%,100%{
-            right: 100%;
-        }
-    }
-    .registro a span:nth-child(4){
-        bottom: -100%;
-        left: 0;
-        width: 2px;
-        height: 100%;
-        background: linear-gradient(360deg, transparent,#0e8893);
-        animation: btn-anim4 1s linear infinite;
-        animation-delay: .75s;
-    }
-    @keyframes btn-anim4 {
-        0%{
-            bottom: -100%;
-        }
-        50%,100%{
-            bottom: 100%;
-        }
-    }
-p{
-    margin: 5px;
-    padding-left: 5px;
-    text-align: left;
-}
+    border: transparent;
+  }
+  .registro button:hover {
+      background: #0e8893;
+      color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 5px #0e8893,
+                  0 0 25px #0e8893,
+                  0 0 50px #0e8893,
+                  0 0 100px #0e8893;
+  }
+  .registro button span {
+      position: absolute;
+      display: block;
+  }
+  .registro button span :nth-child(1){
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #0e8893);
+      animation: btn-anim1 1s linear infinite;
+  }
+  @keyframes btn-anim1 {
+      0%{
+          left: -100%;
+      }
+      50%,100%{
+          left: 100%;
+      }
+  }
+  .registro button span:nth-child(2){
+      top: -100%;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(100deg, transparent, #0e8893);
+      animation: btn-anim2 1s linear infinite;
+      animation-delay: .25s;
+  }
+  @keyframes btn-anim2 {
+      0%{
+          top: -100%;
+      }
+      50%,100%{
+          top: 100%;
+      }
+  }
+  .registro button span:nth-child(3){
+      bottom: 0;
+      right: -100%;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(270deg, transparent, #0e8893);
+      animation: btn-anim3 1s linear infinite;
+      animation-delay: .5s;
+  }
+  @keyframes btn-anim3 {
+      0%{
+          right: -100%;
+      }
+      50%,100%{
+          right: 100%;
+      }
+  }
+  .registro button span:nth-child(4){
+      bottom: -100%;
+      left: 0;
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(360deg, transparent,#0e8893);
+      animation: btn-anim4 1s linear infinite;
+      animation-delay: .75s;
+  }
+  @keyframes btn-anim4 {
+      0%{
+          bottom: -100%;
+      }
+      50%,100%{
+          bottom: 100%;
+      }
+  }
+  .registro form a{
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      color: #0e8893;
+      font-size: 16px;
+      text-decoration: none;
+      text-transform: uppercase;
+      overflow:hidden ;
+      transition: .5s;
+      margin-top: 40px;
+      letter-spacing: 4px;
+      }
+      .registro a:hover {
+          background: #0e8893;
+          color: #fff;
+          border-radius: 5px;
+          box-shadow: 0 0 5px #0e8893,
+                      0 0 25px #0e8893,
+                      0 0 50px #0e8893,
+                      0 0 100px #0e8893;
+      }
+      .registro a span {
+          position: absolute;
+          display: block;
+      }
+      .registro a span :nth-child(1){
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #0e8893);
+          animation: btn-anim1 1s linear infinite;
+      }
+      @keyframes btn-anim1 {
+          0%{
+              left: -100%;
+          }
+          50%,100%{
+              left: 100%;
+          }
+      }
+      .registro a span:nth-child(2){
+          top: -100%;
+          right: 0;
+          width: 2px;
+          height: 100%;
+          background: linear-gradient(100deg, transparent, #0e8893);
+          animation: btn-anim2 1s linear infinite;
+          animation-delay: .25s;
+      }
+      @keyframes btn-anim2 {
+          0%{
+              top: -100%;
+          }
+          50%,100%{
+              top: 100%;
+          }
+      }
+      .registro a span:nth-child(3){
+          bottom: 0;
+          right: -100%;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(270deg, transparent, #0e8893);
+          animation: btn-anim3 1s linear infinite;
+          animation-delay: .5s;
+      }
+      @keyframes btn-anim3 {
+          0%{
+              right: -100%;
+          }
+          50%,100%{
+              right: 100%;
+          }
+      }
+      .registro a span:nth-child(4){
+          bottom: -100%;
+          left: 0;
+          width: 2px;
+          height: 100%;
+          background: linear-gradient(360deg, transparent,#0e8893);
+          animation: btn-anim4 1s linear infinite;
+          animation-delay: .75s;
+      }
+      @keyframes btn-anim4 {
+          0%{
+              bottom: -100%;
+          }
+          50%,100%{
+              bottom: 100%;
+          }
+      }
+  p{
+      margin: 5px;
+      padding-left: 5px;
+      text-align: left;
+  }
 
-footer{
+/*footer{
    
     background-color: black;
     
@@ -275,10 +280,75 @@ footer p{
     color: rgb(245, 245, 245);
     margin: 0;
     padding: 12px;
+}*/
+footer{
+    background: url(/static/img/bg.jpg);
+    /* position: relative; */
+}
+footer img{
+    margin-top: 20px;
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+}
+
+.logo{
+    width: 350px;
+    height: 150px;
+}
+
+.redes{
+    display: inline-block;
+    vertical-align: top;
+    /* margin: 0 0 0 15px; */
+    margin-top: 20px;  
+    /* position: absolute; */
+    /* justify-content:center; */
+    /* justify-content: right; */
+    
+}
+.redes li{
+    color:#FFFFFF;
+    font-size: 1.5em;
+    /* font-weight: bold; */
+    text-decoration: none;
+    list-style: none;   
+    /* position: relative; */   
+    
+}
+
+.redes a{
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.redes a:hover{
+    color: rgb(4, 58, 40);
+}
+
+.iconos{
+    width: 1em;
+    height: 1em;    
 }
 
 
-header{
+.copyright{
+    color:#FFFFFF;
+    justify-content: end;    
+}
+
+@media screen and (max-width:720px){
+	.container{
+        	flex-direction: column;
+    	}
+
+}
+
+
+/*header{
     background-color: rgb(245, 245, 245);
     
 }
@@ -300,4 +370,147 @@ header nav{
 header p{
    padding: 5px 12px;
 }
+*/
+.logo{
+	height: 90px;
+	padding: 10px 30px ;
+	justify-content: center;
+	align-items: center;
+}
+.container{
+    max-width:  1400px;
+    margin: auto;
+}
+header{
+    background-color: rgb(245, 245, 245);
+    justify-content: center;
+    height: 200px;
+    box-shadow: 0px 1px 10px 0px #0531358e;
+}
+header .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ul {
+	list-style: none;
+}
+.search {
+	position: relative;
+	padding: 10px;
+	top: 0px;
+}
+.search input {
+	display: flex;
+	align-items: center;
+	outline: none;
+	box-sizing: border-box;
+	height: 30px;
+	width: 0px;
+	padding: 0px;
+	color: #000;
+	border-radius: 50px;
+	font-size: 20px;
+	padding-left: 20px;
+	border: 1px solid #1f8fa0ae;
+	transition: all .7s ease;
+}
+::placeholder {
+	color: grey;
+}
+.btn {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 45px;
+	height: 45px;
+	background: #1f8fa0;
+	line-height: 40px;
+	border-radius: 50%;
+	text-align: center;
+	cursor: pointer;
+	transition: .5s;
+}
+.btn i {
+	font-size: 25px;
+	color: white;
+	line-height: 40px;
+	transition: all .7s ease;
+}
+.container:hover input {
+	width: 350px;
+}
+.container:hover i{
+	transform: rotate(-360deg);
+}
 
+.btn:hover{
+	background: #1f8fa0;
+}
+
+
+/* - - - - NAV - - - - */
+nav{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+	margin-right: 20px;
+}
+
+.nav1 li a{
+	color: black;
+    text-decoration: none;
+	padding: 10px 15px;
+	display: block;
+}
+
+.nav1 > li{
+	float: left;
+}
+
+nav li a:hover {
+	color: #109BA8;
+}
+
+.nav1 li ul{
+	display: none;
+}
+.nav1 li:hover > ul{
+	display: block;
+}
+
+#nav2{
+	position: absolute;
+	background-color: rgb(245, 245, 245);
+	border-radius: 8px;
+	box-shadow: 2px 4px 0px 0px #109BA8;
+	text-align: left;
+	padding-left: 0%;
+    padding-right: 5px;
+}
+
+ /* - - - - - ESCRITORIO - - - -- */
+@media (min-width: 720px){
+
+    header{
+        margin: auto;
+        width: 100%;
+        height: 100px;
+        background-color: rgb(245, 245, 245);
+    }
+    header .container{
+        display: flex;
+        flex-direction:row;
+        justify-content: space-between;
+    }
+	header .logo{
+        justify-content: center;
+	   align-items: center;
+    }
+	#nav2{
+	padding-left: 0%;
+    padding-right: 5px;
+	}
+
+}

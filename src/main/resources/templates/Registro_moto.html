@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Auto</title>
-    <link rel="stylesheet" href="/static/css/Registro_auto.css">
+    <title>Registro Moto</title>
+    <link rel="stylesheet" href="/static/css/Registro_moto.css">
 </head>
 
 <body>
@@ -31,25 +31,10 @@
                     <br><br>
               </div>
 
-               <div class="car-box2">
-                   <label>Tipo de Vehiculo</label>
-                   <input id="radio" type="radio" name="auto" value="true" >Auto
-                   <input id="radio" type="radio" name="camioneta" value="false" >Camioneta
-                   <br><br><br>
-               </div>
-
-               <div class="car-box1">
-                   <label >Marca</label>
-                   <select name="Marca" required>
-                       <option value="Chevrolet" >Chevrolet</option>
-                       <option value="Peugeot" >Peugeot</option>
-                       <option value="Renault" >Renault</option>
-                       <option value="Toyota" >Toyota</option>
-                       <option value="Volkswagen" >Volkswagen</option>
-                       <option value="Fiat" >Fiat</option>
-                   </select>
-                   <br><br><br>
-                </div>
+              <div class="car-box">
+                <input type="text" name="modelo" required>
+                <label>Marca</label><br><br>
+            </div>
 
                <div class="car-box">
                    <input type="text" name="modelo" required>
@@ -86,18 +71,6 @@
                    <label>Color</label>
                    <br><br>
                </div>
-
-               <div class="car-box1">
-                    <label >Tipo de conbustible</label>
-                    <select name="conbustible" required>
-                        <option value="nafta">Nafta</option>
-                        <option value="gasoil">Gasoil</option>
-                        <option value="electrico">Hibrido</option>
-                        <option value="hibrido">GNC</option>
-                        <option value="electrico">Electrico</option>
-                   </select>
-                   <br><br><br>
-                </div>
 
                <div class="car-box">
                     <input type="number" name="precio" required>

@@ -44,7 +44,8 @@ public class UsuarioController {
         model.put("perfil", login);
         model.put("nombre", login.getNombre());
         model.put("apellido", login.getApellido());
-        model.put("fechaDeNacimiento", login.getFechaDeNacimiento());
+        String fdn = login.getFechaDeNacimiento().toString().replaceAll("-", "/");
+        model.put("fechaDeNacimiento", fdn);
         model.put("dni", login.getDni());
         model.put("email", login.getEmail());
         model.put("telefono", login.getTelefono());

@@ -4,125 +4,140 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Auto</title>
+    <title>Datos del Vehiculo</title>
     <link rel="stylesheet" href="/static/css/Mis-datos_vehiculo.css">
 </head>
 
 <body>
 
     <header>
-        <div class="header_content">
-                
-                <div class="logo_img">
-                       <a href=""><img src="/static/img/Logo_Nombre.png" alt=""></a>  
-                </div> 
-                
-               <!-- <nav>
-                    <a href="#">Contacto</a>
-               </nav> -->
+             <nav>
 
-        </div>
+             </nav>
     </header>
 
-    <section class="formulario_content">
     
-
-        <center>
-           <h1>Cargar Vehiculo</h1>
-           <br>
+    <center>
+    <section class="formulario_conteiner">
 
             <form >
-
-               <label class="label_titulopubli">Titulo de la publicacion</label><br>
-               <input type="text" required>
-               <br><br>
-
-
-               <label>Tipo de Vehiculo    </label><br><br>
-               <input type="radio" name="auto" value="true" required>Auto
-               <input type="radio" name="camioneta" value="false" required>Camioneta
-               <br><br>
-
-
-               <label >Marca</label>
-               <select name="Marca" required>
-                   <option value="Chevrolet" >Chevrolet</option>
-                   <option value="Peugeot" >Peugeot</option>
-                   <option value="Renault" >Renault</option>
-                   <option value="Toyota" >Toyota</option>
-                   <option value="Volkswagen" >Volkswagen</option>
-                   <option value="Fiat" >Fiat</option>
-               </select><br><br>
- 
-
-               <label>Modelo</label>
-               <input type="text" name="modelo" required>
-               <br><br>
-
-
-               <label>Patente</label>
-               <input type="text"  name="patente" required>
-               <br><br>
-
-
-               <label >Año</label>
-               <input type="number" name="anioFabricacion" required><br><br>
-
-
-               <label>Estado    </label>
-               <input type="radio" name="nuevo" value="true" required>Nuevo
-               <input type="radio" name="nuevo" value="false" required>Usado
-               <br><br>
-
-
-               <label >Kilometros</label>
-               <input type="number" name="kilometraje" required>
-               <br><br>
-
-               
-               <label>Color</label>
-               <input type="text" required>
-               <br><br>
-
-
-               <label >Tipo de conbustible</label>
-               <select name="conbustible" required>
-                   <option value="nafta">Nafta</option>
-                   <option value="gasoil">Gasoil</option>
-                 <option value="electrico">Hibrido</option>
-                 <option value="hibrido">GNC</option>
-                 <option value="electrico">Electrico</option>
-              </select><br><br>
-
-
-              <label>Precio</label>
-              <input type="number" name="precio" required>
-              <br><br>
-
-           
-
-              <div class="form_descripcion">
-
-                   <h3>Descripcion</h3><br>
-                   <textarea name="descripcion" rows="10" cols="40">      Agrega una descripcion del Vehiculo</textarea>
-    
-                </div>
+                <h1>Datos del Vehiculo</h1>
                 <br><br>
 
-              <div class="form_img">
-                  <h3>Imagenes</h3><br>
-                  <input type="file" name="fotos">
+                <div class="car-box">
+                    <input type="text" required>
+                    <label>Titulo de la publicacion</label>
+                    <br><br>
+              </div>
+
+               <div class="car-box2">
+                   <label>Tipo de Vehiculo</label>
+                   <input id="radio" type="radio" name="auto" value="true" >Auto
+                   <input id="radio" type="radio" name="camioneta" value="false" >Camioneta
+                   <br><br><br>
                </div>
-               <br><br>
 
+               <div class="car-box1">
+                   <label >Marca</label>
+                   <select name="Marca" required>
+                       <option value="Chevrolet" >Chevrolet</option>
+                       <option value="Peugeot" >Peugeot</option>
+                       <option value="Renault" >Renault</option>
+                       <option value="Toyota" >Toyota</option>
+                       <option value="Volkswagen" >Volkswagen</option>
+                       <option value="Fiat" >Fiat</option>
+                   </select>
+                   <br><br><br>
+                </div>
+
+               <div class="car-box">
+                   <input type="text" name="modelo" required>
+                   <label>Modelo</label><br><br>
+               </div>
+
+               <div class="car-box">
+                   <input type="text"  name="patente" required>
+                   <label>Patente</label>
+                   <br><br>
+               </div>
+
+               <div class="car-box">
+                   <input type="number" name="anioFabricacion" required>
+                   <label >Año</label>
+                   <br><br>
+               </div>
+ 
+               <div class="car-box2">
+                   <label>Estado</label><br>
+                   <input type="radio" name="nuevo" value="true" required>Nuevo
+                   <input type="radio" name="nuevo" value="false" required>Usado
+                   <br><br><br>
+               </div>
+
+               <div class="car-box">
+                   <input type="number" name="kilometraje" required>
+                   <label >Kilometros</label>
+                   <br><br>
+               </div>
+               
+               <div class="car-box">
+                   <input type="text" required>
+                   <label>Color</label>
+                   <br><br>
+               </div>
+
+               <div class="car-box1">
+                    <label >Tipo de conbustible</label>
+                    <select name="conbustible" required>
+                        <option value="nafta">Nafta</option>
+                        <option value="gasoil">Gasoil</option>
+                        <option value="electrico">Hibrido</option>
+                        <option value="hibrido">GNC</option>
+                        <option value="electrico">Electrico</option>
+                   </select>
+                   <br><br><br>
+                </div>
+
+               <div class="car-box">
+                    <input type="number" name="precio" required>
+                    <label>Precio</label>
+                    <br><br>
+               </div>
+
+              <div class="car-box">
+                    <h3>Descripcion</h3>
+                    <textarea name="descripcion" rows="10" cols="40"> Agrega una descripcion del Vehiculo</textarea>
+                    <br><br>
+                </div>
+            
+              <div class="car-box">
+                    <h3>Imagenes</h3>
+                    <input type="file" name="fotos">
+                    <br>
+               </div>
+
+               <input id="submit" type="submit" value="Guardar cambios"><br>
+
+
+               <a class="link" href="/templates/Index.html">Volver a inicio</a><br><br>
        
-              <input type="submit">
-
             </form>
-        </center>
        
     </section>
+</center>
     
 
 </body>
+
+<footer>
+    <div class="container">
+        <p>&copy; busCar2022</p>
+    </div>
+</footer>
+
 </html>
+
+
+	
+	
+	

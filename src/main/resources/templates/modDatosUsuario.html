@@ -9,21 +9,40 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <title>BusCAR-Mis datos de usuario</title>
 </head>
 <body>
     <header>
         <div class="container">
-            <p class="logo">BusCAR</p>
-        </div>
-        <nav>
-            <p>hola gente</p>
-        </nav>    
+
+            <img src="/img/Logo_Nombre.png" alt="logo" class="logo">
+
+            <div class="search">
+                <input type="text" placeholder=" Que desea busCAR?">
+                <div class="btn">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+
+           <nav>
+                   <ul class="nav1">
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="">Comprar</a></li>
+                        <li><a href="">Mi cuenta</a>
+                             <ul id="nav2">
+                                 <li><a href="">Iniciar Sesion</a></li>
+                                 <li id="regi"><a href="">Registrarte</a></li>
+                             </ul>
+                      </li>
+                   </ul>
+          </nav>
+    </div>      
     </header>
+    <section class="home">
     <div class="login">
         <h1><b>Mis datos</b></h1>
         <form action="/usuario/actualizar-perfil" method="POST" enctype="multipart/form-data"> 
-            
             <input type="hidden" name="id" th:value="${perfil.id}">
                 <div class="user-box">      
                     <input type="text" name="nombre" th:value="${perfil.nombre}" >
@@ -82,7 +101,18 @@
                 <br>
                 <br>
         </form>
-       
     </div>
+    </section>
+    <footer>
+        <div class="container">
+        <img src="/static/img/Logo_Nombre.png" class="logo">
+        <p class="copyright">&copy Copyright BusCar - 2022</p>        
+        <ul class="redes">
+            <li><img src="/static/img/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
+            <li><img src="/static/img/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
+            <li><img src="/static/img/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
+        </ul>      
+    </div>  
+    </footer>
 </body>     
 </html>

@@ -29,7 +29,7 @@ public class ControladorPrincipal {
         return "index";
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/inicio")
     public String inicio() {
         return "inicio";
@@ -75,10 +75,12 @@ public class ControladorPrincipal {
     @PostMapping("/registro")
     public String registrar(ModelMap modelo, MultipartFile archivo, @RequestParam String nombre,
             @RequestParam String apellido, @RequestParam String dni, @RequestParam String telefono,
-            @RequestParam String email, @RequestParam String direccion, @RequestParam Date fechaDeNacimiento,
+            @RequestParam String email, @RequestParam String direccion, @RequestParam String fechaDeNacimiento,
             @RequestParam String clave, @RequestParam String clave2) {
         try {
-            usuarioServicio.guardar(archivo, nombre, apellido, fechaDeNacimiento, dni, telefono, email, direccion, clave, clave2);
+            fechaDeNacimiento = fechaDeNacimiento.replaceAll("-", "/");
+            Date fdn = new Date(fechaDeNacimiento);
+            usuarioServicio.guardar(archivo, nombre, apellido, dni, telefono, email, direccion, fdn, clave, clave2);
         } catch (ErrorServicio ex) {
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
@@ -97,4 +99,55 @@ public class ControladorPrincipal {
         modelo.put("descripcion", "Tu usuario fue registrado de manera satisfactoria.");
         return "exito";
     }
+
+    @GetMapping("/contacto")
+    public String contacto() {
+        return "/contacto";
+    }
+
+    @GetMapping("/catalogoAuto")
+    public String catalogoAuto() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoMoto")
+    public String catalogoMoto() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoCamioneta")
+    public String catalogoCamioneta() {
+        return "catalogo";
+    }
+    /*Marcas*/
+    @GetMapping("/catalogoChevrolet")
+    public String catalogoChevrolet() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoPeugeot")
+    public String catalogoPeugeot() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoRenault")
+    public String catalogoRenault() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoToyota")
+    public String catalogoToyota() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoVolkswagen")
+    public String catalogoVolkswagen() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoFiat")
+    public String catalogoFiat() {
+        return "catalogo";
+    }
+
 }

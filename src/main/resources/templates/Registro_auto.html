@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro Auto</title>
-    <link rel="stylesheet" href="/static/css/Registro_auto.css">
+    <link rel="stylesheet" href="/css/Registro_auto.css">
 </head>
 
 <body>
 
     <header>
-             <nav>
+        <nav>
+                 <div class="logo_img">
+                    <a href=""><img src="/img/Logo_Nombre.png" alt=""></a> 
+                </div> 
+                
+               
+        </nav>
 
-             </nav>
     </header>
+    <br>
 
     
     <center>
     <section class="formulario_conteiner">
 
-            <form >
+            <form action="/vehiculo/registro"   method="POST" enctype="multipart/form-data">
                 <h1>Registrar Vehiculo</h1>
                 <p style="color: rgb(95, 95, 95);">A continuacion, ingrese los datos del vehiculo a regirstrar, muchas gracias
                  </p><br><br>
@@ -33,21 +40,27 @@
 
                <div class="car-box2">
                    <label>Tipo de Vehiculo</label>
-                   <input id="radio" type="radio" name="auto" value="true" >Auto
-                   <input id="radio" type="radio" name="camioneta" value="false" >Camioneta
+                  <select name="tdv" required>
+                    <option th:each="tipo : ${Tdv}" th:text="${tipo}"></option>
+                </select>
+                 <!--  <input id="radio" type="radio" name="auto" value="true" >Auto
+                   <input id="radio" type="radio" name="camioneta" value="false" >Camioneta-->
                    <br><br><br>
                </div>
 
                <div class="car-box1">
                    <label >Marca</label>
-                   <select name="Marca" required>
+                  <select name="marca" required>
+                    <option th:each="mar : ${Marcas}" th:text="${mar}"></option> 
+                </select>
+                   <!--<select name="Marca" required>
                        <option value="Chevrolet" >Chevrolet</option>
                        <option value="Peugeot" >Peugeot</option>
                        <option value="Renault" >Renault</option>
                        <option value="Toyota" >Toyota</option>
                        <option value="Volkswagen" >Volkswagen</option>
                        <option value="Fiat" >Fiat</option>
-                   </select>
+                   </select>-->
                    <br><br><br>
                 </div>
 
@@ -63,7 +76,8 @@
                </div>
 
                <div class="car-box">
-                   <input type="number" name="anioFabricacion" required>
+                   <input type="number" name="anio" required>
+                  <!--<input type="number" name="anioFabricacion" required>-->
                    <label >Año</label>
                    <br><br>
                </div>
@@ -82,20 +96,26 @@
                </div>
                
                <div class="car-box">
-                   <input type="text" required>
+                  <select name="color" required>
+                    <option th:each="col : ${Colores}" th:text="${col}"></option> 
+                </select>
+                  <!-- <input type="text" required>-->
                    <label>Color</label>
                    <br><br>
                </div>
 
                <div class="car-box1">
                     <label >Tipo de conbustible</label>
-                    <select name="conbustible" required>
+                 <select name="tdc" required>
+                    <option th:each="tipo : ${Tdc}" th:text="${tipo}"></option> 
+                </select>
+              <!--      <select name="conbustible" required>
                         <option value="nafta">Nafta</option>
                         <option value="gasoil">Gasoil</option>
                         <option value="electrico">Hibrido</option>
                         <option value="hibrido">GNC</option>
                         <option value="electrico">Electrico</option>
-                   </select>
+                   </select>-->
                    <br><br><br>
                 </div>
 
@@ -113,13 +133,13 @@
             
               <div class="car-box">
                     <h3>Imagenes</h3>
-                    <input type="file" name="fotos">
+                    <input type="file" name="archivo">
                     <br>
                </div>
 
                <input id="submit" type="submit" value="Registrar Vehiculo"><br>
 
-               <a class="link" href="/templates/Index.html">Volver a inicio</a><br><br>
+               <a class="link" href="/">Volver a inicio</a><br><br>
        
               
 
@@ -132,6 +152,25 @@
 
 </body>
 
+ <div   th:if="${exito}!=null" class=" header_content" >
+                    <div >
+                        <h5 >Exito </h5>
+                        <p  th:text="${exito}"></p>
+                        <a href="/"> Volver ></a>
+                    </div>
+                    
+                </div>
+
+                <div  th:if="${error}!=null" class="header_content" >
+                    <div >
+
+                        <h5 >Error </h5>
+                        <p th:text="${error}"></p>
+                        <a href="/"> Volver ></a>
+                    </div>
+
+                </div>
+
 <footer>
     <div class="container">
         <p>&copy; busCar2022</p>
@@ -139,8 +178,3 @@
 </footer>
 
 </html>
-
-
-	
-	
-	

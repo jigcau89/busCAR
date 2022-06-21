@@ -4,6 +4,7 @@ import com.busCAR.busCAR.entidades.Transaccion;
 import com.busCAR.busCAR.entidades.Usuario;
 import com.busCAR.busCAR.entidades.Vehiculo;
 import com.busCAR.busCAR.enumeraciones.FormaDePago;
+import com.busCAR.busCAR.enumeraciones.TipoDeVehiculo;
 import com.busCAR.busCAR.errores.ErrorServicio;
 import com.busCAR.busCAR.repositorios.TransaccionRepositorio;
 import com.busCAR.busCAR.repositorios.UsuarioRepositorio;
@@ -47,9 +48,105 @@ public class TransaccionServicio {
         }
     }
 
+    public void validarDatosUsuario(Usuario usuario, String nombre, String dni, String cuil, String telefono, String email, String direccion) throws ErrorServicio {
+        String nombreCompleto = usuario.getNombre() + ' ' + usuario.getApellido();
+        if (nombre == null || nombre.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de nombre no puede estar vacío.");
+        } else if (!nombre.equalsIgnoreCase(nombreCompleto)) {
+            throw new ErrorServicio("El nombre del usuario no coincide con el ingresado.");
+        }
+        if (dni == null || dni.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de DNI no puede estar vacío.");
+        } else if (!dni.equalsIgnoreCase(usuario.getDni())) {
+            throw new ErrorServicio("El DNI del usuario no coincide con el ingresado.");
+        }
+        if (cuil == null || cuil.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de cuil no puede estar vacío.");
+        } else if (!cuil.contains(dni) || cuil.length() != 11) {
+            throw new ErrorServicio("El cuil no es válido.");
+        }
+        if (telefono == null || telefono.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de telefono no puede estar vacío.");
+        } else if (!telefono.equalsIgnoreCase(usuario.getTelefono())) {
+            throw new ErrorServicio("El telefono del usuario no coincide con el ingresado.");
+        }
+        if (direccion == null || direccion.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de direccion no puede estar vacío.");
+        } else if (!direccion.equalsIgnoreCase(usuario.getDireccion())) {
+            throw new ErrorServicio("La dirección del usuario no coincide con la ingresada.");
+        }
+    }
+
+    public void validarDatosTransaccion(Usuario usuario, String nombre, String dni, String telefono, String email, String direccion, String cuil,
+            String banco, String cbu, String alias) throws ErrorServicio {
+        validarDatosUsuario(usuario, nombre, dni, cuil, telefono, email, direccion);
+
+        if (banco == null || banco.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de banco no puede estar vacío.");
+        }
+        if (cbu == null || cbu.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de cbu no puede estar vacío.");
+        } else if (cbu.length() < 6 && cbu.length() > 22) {
+            throw new ErrorServicio("El cbu no es válido.");
+        }
+        if (alias == null || alias.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de alias no puede estar vacío.");
+        }
+    }
+
+    public void validarDatosTarjeta(Usuario usuario, String nombre, String dni, String telefono, String email, String direccion, String cuil,
+            String numeroTarjeta, String vencimiento, String codigoSeguridad) throws ErrorServicio {
+        validarDatosUsuario(usuario, nombre, dni, cuil, telefono, email, direccion);
+        
+//        vencimiento = vencimiento.replaceAll("-", "/");
+//        Date fechaVenc = new Date(vencimiento);
+        if (numeroTarjeta == null || numeroTarjeta.trim().isEmpty()) {
+            throw new ErrorServicio("El campo del número de la tarjeta no puede estar vacío.");
+        } else if (numeroTarjeta.length() != 16) {
+            throw new ErrorServicio("El número de la tarjeta debe tener 16 dígitos.");
+        }
+        if (vencimiento == null || vencimiento.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de vencimiento no puede estar vacío.");
+        } /*else if (fechaVenc.before(new Date())) {
+            throw new ErrorServicio("La tarjeta ya caducó.");
+        }*/
+        if (codigoSeguridad == null || codigoSeguridad.trim().isEmpty()) {
+            throw new ErrorServicio("El campo del código de seguridad no puede estar vacío.");
+        } else if (codigoSeguridad.length() != 3) {
+            throw new ErrorServicio("El código de seguridad debe tener 3 dígitos.");
+        }
+    }
+    
+    public void validarDatosEfectivo(Usuario usuario, String nombre, String dni, String telefono, String email, String direccion, String cuil,
+            String puntoPago) throws ErrorServicio {
+        validarDatosUsuario(usuario, nombre, dni, cuil, telefono, email, direccion);
+        
+        if (puntoPago == null || puntoPago.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de punto de pago no puede estar vacío.");
+        } else if (!puntoPago.equalsIgnoreCase("RapiPago") && !puntoPago.equalsIgnoreCase("PagoFacil")) {
+            throw new ErrorServicio("No aceptamos el punto de pago elegido.");
+        }
+    }
+    
+    public void validarDatosCripto(Usuario usuario, String nombre, String dni, String telefono, String email, String direccion, String cuil,
+            String direccionWallet, String red, String moneda) throws ErrorServicio {
+        validarDatosUsuario(usuario, nombre, dni, cuil, telefono, email, direccion);
+        
+        if (direccionWallet == null || direccionWallet.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de direccion de wallet no puede estar vacío.");
+        }
+        if (red == null || red.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de red no puede estar vacío.");
+        }
+        if (moneda == null || moneda.trim().isEmpty()) {
+            throw new ErrorServicio("El campo de moneda no puede estar vacío.");
+        }
+    }
+
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void guardar(Date fechaTransaccion, Double monto, FormaDePago formaDePago, Usuario usuario, Vehiculo vehiculo) throws ErrorServicio {
+    public void guardar(Double monto, FormaDePago formaDePago, Usuario usuario, Vehiculo vehiculo) throws ErrorServicio {
         try {
+            Date fechaTransaccion = new Date();
             validar(fechaTransaccion, monto, formaDePago, usuario, vehiculo);
             Transaccion transaccion = new Transaccion();
             transaccion.setFechaTransaccion(fechaTransaccion);
@@ -83,7 +180,7 @@ public class TransaccionServicio {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void borrar(String id) {
+    public void borrar(String id) throws ErrorServicio {
         try {
             Optional<Transaccion> respuesta = repositorioTransaccion.findById(id);
             if (respuesta.isPresent()) {
@@ -92,7 +189,9 @@ public class TransaccionServicio {
             } else {
                 throw new ErrorServicio("La transacción no existe.");
             }
-        } catch (Exception e) {
+        } catch (ErrorServicio e) {
+            e.printStackTrace();
+            throw new ErrorServicio("No se pudo eliminar la transacción");
         }
     }
 
@@ -163,42 +262,8 @@ public class TransaccionServicio {
         return repositorioTransaccion.buscarPorPatenteVehiculo(patente);
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void venta(String idUsuario, String idVehiculo, FormaDePago metodoPago, Double monto) throws ErrorServicio {
-        try {
-            validacionVenta(idUsuario, idVehiculo);
-            Optional<Usuario> respuestaUser = repositorioUsuario.findById(idUsuario);
-            Usuario usuario = respuestaUser.get();
-            Optional<Vehiculo> respuestaVehiculo = repositorioVehiculo.findById(idVehiculo);
-            Vehiculo vehiculo = respuestaVehiculo.get();
-            
-            Date fechaTransaccion = new Date();
-            guardar(fechaTransaccion, monto, metodoPago, usuario, vehiculo);
-        } catch (ErrorServicio e) {
-            e.printStackTrace();
-            throw new ErrorServicio(e.getMessage());
-        }
-    }
-
-    public void validacionVenta(String idUsuario, String idVehiculo) throws ErrorServicio {
-        Optional<Usuario> respuestaUser = repositorioUsuario.findById(idUsuario);
-        Optional<Vehiculo> respuestaVehiculo = repositorioVehiculo.findById(idVehiculo);
-        if (respuestaUser.isPresent()) {
-            Usuario usuario = respuestaUser.get();
-            if (!usuario.isActivo()) {
-                throw new ErrorServicio("El usuario fue dado de baja.");
-            }
-        } else {
-            throw new ErrorServicio("El usuario no existe.");
-        }
-
-        if (respuestaVehiculo.isPresent()) {
-            Vehiculo vehiculo = respuestaVehiculo.get();
-            if (!vehiculo.getAlta()) {
-                throw new ErrorServicio("El vehiculo fue dado de baja o ya no hay stock.");
-            }
-        } else {
-            throw new ErrorServicio("El vehiculo no existe.");
-        }
+    @Transactional(readOnly = true)
+    public List<Vehiculo> buscarRelacionados(TipoDeVehiculo tipoVehiculo, String idVehiculo) {
+        return repositorioTransaccion.buscarRelacionados(tipoVehiculo, idVehiculo).subList(0, 3);
     }
 }

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  type= "text/css" href="/static/css/normalize.css">
-    <link rel="stylesheet" href="/static/css/modDatosUsuario.css">
+    <link rel="stylesheet"  type= "text/css" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/modDatosUsuario.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
@@ -13,60 +13,76 @@
 </head>
 <body>
     <header>
+        <div class="container">
+            <p class="logo">BusCAR</p>
+        </div>
         <nav>
-
-        </nav>
+            <p>hola gente</p>
+        </nav>    
     </header>
-    
     <div class="login">
         <h1><b>Mis datos</b></h1>
-        <form > 
+        <form action="/usuario/actualizar-perfil" method="POST" enctype="multipart/form-data"> 
+            
+            <input type="hidden" name="id" th:value="${perfil.id}">
                 <div class="user-box">      
-                    <input type="text" name="nombre" required>
+                    <input type="text" name="nombre" th:value="${perfil.nombre}" >
                     <label>Nombre</label>
                    
                 </div>
                 
                 <div class="user-box">
-                    <input type="text" name="apellido" required >
+                    <input type="text" name="apellido" th:value="${perfil.apellido}"  >
                     <label >Apellido</label>
                 </div>
 
                 <div class="user-box">
-                    <input type="text" name="fechaNacimiento" required>
+                    <input type="text" name="fechaDeNacimiento" th:value="${perfil.fechaDeNacimiento}" >
                     <label >Fecha de nacimiento</label>
                 </div>
 
                 <div class="user-box">
-                    <input type="number" name="dni" required>
+                    <input type="number" name="dni" th:value="${perfil.dni}" >
                     <label> DNI</label>
                 </div>
 
                 <div class="user-box">
-                    <input type="email" name=""required="">
+                    <input type="email" name="email"th:value="${perfil.email}" >
                     <label >E-mail</label>
                 </div> 
 
                 <div class="user-box">
-                    <input type="tel" name="" required="">
+                    <input type="tel" name="telefono" th:value="${perfil.telefono}" >
                     <label >Num. telefónico</label>
                 </div>
 
                 <div class="user-box">
-                    <input type="text" name="" required="">
+                    <input type="text" name="direccion" th:value="${perfil.direccion}" >
                     <label > Domicilio</label>
+                    
+                <div class="user-box">
+                <input type="file" name="archivo" th:src="${'/foto/usuario/'+perfil.id}"> 
+                <img th:src="${'/foto/usuario/'+perfil.id}">
+                <label >Foto de perfil</label>
+                <br> 
                 </div>
-                <button href="#">
+            <input type="hidden" name="clave" th:value="${perfil.getClave()}">
+            <input type="hidden" name="clave2" th:value="${perfil.getClave()}">
+                </div>
+             <p th:if="${error != null}" th:text="${error}" style=color:red;></p>
+             <p th:if="${mensaje != null}" th:text="${mensaje}" style="color:green;"> </p>
+                <button type="submit">
+                    
                     <span></span>
                     <span></span>
                     <span></span>
                     <span></span>
-                Guardar datos
+                Editar datos
                 </button>
                 <br>
                 <br>
         </form>
+       
     </div>
 </body>     
-
 </html>

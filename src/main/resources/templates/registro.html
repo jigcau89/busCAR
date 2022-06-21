@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
@@ -7,8 +7,8 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link rel="icon" href="">
-    <link rel="stylesheet"  type= "text/css" href="/static/css/normalize.css">
-    <link rel="stylesheet"  type= "text/css" href="/static/css/registro.css">
+    <link rel="stylesheet"  type= "text/css" href="/css/normalize.css">
+    <link rel="stylesheet"  type= "text/css" href="/css/registro.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
@@ -16,12 +16,16 @@
 </head>
 <body>
     <header>
-        <nav>
-        </nav>
+            <div class="container">
+                <p class="logo">BusCAR</p>
+            </div>
+            <nav>
+                <p>hola gente</p>
+            </nav>    
     </header>
     <div class="registro">
         <h1><b>Registro</b></h1>
-        <form >
+        <form action="/registro" method="POST" enctype="multipart/form-data">
             <div class="user-box">
                 <input type="text" name="nombre" required>
                 <label >Ingrese su nombre</label>
@@ -31,7 +35,7 @@
                 <label >Ingrese su apellido</label>
             </div>
             <div class="user-box">
-                <input type="text" name="fechaNacimiento" required>
+                <input type="Date" name="fechaDeNacimiento" required>
                 <label >Ingrese su fecha de nacimiento</label>
             </div>
             <div class="user-box">
@@ -55,14 +59,15 @@
                 <label >Ingrese su contraseña</label>
             </div>
             <div class="user-box">
-                <input type="password" name="clave" required>
+                <input type="password" name="clave2" required>
                 <label >Confirme su contraseña</label>
             </div>
             <br>
             <div class="user-box">
-                <input type="file"> 
-                <label >Foto de perfil</label> 
-            </div>
+                <input type="file" name="archivo"> 
+                <label >Foto de perfil</label>
+                <br> 
+                </div>
                <!--<a href="#">
                     <span></span>
                     <span></span>
@@ -71,6 +76,8 @@
                 Guardar foto de perfil
                 </a>--> 
             <a href="#">
+               <p th:if="${error != null}" th:text="${error}" style="color:red"></p>
+            <button type="submit">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -81,20 +88,17 @@
             <br>
             <br>
             <p>¿Ya tenés cuenta?</p>
-            <a class="link" href="inicioSesion.html">Inicia sesión</a>
+            <a class="link" href="/login">Inicia sesión</a>
             <br>
-            <a class="link" href="index.html">Volver a inicio</a>
+            <a class="link" href="/">Volver a inicio</a>
         </form>
-       
-    <!-- <footer>
-        <img src="\busCAR\src\main\resources\static\img\—Pngtree—fashion car private car orange_4484916.png">
-        <ul class="redes">
-             <li><img src="/img/logoinsta.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
-             <li><img src="\busCAR\src\main\resources\static\img\facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
-             <li><img src="\busCAR\src\main\resources\static\img\twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
-         </ul>
-         
-         <p class="copyright">&copy Copyright BusCar - 2022</p>
-    </footer>-->
+        </div>
+    </section>
+    
+        <footer>
+            <div class="container">
+                <p>&copy; busCar2022</p>
+            </div>
+        </footer>
 </body>
 </html>

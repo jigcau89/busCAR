@@ -1,35 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  type= "text/css" href="/static/css/normalize.css">
-    <link rel="stylesheet" href="/static/css/inicioSesion.css">
+    <link rel="stylesheet"  type= "text/css" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/inicioSesion.css">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
+        
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
     <title>BusCAR-Iniciar Sesión</title>
 </head>
 <body>
     <header>
+        <div class="container">
+            <p class="logo">BusCAR</p>
+        </div>
         <nav>
-
-        </nav>
+            <p></p>
+        </nav>    
     </header>
-    
+    <section class="home">
     <div class="login">
         <h1>Iniciar Sesión</h1>
-        <form>
+        <form action="/logincheck" method="POST">
+             <p th:if="${error != null}" th:text="${error}" style="color: red;"></p>
+             <p th:if="${exito != null}" th:text="${exito}" style="color: green;"></p>
+             <p th:if="${logout != null}" th:text="${logout}" style="color:green"></p> 
             <div class="user-box">
-                <input type="email" name="" required="">
+                <input type="email" name="email" required="">
                 <label >Ingrese su E-mail</label>
             </div>
             <div class="user-box">
-                <input type="password" name="" required="">
+                <input type="password" name="clave" required="">
                 <label> Contraseña</label>
             </div>
-            <button href="#">
+             <div>
+                 <input type="checkbox" value="true" />
+                 <label>Recordar la clave</label>
+             </div>
+              <button type="submit">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -38,14 +50,13 @@
             </button><br>
             <br>
             <p>¿No tenés cuenta?</p>
-            <a class="link" href="registro">Registrate acá</a>
+            <a class="link" href="/registroUsuario">Registrate acá</a>
             <br>
-            <a class="link" href="Index">Volver a inicio</a>
+            <a class="link" href="/">Volver a inicio</a>
         </form>
        
     </div>
-  
-    
+    </section>
 
 </body>
 </html>

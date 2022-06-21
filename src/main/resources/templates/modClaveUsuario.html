@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet"  type= "text/css" href="/static/css/normalize.css">
-    <link rel="stylesheet" href="/static/css/modClaveUsuario.css">
+    <link rel="stylesheet"  type= "text/css" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/modClaveUsuario.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
@@ -13,34 +13,34 @@
 </head>
 <body>
     <header>
+        <div class="container">
+            <p class="logo">BusCAR</p>
+        </div>
         <nav>
-
-        </nav>
+            <p>hola gente</p>
+        </nav>    
     </header>
-
     <div  class="login">
         <h1>Contraseña</h1>
-            <form >
-                <div class="user-box">
-                    <input type="password" name="clave" disabled>
-                    <label >Contraseña actual</label>
-                </div>
+        <p id="mensaje" th:if="${error != null}" th:text="${error}" style="color:red;"> </p>
+        <p id="mensaje" th:if="${mensaje != null}" th:text="${mensaje}" style="color:green;">
+            <form action="/usuario/edita-clave" method="POST">
                 <div class="user-box">
                     <input type="password" name="clave" required>
                     <label >Nueva contraseña</label>
                 </div>
                 <div class="user-box">
-                    <input type="password" name="clave" required>
+                    <input type="password" name="clave2" required>
                     <label >Confirmar nueva contraseña</label>
                 </div>
-                <button href="#">
+                <button type="submit">
                     <span></span>
                     <span></span>
                     <span></span>
                     <span></span>
-                Guardar contraseña
+                    Guardar contraseña
                 </button>
             </form> 
-        </div>
+        </div>    
 </body>
 </html>

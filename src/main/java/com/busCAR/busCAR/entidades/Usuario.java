@@ -10,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
@@ -32,13 +33,12 @@ public class Usuario {
 
     private String telefono;
     
-    @Column(unique = true) //es opcional, indica que los valores de esta columna son unicos.
+   // @Column(unique = true) //es opcional, indica que los valores de esta columna son unicos.
     private String email; //no se puede repetir el valor
 
     private String direccion;
 
     @Temporal(TemporalType.DATE)
-    //@DateTimeFormat("dd/MM/yyyy")
     private Date fechaDeNacimiento;
 
     @ManyToOne
@@ -50,13 +50,16 @@ public class Usuario {
     private String clave;
    
     //private List<Vehiculo> favoritos;
-
+    
     private boolean activo;
+    
+    @ManyToOne
+    private Vehiculo vehiculo;
 
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String dni, String telefono, String email, String direccion, Date fechaDeNacimiento, Foto foto, Rol rol, String clave, /*List<Vehiculo> favoritos, */boolean activo) {
+    public Usuario(String nombre, String apellido, String dni, String telefono, String email, String direccion, Date fechaDeNacimiento, Foto foto, Rol rol, String clave, /*List<Vehiculo> favoritos, */boolean activo, Vehiculo vehiculo) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -69,6 +72,7 @@ public class Usuario {
         this.clave = clave;
         //this.favoritos = favoritos;
         this.activo = activo;
+        this.vehiculo = vehiculo;
     }
     
     /**
@@ -255,6 +259,20 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", email=" + email + ", direccion=" + direccion + ", fechaDeNacimiento=" + fechaDeNacimiento + ", foto=" + foto + ", rol=" + rol + ", clave=" + clave + ", favoritos=" /*+ favoritos*/ + ", activo=" + activo + '}';
+        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", email=" + email + ", direccion=" + direccion + ", fechaDeNacimiento=" + fechaDeNacimiento + ", foto=" + foto + ", rol=" + rol + ", clave=" + clave + ", activo=" + activo + ", vehiculo=" + vehiculo + '}';
+    }
+
+    /**
+     * @return the vehiculo
+     */
+    public Vehiculo getVehiculo() {
+        return vehiculo;
+    }
+
+    /**
+     * @param vehiculo the vehiculo to set
+     */
+    public void setVehiculo(Vehiculo vehiculo) {
+        this.vehiculo = vehiculo;
     }
 }

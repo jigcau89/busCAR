@@ -160,7 +160,7 @@ nav li a:hover {
         rgba(0,0,0,0.5)
     )
 
-    ,url("/static/img/autosfila.jpg");
+    ,url("/img/autosfila.jpg");
 
     background-repeat: no-repeat;
     background-size: cover;
@@ -179,7 +179,7 @@ nav li a:hover {
 
 
 #somos-buscar .img-container{
-    background-image: url("/static/img/somos-buscar.jpg");
+    background-image: url("/img/somos-buscar.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -346,6 +346,16 @@ footer .container{
     
 
     /* - - - SOMOS BUSCAR - - - */
+
+  
+    nav li a{
+            
+        padding: 10px 15px;
+        display: block;
+    }
+    nav > li{
+        float: left;
+    }
     #somos-buscar .container{
         display: flex;
         justify-content: space-evenly;
@@ -365,8 +375,8 @@ footer .container{
             0deg,
             rgba(19, 19, 19, 0.23),
             rgba(19, 19, 19, 0)
-        ), url("/static/img/somos-buscar.jpg");
-             background-size: cover;
+        ), url("/img/somos-buscar.jpg");
+        background-size: cover;
         background-position: center center;
         height: 500px;
         width: 800px;

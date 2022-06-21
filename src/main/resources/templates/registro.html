@@ -12,65 +12,75 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <script src='main.js'></script>
 </head>
 <body>
     <header>
-            <div class="container">
-                <p class="logo">BusCAR</p>
+        <div class="container">
+
+            <img src="/img/Logo_Nombre.png" alt="logo" class="logo">
+
+            <div class="search">
+                <input type="text" placeholder=" Que desea busCAR?">
+                <div class="btn">
+                    <i class="fa fa-search"></i>
+                </div>
             </div>
-            <nav>
-                <p>hola gente</p>
-            </nav>    
+
+           <nav>
+                   <ul class="nav1">
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="">Comprar</a></li>
+                        <li><a href="">Mi cuenta</a>
+                             <ul id="nav2">
+                                 <li><a href="">Iniciar Sesion</a></li>
+                                 <li id="regi"><a href="">Registrarte</a></li>
+                             </ul>
+                      </li>
+                   </ul>
+          </nav>
+    </div>
     </header>
     <section class="home">
-        <div class="registro">
+    <div class="registro">
         <h1><b>Registro</b></h1>
         <form action="/registro" method="POST" enctype="multipart/form-data">
             <div class="user-box">
                 <input type="text" name="nombre" required>
                 <label >Ingrese su nombre</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="text" name="apellido" required>
                 <label >Ingrese su apellido</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="Date" name="fechaDeNacimiento" required>
                 <label >Ingrese su fecha de nacimiento</label>
-                <br>
-            </div> 
+            </div>
             <div class="user-box">
                 <input type="number" name="dni" required>
                 <label >Ingrese su dni</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="email" name="email" required>
                 <label >Ingrese su E-mail</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="tel" name="telefono" required>
                 <label >Ingrese su núm. telefónico</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="text" name="direccion" required>
                 <label >Ingrese su domicilio</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="password" name="clave" required>
                 <label >Ingrese su contraseña</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="password" name="clave2" required>
                 <label >Confirme su contraseña</label>
-                <br>
             </div>
             <br>
             <div class="user-box">
@@ -85,15 +95,16 @@
                     <span></span>
                 Guardar foto de perfil
                 </a>--> 
+            <a href="#">
                <p th:if="${error != null}" th:text="${error}" style="color:red"></p>
+            </a>
             <button type="submit">
                 <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
-                <b>Registrarse</b> 
-            </button>
-           
+                <b>Registrarse</b>
+            </button> 
             <br>
             <br>
             <p>¿Ya tenés cuenta?</p>
@@ -103,12 +114,17 @@
         </form>
         </div>
     </section>
-    
-        <footer>
-            <div class="container">
-                <p>&copy; busCar2022</p>
-            </div>
-        </footer>
-    
+    <footer>
+        <div class="container">
+        <img src="/static/img/Logo_Nombre.png" class="logo">
+        <p class="copyright">&copy Copyright BusCar - 2022</p>        
+        <ul class="redes">
+            <li><img src="/static/img/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
+            <li><img src="/static/img/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
+            <li><img src="/static/img/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
+        </ul>      
+    </div>  
+    </footer>
+      
 </body>
 </html>

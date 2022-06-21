@@ -164,7 +164,7 @@ body{
             bottom: 100%;
         }
     }
-    footer{
+    /*footer{
         background-color: black;
         position: absolute;
         bottom: 0;
@@ -182,9 +182,79 @@ body{
         margin: 0;
         padding: 12px;
     }
+    */
+    footer{
+        background: url(/static/img/bg.jpg);
+        /* position: relative; */
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+       
+    }
+    footer img{
+        margin-top: 20px;
+        
+    }
+    
+    .container{
+        display: flex;
+        justify-content: space-around;
+        position: relative;
+    }
+    
+    .logo{
+        width: 350px;
+        height: 150px;
+    }
+    
+    .redes{
+        display: inline-block;
+        vertical-align: top;
+        /* margin: 0 0 0 15px; */
+        margin-top: 20px;  
+        /* position: absolute; */
+        /* justify-content:center; */
+        /* justify-content: right; */
+        
+    }
+    .redes li{
+        color:#FFFFFF;
+        font-size: 1.5em;
+        /* font-weight: bold; */
+        text-decoration: none;
+        list-style: none;   
+        /* position: relative; */   
+        
+    }
+    
+    .redes a{
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+    
+    .redes a:hover{
+        color: rgb(4, 58, 40);
+    }
+    
+    .iconos{
+        width: 1em;
+        height: 1em;    
+    }
     
     
-    header{
+    .copyright{
+        color:#FFFFFF;
+        justify-content: end;    
+    }
+    
+    @media screen and (max-width:720px){
+        .container{
+                flex-direction: column;
+            }
+    
+    }
+    
+    /* header{
         background-color: rgb(245, 245, 245);
         
     }
@@ -205,4 +275,147 @@ body{
     }
     header p{
        padding: 5px 12px;
+    }*/
+    .logo{
+        height: 90px;
+        padding: 10px 30px ;
+        justify-content: center;
+        align-items: center;
+    }
+    .container{
+        max-width:  1400px;
+        margin: auto;
+    }
+    header{
+        background-color: rgb(245, 245, 245);
+        justify-content: center;
+        height: 200px;
+        box-shadow: 0px 1px 10px 0px #0531358e;
+    }
+    header .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    ul {
+        list-style: none;
+    }
+    .search {
+        position: relative;
+        padding: 10px;
+        top: 0px;
+    }
+    .search input {
+        display: flex;
+        align-items: center;
+        outline: none;
+        box-sizing: border-box;
+        height: 30px;
+        width: 0px;
+        padding: 0px;
+        color: #000;
+        border-radius: 50px;
+        font-size: 20px;
+        padding-left: 20px;
+        border: 1px solid #1f8fa0ae;
+        transition: all .7s ease;
+    }
+    ::placeholder {
+        color: grey;
+    }
+    .btn {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        width: 45px;
+        height: 45px;
+        background: #1f8fa0;
+        line-height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        cursor: pointer;
+        transition: .5s;
+    }
+    .btn i {
+        font-size: 25px;
+        color: white;
+        line-height: 40px;
+        transition: all .7s ease;
+    }
+    .container:hover input {
+        width: 350px;
+    }
+    .container:hover i{
+        transform: rotate(-360deg);
+    }
+    
+    .btn:hover{
+        background: #1f8fa0;
+    }
+    
+    
+    /* - - - - NAV - - - - */
+    nav{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-right: 20px;
+    }
+    
+    .nav1 li a{
+        color: black;
+        text-decoration: none;
+        padding: 10px 15px;
+        display: block;
+    }
+    
+    .nav1 > li{
+        float: left;
+    }
+    
+    nav li a:hover {
+        color: #109BA8;
+    }
+    
+    .nav1 li ul{
+        display: none;
+    }
+    .nav1 li:hover > ul{
+        display: block;
+    }
+    
+    #nav2{
+        position: absolute;
+        background-color: rgb(245, 245, 245);
+        border-radius: 8px;
+        box-shadow: 2px 4px 0px 0px #109BA8;
+        text-align: left;
+        padding-left: 0%;
+        padding-right: 5px;
+    }
+    
+     /* - - - - - ESCRITORIO - - - -- */
+    @media (min-width: 720px){
+    
+        header{
+            margin: auto;
+            width: 100%;
+            height: 100px;
+            background-color: rgb(245, 245, 245);
+        }
+        header .container{
+            display: flex;
+            flex-direction:row;
+            justify-content: space-between;
+        }
+        header .logo{
+            justify-content: center;
+           align-items: center;
+        }
+        #nav2{
+        padding-left: 0%;
+        padding-right: 5px;
+        }
+    
     }

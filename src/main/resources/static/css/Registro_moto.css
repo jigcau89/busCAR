@@ -191,29 +191,3 @@ footer .container{
         font-size: 2.6em;
     }
 }
-/* 
-@media (min-width: 900px){
-    .formulario_conteiner{
-    margin: 100px 150px;
-    }
-    .formulario_conteiner h1{
-        font-size: 2em;
-    }
-}
-
-@media (min-width: 1200px){
-    .formulario_conteiner{
-    margin: 100px 250px;
-    }
-}
-@media (min-width: 1300px){
-    .formulario_conteiner{
-    margin: 100px 200px;
-    }
-}
-
-@media (min-width: 1300px){
-    .formulario_conteiner{
-    margin: 100px 500px;
-    }
-} */

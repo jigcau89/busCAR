@@ -3,6 +3,154 @@ body{
     margin: 26px;
 }
 
+/*-------------------------------------HEADER-------------------------------------*/
+
+.logoNav{
+	height: 90px;
+	padding: 10px 30px ;
+	justify-content: center;
+	align-items: center;
+}
+.container{
+    max-width:  1400px;
+    margin: auto;
+}
+header{
+    background-color: rgb(245, 245, 245);
+    justify-content: center;
+    height: 200px;
+    box-shadow: 0px 1px 10px 0px #0531358e;
+}
+header .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ul {
+	list-style: none;
+}
+.search {
+	position: relative;
+	padding: 10px;
+	top: 0px;
+}
+
+.buscador{
+	display: flex;
+	align-items: center;
+	outline: none;
+	box-sizing: border-box;
+	height: 30px;
+	width: 0px;
+	padding: 0px;
+	color: #000;
+	border-radius: 50px;
+	font-size: 20px;
+	padding-left: 20px;
+	border: 1px solid #1f8fa0ae;
+	transition: all .7s ease;
+}
+::placeholder {
+	color: grey;
+}
+.btn {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 45px;
+	height: 45px;
+	background: #1f8fa0;
+	line-height: 40px;
+	border-radius: 50%;
+	text-align: center;
+	cursor: pointer;
+	transition: .5s;
+}
+.btn i {
+	font-size: 25px;
+	color: white;
+	line-height: 40px;
+	transition: all .7s ease;
+}
+.container:hover input {
+	width: 350px;
+}
+.container:hover i{
+	transform: rotate(-360deg);
+}
+
+.btn:hover{
+	background: #1f8fa0;
+}
+
+
+/* - - - - NAV - - - - */
+nav{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+	margin-right: 20px;
+}
+
+.nav1 li a{
+	color: black;
+    text-decoration: none;
+	padding: 10px 15px;
+	display: block;
+}
+
+.nav1 > li{
+	float: left;
+}
+
+nav li a:hover {
+	color: #109BA8;
+}
+
+.nav1 li ul{
+	display: none;
+}
+.nav1 li:hover > ul{
+	display: block;
+}
+
+#nav2{
+	position: absolute;
+	background-color: rgb(245, 245, 245);
+	border-radius: 8px;
+	box-shadow: 2px 4px 0px 0px #109BA8;
+	text-align: left;
+	padding-left: 0%;
+    padding-right: 5px;
+}
+
+ /* - - - - - ESCRITORIO - - - -- */
+@media (min-width: 720px){
+
+    header{
+        margin: auto;
+        width: 100%;
+        height: 100px;
+        background-color: rgb(245, 245, 245);
+    }
+    header .container{
+        display: flex;
+        flex-direction:row;
+        justify-content: space-between;
+    }
+	header .logo{
+        justify-content: center;
+	   align-items: center;
+    }
+	#nav2{
+	padding-left: 0%;
+    padding-right: 5px;
+	}
+
+}
+/*--------------------------------------------*/
+
 h1 {
     text-align: center;    
 }
@@ -11,6 +159,8 @@ p {
     text-align: center;
     font-size: 18px;
 }
+/*-------------------------------------------------*/
+
 
 .contactoPrivado {
     display: flex;
@@ -22,6 +172,7 @@ p {
 }
 
 .foto {
+    width: 50%;
     padding: 10px 20px 10px;
     margin-top: 70px;
 }
@@ -62,6 +213,7 @@ p {
     transform: scale(1.1)
 }
 
+/*--------------------------------------------------------------------*/
 .logosContacto{
     text-align: center;
 }
@@ -91,12 +243,19 @@ p {
     margin: 15px;
 }
 
+/*--------------------------------------------------------------------------*/
 footer{
     background: url(/busCAR/src/main/resources/static/img/bg.jpg);
     position: relative;
 }
 footer img{
     margin-top: 20px;
+}
+
+.primerPiso{
+    display: flex;
+    justify-content: space-around;
+    position: relative;
 }
 
 .logo{
@@ -108,16 +267,20 @@ footer img{
     display: inline-block;
     vertical-align: top;
     /* margin: 0 0 0 15px; */
-    margin-top: 20px;
-    margin-left: 700px;    
-    position: absolute;
+    margin-top: 20px;  
+    /* position: absolute; */
+    /* justify-content:center; */
+    /* justify-content: right; */
+    
 }
 .redes li{
     color:#FFFFFF;
     font-size: 1.5em;
     /* font-weight: bold; */
     text-decoration: none;
-    list-style: none;     
+    list-style: none;   
+    /* position: relative; */   
+    
 }
 
 .redes a{
@@ -126,7 +289,7 @@ footer img{
 }
 
 .redes a:hover{
-    color: #0e8893;
+    color: rgb(4, 58, 40);
 }
 
 .iconos{
@@ -137,4 +300,34 @@ footer img{
 .copyright{
     text-align: center;
     color:#FFFFFF;
+}
+
+@media screen and (max-width:720px){
+
+    .contactoPrivado {
+        display: flex;
+        flex-direction: column;
+    }  
+    
+    .cuestionario{    
+        width: 90%;        
+    }
+
+    .foto {
+        padding: 10px 20px 10px;
+        width: 60%;
+    }
+
+    .contactoPublico{
+        flex-direction: column;
+    }
+
+    .logos{
+        width: 40%;
+    }
+
+    .primerPiso{
+        flex-direction: column;
+    }
+    
 }

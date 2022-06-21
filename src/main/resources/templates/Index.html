@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/extras/spring-security">
 
-    <head>
-        <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Document</title>
-                    <link rel="stylesheet" href="/css/Index.css">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <link rel="stylesheet" href="/css/Index.css">    <!-- - - - LINK ICONO-NAV - - - -->
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+
 
                         </head>
 
@@ -15,9 +17,29 @@
                             <header>
                                 <div class="container">
 
-                                    <img src="/img/Logo_Nombre.png" alt="logo" class="logo">
+                <img src="/img/Logo_Nombre.png" alt="logo" class="logo">
 
-                                        <nav>
+                <div class="search">
+                    <input type="text" placeholder=" Que desea busCAR?">
+                    <div class="btn">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
+
+               <nav>
+                       <ul class="nav1">
+                            <li><a href="#"> Contacto</a></li>
+                            <li><a href="">Comprar</a></li>
+                            <li><a href="">Mi cuenta</a>
+                                 <ul id="nav2">
+                                     <li id="inicia"><a href="">Iniciar Sesion</a></li>
+                                     <li id="regis"><a href="">Registrarte</a></li>
+                                 </ul>
+                          </li>
+                       </ul>
+              </nav>
+       </div>
+</header>
 
 
                                             <li><a href="/login">Iniciar Sesion</a></li>

@@ -7,9 +7,11 @@ import com.busCAR.busCAR.enumeraciones.Color;
 import com.busCAR.busCAR.enumeraciones.TipoDeCombustible;
 import com.busCAR.busCAR.enumeraciones.TipoDeVehiculo;
 import com.busCAR.busCAR.errores.ErrorServicio;
+import com.busCAR.busCAR.repositorios.UsuarioRepositorio;
 import com.busCAR.busCAR.repositorios.VehiculoRepositorio;
 import java.util.List;
 import java.util.Optional;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -21,6 +23,7 @@ public class VehiculoServicio {
 
     @Autowired
     private VehiculoRepositorio vehiculorepositorio;
+    
 
     @Autowired
     private FotoServicio fotoServicio;
@@ -75,7 +78,7 @@ public class VehiculoServicio {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void guardar(MultipartFile archivo, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc,String descripcion,boolean alta, TipoDeVehiculo tdv,Usuario us) throws ErrorServicio {
+    public void guardar(MultipartFile archivo, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc,String descripcion,boolean alta, TipoDeVehiculo tdv,Usuario id_us) throws ErrorServicio {
 
         try {
             validar(patente, modelo, marca, anioFabricacion, color, precio, nuevo, kilometraje, tdc, tdv);
@@ -94,7 +97,7 @@ public class VehiculoServicio {
             vehiculo.setTipoDeVehiculo(tdv);
             Foto foto = fotoServicio.guardar(archivo);
             vehiculo.setFotos(foto);
-            vehiculo.setUsuario(us);
+            vehiculo.setId_usuario(id_us);
             vehiculorepositorio.save(vehiculo);
 
         } catch (ErrorServicio e) {
@@ -170,6 +173,13 @@ public class VehiculoServicio {
             throw new ErrorServicio("ALTA: El vehículo no se encontró.");
         }
     }
+    
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    public void pasarUsuarioVehiculo(HttpSession session)
+    {
+       
+        
+    }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
     public void habilitar(String id) throws ErrorServicio {
@@ -186,9 +196,15 @@ public class VehiculoServicio {
 
     /*Búsquedas*/
     @Transactional(readOnly = true)
-    public Vehiculo buscarPorId(String id) {
+    public Vehiculo buscarPorId(String id)throws ErrorServicio {
+        try{
         Optional<Vehiculo> vehiculo = vehiculorepositorio.findById(id);
         return vehiculo.get();
+        }catch(Exception e)
+        {
+            throw new ErrorServicio(e.getMessage());
+        }
+      
     }
 
     /*Listas de todos los vehículos */

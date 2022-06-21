@@ -16,11 +16,13 @@ import com.busCAR.busCAR.servicios.VehiculoServicio;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
 @RequestMapping("/vehiculo")
 public class VehiculoController {
 
@@ -45,8 +48,12 @@ public class VehiculoController {
     }
 
     /*ENUMS*/
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     @GetMapping("/registro")
-    public String colorear(ModelMap vista) {
+    public String colorear(ModelMap vista, HttpSession session) {
+        
+       
+        
         vista.addAttribute("Colores", Color.values());
         vista.addAttribute("Tdc", TipoDeCombustible.values());
         vista.addAttribute("Marcas", Marca.values());
@@ -56,12 +63,15 @@ public class VehiculoController {
     }
 
     /*ABMS*/
+    
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     @GetMapping("/modificar_vehiculo")
-    public String editarPerfil(@RequestParam(required = false) String id, ModelMap vista) {
-        Vehiculo vehiculo = new Vehiculo();
-
-        id = "e1a398fa-501a-403b-ab00-bea886d95d49";
-        vehiculo = serviciovehiculo.buscarPorId(id);
+    public String editarPerfil(@RequestParam(required = false) String id, ModelMap vista, HttpSession session)throws ErrorServicio {
+        Vehiculo vehiculo ;
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        
+        id = login.getId();
+        vehiculo = serviciovehiculo.buscarPorId(id) ;
 
         vista.put("perfil", vehiculo);
         vista.addAttribute("id", id);
@@ -79,15 +89,18 @@ public class VehiculoController {
         return "Mis-Datos_vehiculo";
 
     }
-
-    @PostMapping("/actualizar_vehiculo")
-    public String actualizar(ModelMap vista, @RequestParam(required = false) String id, MultipartFile archivo, String patente, String modelo, String marca, Integer anio,
+  
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    @GetMapping("/actualizar_vehiculo")
+    public String actualizar(HttpSession session,ModelMap vista, @RequestParam(required = false) String id, MultipartFile archivo, String patente, String modelo, String marca, Integer anio,
             Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, String descripcion,
             Boolean alta, TipoDeVehiculo tdv) throws ErrorServicio {
-        Vehiculo vehiculo;
+        
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+         id = "4d653c93-f3ee-418c-be87-589dbbcefc76";
 
-        id = "e1a398fa-501a-403b-ab00-bea886d95d49";
-        vehiculo = serviciovehiculo.buscarPorId(id);
+      
+      
         try {
 
             serviciovehiculo.modificar(id, archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv);
@@ -105,16 +118,18 @@ public class VehiculoController {
         }
 
     }
-
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     @PostMapping("/registro")
-    public String registro(ModelMap model, @RequestParam MultipartFile archivo, @RequestParam String patente, @RequestParam String modelo, @RequestParam String marca, @RequestParam Integer anio,
+    public String registro(HttpSession session,ModelMap model, @RequestParam MultipartFile archivo, @RequestParam String patente, @RequestParam String modelo, @RequestParam String marca, @RequestParam Integer anio,
             @RequestParam Color color, @RequestParam Double precio, @RequestParam Boolean nuevo, @RequestParam String kilometraje, @RequestParam TipoDeCombustible tdc, @RequestParam String descripcion,
             @RequestParam TipoDeVehiculo tdv, Usuario us) throws ErrorServicio {
-        String idu = "";
+        
+        
+         Usuario login = (Usuario) session.getAttribute("usuariosession");
+        
         try {
-
-            us = usuarioservicio.buscarPorId(idu);
-            serviciovehiculo.guardar(archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv, us);
+ 
+            serviciovehiculo.guardar(archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv, login);
             model.put("exito", "Vehículo guardado correctamente");
             return "Registro_auto";
         } catch (ErrorServicio e) {

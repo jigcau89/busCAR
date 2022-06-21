@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -54,6 +55,7 @@ public class Vehiculo {
         this.alta = alta;
         this.tipoDeVehiculo = tipoDeVehiculo;
         this.fotos = fotos;
+        
         this.usuario = usuario;
     }
 
@@ -169,11 +171,11 @@ public class Vehiculo {
         this.fotos = fotos;
     }
 
-    public Usuario getUsuario() {
+    public Usuario getId_usuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setId_usuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
@@ -181,7 +183,8 @@ public class Vehiculo {
     public String toString() {
         return "Vehiculo{" + "id=" + id + ", patente=" + patente + ", modelo=" + modelo + ", marca=" + marca + ", anioFabricacion=" + anioFabricacion + ", color=" + color + ", precio=" + precio + ", nuevo=" + nuevo + ", kilometraje=" + kilometraje + ", tipoDeCombustible=" + tipoDeCombustible + ", descripcion=" + descripcion + ", alta=" + alta + ", tipoDeVehiculo=" + tipoDeVehiculo + ", fotos=" + fotos + ", usuario=" + usuario + '}';
     }
-    
+
+
     
 
    

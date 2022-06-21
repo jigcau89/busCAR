@@ -73,6 +73,21 @@ public class UsuarioServicio implements UserDetailsService {
         usuarioRepositorio.save(usuario);
 
     }
+    
+    @Transactional
+    public void cargarListaVehiculos(String id, String id_v) throws ErrorServicio
+    {
+        /*
+        Optional <Usuario> respuesta = usuarioRepositorio.findById(id);
+        List <Usuario> lista;
+        lista.add(id_v);
+        if(respuesta.isPresent())
+        {
+            Usuario usuario = respuesta.get();
+            usuario.setFavoritos(id_v);
+        }*/
+        
+    }
 
     @Transactional
     public void modificar(MultipartFile archivo, String id, String nombre, String apellido,

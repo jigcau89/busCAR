@@ -1,153 +1,148 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos del Vehiculo</title>
+    <link rel="stylesheet" href="/css/Mis-datos_vehiculo.css">
+</head>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Modificar Vehículo</title>
-        <link rel="stylesheet" href="/css/Registro_auto.css">
+<body>
 
-    </head>
+    <header>
+             <nav>
 
-    <body>
+             </nav>
+    </header>
 
-        <header>
-            <nav>
-                <div class="logo_img">
-                    <a href=""><img src="/img/Logo_Nombre.png" alt=""></a> 
-                </div> 
-
-
-            </nav>
-        </header>
-        <br>
-
-        <section class="formulario_content">
+    
+    <center>
+    <section class="formulario_conteiner">
 
             <form action="/vehiculo/actualizar_vehiculo"  method="POST" enctype="multipart/form-data">
-                <h1>Modificar Vehículo</h1><br>
+                <h1>Datos del Vehiculo</h1>
+                <br><br>
 
                 <div class="car-box">
-
-                    <label>Titulo de la publicacion</label>
-                    <br>
                     <input type="text" required>
+                    <label>Titulo de la publicacion</label>
                     <br><br>
-                </div>
+              </div>
 
-                <div class="car-box2">
-
-
-                    <select name="tdv" required>
+               <div class="car-box2">
+                   <label>Tipo de Vehiculo</label>
+                 <select name="tdv" required>
                         <option th:each="tipo : ${Tdv}" th:text="${tipo}" ></option>
                     </select>
-                    <label>Tipo de vehículo</label>
-                    <br><br><br>
-                </div>
+                   <!--<input id="radio" type="radio" name="auto" value="true" >Auto
+                   <input id="radio" type="radio" name="camioneta" value="false" >Camioneta-->
+                   <br><br><br>
+               </div>
 
-                <div class="car-box2">
-                    <label>Estado</label><br>
-                    <input type="radio" name="nuevo" value="true" required>Nuevo
-                    <input type="radio" name="nuevo" value="false" required>Usado
-                    <br><br><br>
-                </div>
-
-                <div class="car-box1">
-
-                    <select name="marca" required>
+               <div class="car-box1">
+                   <label >Marca</label>
+                 <select name="marca" required>
                         <option th:each="mar : ${Marcas}" th:text="${mar}"></option> 
                     </select>
-                    <label>Marca</label>
-                    <br><br><br>
+                <!--   <select name="Marca" required>
+                       <option value="Chevrolet" >Chevrolet</option>
+                       <option value="Peugeot" >Peugeot</option>
+                       <option value="Renault" >Renault</option>
+                       <option value="Toyota" >Toyota</option>
+                       <option value="Volkswagen" >Volkswagen</option>
+                       <option value="Fiat" >Fiat</option>
+                   </select>-->
+                   <br><br><br>
                 </div>
 
-                <div class="car-box">
-                    <select name="color" required>
+               <div class="car-box">
+                   <input type="text" name="modelo" required>
+                   <label>Modelo</label><br><br>
+               </div>
+
+               <div class="car-box">
+                   <input type="text"  name="patente" required>
+                   <label>Patente</label>
+                   <br><br>
+               </div>
+
+               <div class="car-box">
+                   <input type="number" name="anio" required>
+                 <!--<input type="number" name="anioFabricacion" required>-->
+                   <label >Año</label>
+                   <br><br>
+               </div>
+ 
+               <div class="car-box2">
+                   <label>Estado</label><br>
+                   <input type="radio" name="nuevo" value="true" required>Nuevo
+                   <input type="radio" name="nuevo" value="false" required>Usado
+                   <br><br><br>
+               </div>
+
+               <div class="car-box">
+                   <input type="number" name="kilometraje" required>
+                   <label >Kilometros</label>
+                   <br><br>
+               </div>
+               
+               <div class="car-box">
+                 <select name="color" required>
                         <option th:each="col : ${Colores}" th:text="${col}"></option> 
                     </select>
-                    <label>Color</label>
-                    <br><br>
-                </div>
+                   <!--<input type="text" required>-->
+                   <label>Color</label>
+                   <br><br>
+               </div>
 
-                <div class="car-box1">
-
-                    <select name="tdc" required>
+               <div class="car-box1">
+                    <label >Tipo de combustible</label>
+                  <select name="tdc" required>
                         <option th:each="tipo : ${Tdc}" th:text="${tipo}"></option> 
                     </select>
-                    <label>Tipo de combustible</label>
-                    <br><br><br>
+                  <!--  <select name="conbustible" required>
+                        <option value="nafta">Nafta</option>
+                        <option value="gasoil">Gasoil</option>
+                        <option value="electrico">Hibrido</option>
+                        <option value="hibrido">GNC</option>
+                        <option value="electrico">Electrico</option>
+                   </select>-->
+                   <br><br><br>
                 </div>
 
-                <div class="car-box">
-                    <label>Modelo</label>
-                    <input class="prueba"  type="text" name="modelo" >
-
-                </div>
-
-                <div class="car-box">
-                    <label>Patente</label>
-                    <input type="text" name="patente" required>
-
-                    <br><br>
-                </div>
-
-                <div class="car-box">
-                    <label>Año</label>
-                    <input type="number" name="anio" required>
-
-
-                    <br><br>
-                </div>
-
-
-
-                <div class="car-box">
-                    <label>Kilometros</label>
-                    <input type="number" name="kilometraje" required>
-
-
-                    <br><br>
-                </div>
-
-
-
-                <div class="car-box">
-                    <label>Precio</label>
+               <div class="car-box">
                     <input type="number" name="precio" required>
-
+                    <label>Precio</label>
                     <br><br>
-                </div>
+               </div>
 
-                <div class="car-box">
+              <div class="car-box">
                     <h3>Descripcion</h3>
-                    <textarea name="descripcion" rows="10" cols="40" > </textarea>
+                    <textarea name="descripcion" rows="10" cols="40"> Agrega una descripcion del Vehiculo</textarea>
                     <br><br>
                 </div>
-                <img th:src="${'/foto/vehiculo?id='+id}"  alt="auto" class="logo">
-                <div class="car-box">
-
-
+            <img th:src="${'/foto/vehiculo?id='+id}"  alt="auto" class="logo">
+              <div class="car-box">
                     <h3>Imagenes</h3>
                     <input type="file" name="archivo">
                     <br>
-                </div>
+               </div>
 
-                <input id="submit" type="submit" ><br><br>
-
-                <a class="link" href="/">Volver a inicio</a><br><br>
+               <input id="submit" type="submit" value="Guardar cambios"><br>
 
 
-
+               <a class="link" href="/">Volver a inicio</a><br><br>
+       
             </form>
+       
+    </section>
+</center>
+    
 
+</body>
 
-        </section>
-
-
-    </body>
-
-    <div   th:if="${exito}!=null" class=" header_content" >
+  <div   th:if="${exito}!=null" class=" header_content" >
         <div >
             <h5 >Exito </h5>
             <p  th:text="${exito}"></p>
@@ -165,11 +160,11 @@
         </div>
 
     </div>
-
-    <footer>
-        <div class="container">
-            <p>&copy; busCar2022</p>
-        </div>
-    </footer>
+  
+<footer>
+    <div class="container">
+        <p>&copy; busCar2022</p>
+    </div>
+</footer>
 
 </html>

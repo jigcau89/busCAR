@@ -23,54 +23,44 @@
                 <p>hola gente</p>
             </nav>    
     </header>
-    <section class="home">
-        <div class="registro">
+    <div class="registro">
         <h1><b>Registro</b></h1>
         <form action="/registro" method="POST" enctype="multipart/form-data">
             <div class="user-box">
                 <input type="text" name="nombre" required>
                 <label >Ingrese su nombre</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="text" name="apellido" required>
                 <label >Ingrese su apellido</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="Date" name="fechaDeNacimiento" required>
                 <label >Ingrese su fecha de nacimiento</label>
-                <br>
-            </div> 
+            </div>
             <div class="user-box">
                 <input type="number" name="dni" required>
                 <label >Ingrese su dni</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="email" name="email" required>
                 <label >Ingrese su E-mail</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="tel" name="telefono" required>
                 <label >Ingrese su núm. telefónico</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="text" name="direccion" required>
                 <label >Ingrese su domicilio</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="password" name="clave" required>
                 <label >Ingrese su contraseña</label>
-                <br>
             </div>
             <div class="user-box">
                 <input type="password" name="clave2" required>
                 <label >Confirme su contraseña</label>
-                <br>
             </div>
             <br>
             <div class="user-box">
@@ -85,6 +75,7 @@
                     <span></span>
                 Guardar foto de perfil
                 </a>--> 
+            <a href="#">
                <p th:if="${error != null}" th:text="${error}" style="color:red"></p>
             <button type="submit">
                 <span></span>
@@ -92,7 +83,7 @@
                 <span></span>
                 <span></span>
                 <b>Registrarse</b> 
-            </button>
+            </a>
            
             <br>
             <br>
@@ -109,6 +100,5 @@
                 <p>&copy; busCar2022</p>
             </div>
         </footer>
-    
 </body>
 </html>

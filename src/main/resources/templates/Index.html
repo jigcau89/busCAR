@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-<link rel="stylesheet" href="/static/css/Index.css">
+   <link rel="stylesheet" href="/static/css/Index.css">    <!-- - - - LINK ICONO-NAV - - - -->
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
 
 </head>
@@ -16,22 +17,29 @@
     <header>
         <div class="container">
 
-            <img src="/static/img/Logo_Nombre.png" alt="logo" class="logo">
+                <img src="/static/img/Logo_Nombre.png" alt="logo" class="logo">
 
-            <nav>
-                <ul>
-                    <li><a href="/templates/contacto.html">Contacto</a></li>
-                    <li><a href="/templates/">Comprar</a></li>
-                    <li><a href="/templates/">Mi cuenta</a>
-                        <ul>
-                            <li><a href="/templates/inicioSesion.html">Iniciar Sesion</a></li>
-                            <li><a href="/templates/registro.html">Registrarte</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+                <div class="search">
+                    <input type="text" placeholder=" Que desea busCAR?">
+                    <div class="btn">
+                        <i class="fa fa-search"></i>
+                    </div>
+                </div>
+
+               <nav>
+                       <ul class="nav1">
+                            <li><a href="#"> Contacto</a></li>
+                            <li><a href="">Comprar</a></li>
+                            <li><a href="">Mi cuenta</a>
+                                 <ul id="nav2">
+                                     <li id="inicia"><a href="">Iniciar Sesion</a></li>
+                                     <li id="regis"><a href="">Registrarte</a></li>
+                                 </ul>
+                          </li>
+                       </ul>
+              </nav>
+       </div>
+</header>
 
     <!-- - - - SECTION HERO - - - -->
     <section id="hero">

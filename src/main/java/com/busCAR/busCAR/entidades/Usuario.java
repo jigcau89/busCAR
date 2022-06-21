@@ -51,29 +51,8 @@ public class Usuario {
    
     //private List<Vehiculo> favoritos;
     
-    private boolean activo;
     
-    @ManyToOne
-    private List <Vehiculo> favoritos;
-
-    public Usuario() {
-    }
-
-    public Usuario(String id, String nombre, String apellido, String dni, String telefono, String email, String direccion, Date fechaDeNacimiento, Foto foto, Rol rol, String clave, boolean activo, List<Vehiculo> favoritos) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.dni = dni;
-        this.telefono = telefono;
-        this.email = email;
-        this.direccion = direccion;
-        this.fechaDeNacimiento = fechaDeNacimiento;
-        this.foto = foto;
-        this.rol = rol;
-        this.clave = clave;
-        this.activo = activo;
-        this.favoritos = favoritos;
-    }
+    private boolean activo;
 
     public String getId() {
         return id;
@@ -171,18 +150,25 @@ public class Usuario {
         this.activo = activo;
     }
 
-    public List<Vehiculo> getFavoritos() {
-        return favoritos;
+    public Usuario() {
     }
 
-    public void setFavoritos(List<Vehiculo> favoritos) {
-        this.favoritos = favoritos;
+    public Usuario(String id, String nombre, String apellido, String dni, String telefono, String email, String direccion, Date fechaDeNacimiento, Foto foto, Rol rol, String clave, boolean activo) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.email = email;
+        this.direccion = direccion;
+        this.fechaDeNacimiento = fechaDeNacimiento;
+        this.foto = foto;
+        this.rol = rol;
+        this.clave = clave;
+        this.activo = activo;
     }
-
-    @Override
-    public String toString() {
-        return "Usuario{" + "id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", email=" + email + ", direccion=" + direccion + ", fechaDeNacimiento=" + fechaDeNacimiento + ", foto=" + foto + ", rol=" + rol + ", clave=" + clave + ", activo=" + activo + ", favoritos=" + favoritos + '}';
-    }
-
    
+
+    
+    
 }

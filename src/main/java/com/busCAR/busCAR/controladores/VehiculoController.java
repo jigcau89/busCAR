@@ -63,15 +63,15 @@ public class VehiculoController {
     }
 
     /*ABMS*/
-    /*
+    
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
-    @PostMapping("/modificar_vehiculo")
-    public String editarPerfil(@RequestParam(required = false) String id, ModelMap vista, HttpSession session) {
+    @GetMapping("/modificar_vehiculo")
+    public String editarPerfil(@RequestParam(required = false) String id, ModelMap vista, HttpSession session)throws ErrorServicio {
         Vehiculo vehiculo ;
         Usuario login = (Usuario) session.getAttribute("usuariosession");
         
-        id = login.getVehiculo().getId();
-        vehiculo = serviciovehiculo.buscarPorId(id);
+        id = login.getId();
+        vehiculo = serviciovehiculo.buscarPorId(id) ;
 
         vista.put("perfil", vehiculo);
         vista.addAttribute("id", id);
@@ -88,8 +88,8 @@ public class VehiculoController {
 
         return "Mis-Datos_vehiculo";
 
-    }*/
-    
+    }
+  
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     @GetMapping("/actualizar_vehiculo")
     public String actualizar(HttpSession session,ModelMap vista, @RequestParam(required = false) String id, MultipartFile archivo, String patente, String modelo, String marca, Integer anio,
@@ -129,7 +129,7 @@ public class VehiculoController {
         
         try {
  
-            serviciovehiculo.guardar(archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv, login.getId());
+            serviciovehiculo.guardar(archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv, login);
             model.put("exito", "Vehículo guardado correctamente");
             return "Registro_auto";
         } catch (ErrorServicio e) {

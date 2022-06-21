@@ -78,7 +78,7 @@ public class VehiculoServicio {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void guardar(MultipartFile archivo, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc,String descripcion,boolean alta, TipoDeVehiculo tdv,String id_us) throws ErrorServicio {
+    public void guardar(MultipartFile archivo, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc,String descripcion,boolean alta, TipoDeVehiculo tdv,Usuario id_us) throws ErrorServicio {
 
         try {
             validar(patente, modelo, marca, anioFabricacion, color, precio, nuevo, kilometraje, tdc, tdv);
@@ -196,9 +196,15 @@ public class VehiculoServicio {
 
     /*Búsquedas*/
     @Transactional(readOnly = true)
-    public Vehiculo buscarPorId(String id) {
+    public Vehiculo buscarPorId(String id)throws ErrorServicio {
+        try{
         Optional<Vehiculo> vehiculo = vehiculorepositorio.findById(id);
         return vehiculo.get();
+        }catch(Exception e)
+        {
+            throw new ErrorServicio(e.getMessage());
+        }
+      
     }
 
     /*Listas de todos los vehículos */

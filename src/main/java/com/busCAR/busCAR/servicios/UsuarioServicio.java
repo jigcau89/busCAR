@@ -77,6 +77,7 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional
     public void cargarListaVehiculos(String id, String id_v) throws ErrorServicio
     {
+        /*
         Optional <Usuario> respuesta = usuarioRepositorio.findById(id);
         List <Usuario> lista;
         lista.add(id_v);
@@ -84,7 +85,7 @@ public class UsuarioServicio implements UserDetailsService {
         {
             Usuario usuario = respuesta.get();
             usuario.setFavoritos(id_v);
-        }
+        }*/
         
     }
 

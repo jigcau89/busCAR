@@ -34,12 +34,13 @@ public class Vehiculo {
     private TipoDeVehiculo tipoDeVehiculo;
     @ManyToOne
     private Foto fotos;
-    private String id_usuario;
+    @ManyToOne
+    private Usuario usuario;
 
     public Vehiculo() {
     }
 
-    public Vehiculo(String id, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tipoDeCombustible, String descripcion, Boolean alta, TipoDeVehiculo tipoDeVehiculo, Foto fotos, String id_usuario) {
+    public Vehiculo(String id, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tipoDeCombustible, String descripcion, Boolean alta, TipoDeVehiculo tipoDeVehiculo, Foto fotos, Usuario usuario) {
         this.id = id;
         this.patente = patente;
         this.modelo = modelo;
@@ -55,7 +56,7 @@ public class Vehiculo {
         this.tipoDeVehiculo = tipoDeVehiculo;
         this.fotos = fotos;
         
-        this.id_usuario = id_usuario;
+        this.usuario = usuario;
     }
 
     public String getId() {
@@ -170,17 +171,17 @@ public class Vehiculo {
         this.fotos = fotos;
     }
 
-    public String getId_usuario() {
-        return id_usuario;
+    public Usuario getId_usuario() {
+        return usuario;
     }
 
-    public void setId_usuario(String id_usuario) {
-        this.id_usuario = id_usuario;
+    public void setId_usuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     @Override
     public String toString() {
-        return "Vehiculo{" + "id=" + id + ", patente=" + patente + ", modelo=" + modelo + ", marca=" + marca + ", anioFabricacion=" + anioFabricacion + ", color=" + color + ", precio=" + precio + ", nuevo=" + nuevo + ", kilometraje=" + kilometraje + ", tipoDeCombustible=" + tipoDeCombustible + ", descripcion=" + descripcion + ", alta=" + alta + ", tipoDeVehiculo=" + tipoDeVehiculo + ", fotos=" + fotos + ", id_usuario=" + id_usuario + '}';
+        return "Vehiculo{" + "id=" + id + ", patente=" + patente + ", modelo=" + modelo + ", marca=" + marca + ", anioFabricacion=" + anioFabricacion + ", color=" + color + ", precio=" + precio + ", nuevo=" + nuevo + ", kilometraje=" + kilometraje + ", tipoDeCombustible=" + tipoDeCombustible + ", descripcion=" + descripcion + ", alta=" + alta + ", tipoDeVehiculo=" + tipoDeVehiculo + ", fotos=" + fotos + ", usuario=" + usuario + '}';
     }
 
 

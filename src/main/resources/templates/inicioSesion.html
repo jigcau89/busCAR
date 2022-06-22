@@ -6,20 +6,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"  type= "text/css" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/inicioSesion.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">   
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <title>BusCAR-Iniciar Sesión</title>
 </head>
 <body>
     <header>
         <div class="container">
-            <p class="logo">BusCAR</p>
-        </div>
-        <nav>
-            <p>hola gente</p>
-        </nav>    
+
+            <a href="/">    <img src="/img/Logo_Nombre.png" alt="logo" class="logo"></a>
+
+            <div class="search">
+                <input type="text" placeholder=" Que desea busCAR?">
+                <div class="btn">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+
+           <nav>
+                   <ul class="nav1">
+                        <li><a href="/contacto">Contacto</a></li>
+                        <li><a href="/catalogo">Comprar</a></li>
+                        <li><a href="">Mi cuenta</a>
+                             <ul id="nav2">
+                                 <li><a href="/login">Iniciar Sesion</a></li>
+                                 <li id="regi"><a href="/registroUsuario">Registrarte</a></li>
+                             </ul>
+                      </li>
+                   </ul>
+          </nav>
+    </div>  
     </header>
+    <section class="home">
     <div class="login">
         <h1>Iniciar Sesión</h1>
         <form action="/logincheck" method="POST">
@@ -53,6 +73,17 @@
         </form>
        
     </div>
-
+    </section>
+    <footer>
+        <div class="container">
+        <img src="/img/Logo_Nombre.png" class="logo">
+        <p class="copyright">&copy Copyright BusCar - 2022</p>        
+        <ul class="redes">
+            <li><img src="/img/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
+            <li><img src="/img/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
+            <li><img src="/img/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
+        </ul>      
+    </div>  
+    </footer>
 </body>
 </html>

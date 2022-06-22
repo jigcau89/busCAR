@@ -1,7 +1,9 @@
 package com.busCAR.busCAR.controladores;
 
+import com.busCAR.busCAR.entidades.Usuario;
 import com.busCAR.busCAR.errores.ErrorServicio;
 import com.busCAR.busCAR.servicios.UsuarioServicio;
+import com.busCAR.busCAR.servicios.VehiculoServicio;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,24 +23,29 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("")
 public class ControladorPrincipal {
 
+   
     @Autowired
     private UsuarioServicio usuarioServicio;
-
+    
+    
     @GetMapping("")
-    public String index() {
-        return "index";
+    public String index() {  
+        return "index";     
     }
-  
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/inicio")
-    public String inicio() {
+    public String inicio(HttpSession session,ModelMap model) {
+        
         return "inicio";
     }
 
     @GetMapping("/login")
     public String login(HttpSession session, Authentication usuario, ModelMap modelo, @RequestParam(required = false) String error) {
         try {
-            if (usuario.getName() != null) {
+            if (usuario.getName() != null) {              
+                modelo.addAttribute("session",session);
+                
                 return "redirect:/";
             } else {
 
@@ -99,9 +106,60 @@ public class ControladorPrincipal {
         modelo.put("descripcion", "Tu usuario fue registrado de manera satisfactoria.");
         return "exito";
     }
-    
+
     @GetMapping("/contacto")
-    public String contacto(){
+    public String contacto() {
         return "/contacto";
     }
+    
+    @GetMapping("/catalogo")
+    public String catalogo() {
+        return "/catalogo";
+    }
+
+    @GetMapping("/catalogoAuto")
+    public String catalogoAuto() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoMoto")
+    public String catalogoMoto() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoCamioneta")
+    public String catalogoCamioneta() {
+        return "catalogo";
+    }
+    /*Marcas*/
+    @GetMapping("/catalogoChevrolet")
+    public String catalogoChevrolet() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoPeugeot")
+    public String catalogoPeugeot() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoRenault")
+    public String catalogoRenault() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoToyota")
+    public String catalogoToyota() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoVolkswagen")
+    public String catalogoVolkswagen() {
+        return "catalogo";
+    }
+
+    @GetMapping("/catalogoFiat")
+    public String catalogoFiat() {
+        return "catalogo";
+    }
+
 }

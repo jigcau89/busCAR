@@ -26,7 +26,26 @@ public class UsuarioController {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @GetMapping("/inicioOk")
+    public String inicioOk(HttpSession session) {
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        if (login == null) {
+            return "redirect:/login";
+        }
+        return "inicio";
+    }
+
+    @GetMapping("/index_logueado")
+    public String indexLogueado(HttpSession session, ModelMap model) {
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        model.addAttribute("nombreUsuario", login.getNombre());
+        if (login == null) {
+            return "redirect:/login";
+        }
+        return "index";
+    }
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+
     @GetMapping("/editar-perfil")
     public String editarPerfil(HttpSession session, /*@RequestParam String id,*/ ModelMap model) {
 
@@ -44,6 +63,9 @@ public class UsuarioController {
         model.put("perfil", login);
         model.put("nombre", login.getNombre());
         model.put("apellido", login.getApellido());
+        String fdn = login.getFechaDeNacimiento().toString().replaceAll("-", "/");
+        System.out.println(fdn);
+        System.out.println(login.getFechaDeNacimiento());
         model.put("fechaDeNacimiento", login.getFechaDeNacimiento());
         model.put("dni", login.getDni());
         model.put("email", login.getEmail());
@@ -60,18 +82,19 @@ public class UsuarioController {
     public String registrar(ModelMap modelo, HttpSession session, MultipartFile archivo,
             @RequestParam String id, @RequestParam String nombre, @RequestParam String apellido,
             @RequestParam String dni, @RequestParam String telefono, @RequestParam String email,
-            @RequestParam String direccion, @RequestParam Date fechaDeNacimiento) {
+            @RequestParam String direccion, @RequestParam String fechaDeNacimiento) {
         Usuario usuario = null;
         try {
             Usuario login = (Usuario) session.getAttribute("usuariosession");//recupero el usuario de la seccion 
             if (login == null || !login.getId().equals(id)) { //si es null en la seccion no hay ningun usuario
-               // return "redirect:/inicio";
-               return "index";
+                // return "redirect:/inicio";
+                return "index";
             }
 
             usuario = usuarioServicio.buscarPorId(id);
-
-            usuarioServicio.modificar(archivo, id, nombre, apellido, dni, telefono, direccion, fechaDeNacimiento, usuario.getClave(), usuario.getClave());
+            fechaDeNacimiento = fechaDeNacimiento.replaceAll("-", "/");
+            Date fdn = new Date(fechaDeNacimiento);
+            usuarioServicio.modificar(archivo, id, nombre, apellido, dni, telefono, direccion, fdn, usuario.getClave(), usuario.getClave());
             session.setAttribute("usuariosession", usuario);
             //return "redirect:/inicio";
             return "index";

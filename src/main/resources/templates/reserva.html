@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="/busCAR/src/main/resources/static/css/contacto.css"> -->
-    <link rel="stylesheet" href="/busCAR/src/main/resources/static/css/transaccionEstilo.css">
+    <link rel="stylesheet" href="/css/transaccionEstilo.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
@@ -13,6 +13,30 @@
 </head>
 <body>
     <header>
+        <div class="container">
+
+            <a href="/">    <img src="/img/Logo_Nombre.png" alt="logo" class="logoNav"></a>
+
+            <div class="search">
+                <input type="text" placeholder=" Que desea busCAR?" class="buscador">
+                <div class="btn">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+
+           <nav>
+                   <ul class="nav1">
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="">Comprar</a></li>
+                        <li><a href="">Mi cuenta</a>
+                             <ul id="nav2">
+                                 <li><a href="">Iniciar Sesion</a></li>
+                                 <li id="regi"><a href="">Registrarte</a></li>
+                             </ul>
+                      </li>
+                   </ul>
+          </nav>
+        </div>
 
     </header>
     
@@ -22,29 +46,31 @@
         <div class="bloque1">                
             <section class="infoProducto">
                 <p id="p1">Estas por reservar:</p>
-                <img src="/busCAR/src/main/resources/static/img/azul.png" class="foto">
-                <h2>Marca - Modelo</h2>
-                <h3>Año/km</h3><hr>
+                <img th:src="${'/foto/vehiculo/' + vehiculo.id}" class="foto">
+                <h2 th:text="${vehiculo.marca + ' ' + vehiculo.modelo}">Marca - Modelo</h2>
+                <h3 th:text="${vehiculo.anioFabricacion + ', ' + vehiculo.kilometraje + 'Km'}">Año/km</h3><hr>
                 <section class="precio">
                     <p id="parrafo-reserva">La reserva es el 5% del monto total</p>
-                    <p id="precio">$$$$$</p>
+                    <p id="precio" th:text="${'$' + vehiculo.precio}">$$$$$</p>
                 </section>
             </section>
 
             <section class="mediosPago">
                 <h1>¿Cómo querés pagar?</h1>
-                <form>                
+                <form th:action="@{/transaccion/pago}">                
                     <fieldset>
                         <legend>Elija el medio de pago</legend>
                         
-                        <label for="Transferencia"><input type="radio" name="pago" value="Transferencia" id="radio-Transferencia"><img class="icoMedio" src="/busCAR/src/main/resources/static/img/transferencia-bancaria.png">Transferencia Bancaria</label>                    
+                        <label for="Transferencia"><input type="radio" name="pago" th:value="${transferencia}" id="radio-Transferencia"><img class="icoMedio" src="/img/transferencia-bancaria.png">Transferencia Bancaria</label>                    
 
-                        <label for="Tarjeta"><input type="radio" name="pago" value="Tarjeta" id="radio-Tarjeta"><img class="icoMedio" src="/busCAR/src/main/resources/static/img/tarjeta-de-credito.png">Tarjeta</label>                    
+                        <label for="Tarjeta"><input type="radio" name="pago" th:value="${tarjeta}" id="radio-Tarjeta"><img class="icoMedio" src="/img/tarjeta-de-credito.png">Tarjeta</label>                    
 
-                        <label for="Efectivo"><input type="radio" name="pago" value="Rapipago" id="radio-Efectivo" checked><img class="icoMedio" src="/busCAR/src/main/resources/static/img/efectivo.png">Efectivo</label>     
+                        <label for="Efectivo"><input type="radio" name="pago" th:value="${rapipago}" id="radio-Efectivo"><img class="icoMedio" src="/img/efectivo.png">Efectivo</label>     
                         
-                        <label for="Cripto"><input type="radio" name="pago" value="Cripto" id="radio-Cripto" checked><img class="icoMedio" src="/busCAR/src/main/resources/static/img/criptomoneda.png">Criptomonedas</label>    
-                    </fieldset>                    
+                        <label for="Cripto"><input type="radio" name="pago" th:value="${cripto}" id="radio-Cripto"><img class="icoMedio" src="/img/criptomoneda.png">Criptomonedas</label>    
+                    </fieldset>             
+                    <input type="hidden" name="precio" th:value="${precio}">
+                    <input type="hidden" name="id_v" th:value="${vehiculo.id}">
                     <input type="submit" value="Continuar" class="enviar">
                 </form>
             </section>
@@ -52,14 +78,15 @@
     </main>    
 
     <footer>
-        <img src="/busCAR/src/main/resources/static/img/Logo_Nombre.png">
+        <div class="primerPiso">
+        <img src="/img/Logo_Nombre.png" class="logo">
+        <p class="copyright">&copy Copyright BusCar - 2022</p>        
         <ul class="redes">
-            <li><img src="/busCAR/src/main/resources/static/img/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
-            <li><img src="/busCAR/src/main/resources/static/img/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
-            <li><img src="/busCAR/src/main/resources/static/img/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
-        </ul>
-        <p class="copyright">&copy Copyright BusCar - 2022</p>
-
+            <li><img src="/img/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
+            <li><img src="/img/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
+            <li><img src="/img/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
+        </ul>      
+    </div>  
     </footer>
 </body>
 </html>

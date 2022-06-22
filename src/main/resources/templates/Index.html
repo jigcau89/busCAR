@@ -6,184 +6,197 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/Index.css">
-
-</head>
-
-<body>
-
-    <header>
-        <div class="container">
-
-            <img src="/img/Logo_Nombre.png" alt="logo" class="logo">
-
-            <nav>
-                <ul>
-  
-                    <li><a href="/vehiculo/modificar_vehiculo">modificar</a></li>
-                    <li><a href="/vehiculo/registro">Vehiculo</a></li>
-                    <li><a href="/contacto">Contacto</a></li>
-                    <li><a href="/templates/">Comprar</a></li>
-                    <li sec:authorize="hasAnyRole('ROLE_USUARIO')">
-                        <a href="/"  role="button" th:text="${nombreUsuario}"> </a>
-                        <div>
-                            <a  href="/usuario/editar-perfil">Editar perfil</a>
-                            <a  href="/usuario/editar-clave">Cambiar contraseña</a>
-                            <a  href="#">Ver Reservas</a>
-                            <a  href="/logout">Logout</a>
-                        </div>
-                    </li>
-                    <li th:if="${session.usuariosession != null}"><a href="/usuario/modDatosUsuario">Mi cuenta</a>
-                  
-                        <ul>
-                            <li th:if="${session.usuariosession == null}"><a href="/login">Iniciar Sesion</a></li>
-                            <li><a th:if="${session.usuariosession == null}" href="/registroUsuario">Registrarte</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- - - - SECTION HERO - - - -->
-    <section id="hero">
-        <h1>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni</h1>
-    </section>
+   <link rel="stylesheet" href="/css/Index.css">    <!-- - - - LINK ICONO-NAV - - - -->
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
 
-    <!-- - - - SECTION SOMOS BUSCAR - - - -->
-    <section id="somos-buscar">
+                        </head>
 
-        <div class="container">
+                        <body>
 
-            <div class="img-container"></div>
+                            <header>
+                                <div class="container">
 
-            <div class="texto">
-
-                <h1>Somos bus<span class="color-acento">CAR</h1></span>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati illo sunt magnam cupiditate
-                    corporis laborum vitae beatae provident nostrum molestiae praesentium veniam.</p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- - - - SECTION CATEGORIA - - - -->
-    <section id="categoria">
-
-        <div class="container">
-            <h1>Categorias</h1>
-
-            <div class="categorias">
-
-                <div class="categoria">
-                    <div class="img-container">
-                        <a href="#"><img src="/img/car_degra.png" alt="cat-auto"></a>
+                                    <a href="/" ><img src="/img/Logo_Nombre.png" alt="logo" class="logo"></a>
+                    
+                <div class="search">
+                    <input type="text" placeholder=" Que desea busCAR?">
+                    <div class="btn">
+                        <i class="fa fa-search"></i>
                     </div>
-                    <h3>Autos</h3>
                 </div>
 
-                <div class="categoria">
-                    <div class="img-container">
-                        <a href="#"><img src="/img/moto_degra.png" alt="cat-moto"></a>
-                    </div>
-                    <h3>Motos</h3>
-                </div>
+               <nav>
+                    <ul class="nav1">
+                        <li><a href="/contacto"> Contacto</a></li>
+                        <li><a href="/catalogo">Comprar</a></li>
+                        <!--<ul id="nav2">-->
+                        <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')" >
+                        <!--  th:if="${session != null}" th:text="${nombreUsuario}" -->
+                             <a href="">Mi cuenta</a>
+                           <a href="/"  th:if="${session}" th:text="${nombreUsuario}"></a>
+                            <ul id="nav2">
+                                <a href="/usuario/editar-perfil">Editar perfil</a>
+                                <a  href="/usuario/editar-clave">Cambiar contraseña</a>
+                                <a  href="/vehiculo/registro"> Registrar Vehiculo</a>
+                                <a  href="/vehiculo/modificar_vehiculo">Modificar Vehiculo</a>
+                                <a  href="/logout">Logout</a>                              
+                            </ul>
+                        </li>
+                        <!--</ul>-->
+                        <!--<li id="inicia"><a href="/login">Iniciar Sesion</a></li>
+                            <li id="regis"><a href="/registroUsuario">Registrarte</a></li>-->
+                        <!--<lu th:if="${session.usuariosession != null}"><a href="/usuario/modDatosUsuario">Mi cuenta</a>-->
+                        <li th:if="${session.usuariosession == null}"><a href="/login">Iniciar Sesion</a></li>
+                        <li><a th:if="${session.usuariosession == null}" href="/registroUsuario">Registrarte</a></li>
+                    </ul>
+                </nav>
+       </div>
+</header>
+                                        </nav>
+                                </div>
+                            </header>
 
-                <div class="categoria">
-                    <div class="img-container">
-                        <a href="#"><img src="/img/camioneta_degra.png" alt="cat-camioneta"></a>
-                    </div>
-                    <h3>Camionetas</h3>
-                </div>
-
-            </div>
-        </div>
-
-    </section>
-
-    <!-- - - - SECTION MARCAS - - - -->
-    <section id="marcas">
-
-
-        <div class="container">
-            <h1>Marcas</h1>
-
-            <div class="marquita">
-
-                <div class="marcas1"><a href="">
-                        <img src="/img/Chevrolet-logo.png" alt="Chevrolet"></a>
-                </div>
-
-                <div class="marcas2"><a href="">
-                        <img src="/img/Peugeot-logo.png" alt="Peugeot"></a>
-                </div>
-
-                <div class="marcas3"><a href="">
-                        <img src="/img/Renault-Logo.png" alt="Renault"></a>
-                </div>
-
-                <div class="marcas4"><a href="">
-                        <img src="/img/Toyota-logo.png" alt="Toyota"></a>
-                </div>
-
-                <div class="marcas5"><a href="">
-                        <img src="/img/Volkswagen-logo.png" alt="Volkswagen"></a>
-                </div>
-
-                <div class="marcas6"><a href="">
-                        <img src="/img/Fiat-logo.png" alt="Fiat"></a>
-
-                </div>
-
-            </div>
-        </div>
-
-    </section>
+                            <!-- - - - SECTION HERO - - - -->
+                            <section id="hero">
+                                <h1></h1>
+                                <br><br><br><br>
+                                                <h1>Bienvenidos a BusCar! donde podrás encontrar las mejores ofertas de los mejores vehículos de Argentina.</h1>
+                                                </section>
 
 
-    <!-- - - - RESEÑAS - - - -->
-    <section id="reseñas">
+                                                <!-- - - - SECTION SOMOS BUSCAR - - - -->
+                                                <section id="somos-buscar">
 
-        <div class="container">
+                                                    <div class="container">
 
-            <h1>Lo que opinan nuestros clientes</h1>
+                                                        <div class="img-container"></div>
 
-            <div class="resenia">
-                <h4>Kun Aguero ⭐ ⭐ ⭐ ⭐ ⭐</h4>
-                <p>Quiero destacar y felicitar a la empresa busCAR, y su personal, que me ayudaron una enormidad en una
-                    compra urgente que tuve que realizar. Todo se realizó en un par de horas, entregándome seguridad,
-                    confianza en la compra y sin poner en riesgo mi dinero. Felicitaciones y 100% recomendado busCAR</p>
-            </div>
+                                                        <div class="texto">
 
-            <div class="resenia">
-                <h4>Fernando chiquito ⭐ ⭐ ⭐ ⭐</h4>
-                <p>Excelente experiencia con busCAR, flexible en las necesidades horarias para concretar transferencias,
-                    recomendable la plataforma, empresa.</p>
-            </div>
+                                                            <h1>Somos bus<span class="color-acento">CAR</h1></span>
+                                                            <p>En BusCar transformamos la compra y venta de autos en Argentina, tenemos mas de 1000 autos certificados y garantizados.  </p>
 
-            <div class="resenia">
-                <h4>Profe Pili ⭐ ⭐ ⭐ ⭐</h4>
-                <p>No te ocultan nada. No solo venden autos, venden confianza</p>
-            </div>
+                                                        </div>
 
-            <div class="resenia">
-                <h4>Chamullo ⭐ ⭐ ⭐ ⭐⭐</h4>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, rerum! Mollitia magnam
-                    voluptatem error sed inventore corrupti beatae rem. Animi inventore ducimus quae ad hic. Hic nobis
-                    minus quis dolorem.</p>
-            </div>
-        </div>
-    </section>
+                                                    </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; busCar2022</p>
-        </div>
-    </footer>
+                                                </section>
 
-</body>
+                                                <!-- - - - SECTION CATEGORIA - - - -->
+                                                <section id="categoria">
 
-</html>
+                                                    <div class="container">
+                                                        <h1>Categorias</h1>
+
+                                                        <div class="categorias">
+
+                                                            <div class="categoria">
+                                                                <div class="img-container">
+                                                                    <a href="/catalogoAuto"><img src="/img/car_degra.png" alt="cat-auto"></a>
+                                                                </div>
+                                                                <h3>Autos</h3>
+                                                            </div>
+
+                                                            <div class="categoria">
+                                                                <div class="img-container">
+                                                                    <a href="catalogoMoto"><img src="/img/moto_degra.png" alt="cat-moto"></a>
+                                                                </div>
+                                                                <h3>Motos</h3>
+                                                            </div>
+
+                                                            <div class="categoria">
+                                                                <div class="img-container">
+                                                                    <a href="/catalogoCamioneta"><img src="/img/camioneta_degra.png" alt="cat-camioneta"></a>
+                                                                </div>
+                                                                <h3>Camionetas</h3>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </section>
+
+                                                <!-- - - - SECTION MARCAS - - - -->
+                                                <section id="marcas">
+
+
+                                                    <div class="container">
+                                                        <h1>Marcas</h1>
+
+                                                        <div class="marquita">
+
+                                                            <div class="marcas1">
+                                                                <a href="/catalogoChevrolet">  <img src="/img/Chevrolet-logo.png" alt="Chevrolet"></a>
+                                                            </div>
+
+                                                            <div class="marcas2">
+                                                                <a href="/catalogoPeugeot">  <img src="/img/Peugeot-logo.png" alt="Peugeot"></a>
+                                                            </div>
+
+                                                            <div class="marcas3">
+                                                                <a href="/catalogoRenault">  <img src="/img/Renault-Logo.png" alt="Renault"></a>
+                                                            </div>
+
+                                                            <div class="marcas4">
+                                                                <a href="/catalogoToyota">   <img src="/img/Toyota-logo.png" alt="Toyota"></a>
+                                                            </div>
+
+                                                            <div class="marcas5">
+                                                                <a href="/catalogoVolkswagen">   <img src="/img/Volkswagen-logo.png" alt="Volkswagen"></a>
+                                                            </div>
+
+                                                            <div class="marcas6">
+                                                                <a href="/catalogoFiat">       <img src="/img/Fiat-logo.png" alt="Fiat"></a>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </section>
+
+
+                                                <!-- - - - RESEÑAS - - - -->
+                                                <section id="reseñas">
+
+                                                    <div class="container">
+
+                                                        <h1>Lo que opinan nuestros clientes</h1>
+
+                                                        <div class="resenia">
+                                                            <h4>Kun Aguero ⭐ ⭐ ⭐ ⭐ ⭐</h4>
+                                                            <p>Quiero destacar y felicitar a la empresa busCAR, y su personal, que me ayudaron una enormidad en una
+                                                                compra urgente que tuve que realizar. Todo se realizó en un par de horas, entregándome seguridad,
+                                                                confianza en la compra y sin poner en riesgo mi dinero. Felicitaciones y 100% recomendado busCAR</p>
+                                                        </div>
+
+                                                        <div class="resenia">
+                                                            <h4>Fernando chiquito ⭐ ⭐ ⭐ ⭐</h4>
+                                                            <p>Excelente experiencia con busCAR, flexible en las necesidades horarias para concretar transferencias,
+                                                                recomendable la plataforma, empresa.</p>
+                                                        </div>
+
+                                                        <div class="resenia">
+                                                            <h4>Profe Pili ⭐ ⭐ ⭐ ⭐</h4>
+                                                            <p>No te ocultan nada. No solo venden autos, venden confianza</p>
+                                                        </div>
+
+                                                        <div class="resenia">
+                                                            <h4>Chamullo ⭐ ⭐ ⭐ ⭐⭐</h4>
+                                                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, rerum! Mollitia magnam
+                                                                voluptatem error sed inventore corrupti beatae rem. Animi inventore ducimus quae ad hic. Hic nobis
+                                                                minus quis dolorem.</p>
+                                                        </div>
+                                                    </div>
+                                                </section>
+
+                                                <footer>
+                                                    <div class="container">
+                                                        <p>&copy; busCar2022</p>
+                                                    </div>
+                                                </footer>
+
+                                                </body>
+
+                                                </html>

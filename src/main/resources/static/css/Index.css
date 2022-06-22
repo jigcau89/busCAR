@@ -26,53 +26,124 @@ body{
 
 
 /* - - - HEADER - - - */
+.logo{
+	height: 90px;
+	padding: 10px 30px ;
+	justify-content: center;
+	align-items: center;
+}
+.container{
+    max-width:  1400px;
+    margin: auto;
+}
 header{
     background-color: rgb(245, 245, 245);
+    justify-content: center;
+    height: 200px;
+    box-shadow: 0px 1px 10px 0px #0531358e;
 }
-
-header .logo{
-    margin: 0;
-    padding: 10px 30px ;
-    height: 90px;
-}
-
 header .container{
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
     align-items: center;
 }
+ul {
+	list-style: none;
+}
+.search {
+	position: relative;
+	padding: 10px;
+	top: 0px;
+}
+input {
+	display: flex;
+	align-items: center;
+	outline: none;
+	box-sizing: border-box;
+	height: 30px;
+	width: 0px;
+	padding: 0px;
+	color: #000;
+	border-radius: 50px;
+	font-size: 20px;
+	padding-left: 20px;
+	border: 1px solid #1f8fa0ae;
+	transition: all .7s ease;
+}
+::placeholder {
+	color: grey;
+}
+.btn {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	width: 45px;
+	height: 45px;
+	background: #1f8fa0;
+	line-height: 40px;
+	border-radius: 50%;
+	text-align: center;
+	cursor: pointer;
+	transition: .5s;
+}
+.btn i {
+	font-size: 25px;
+	color: white;
+	line-height: 40px;
+	transition: all .7s ease;
+}
+.container:hover input {
+	width: 350px;
+}
+.container:hover i{
+	transform: rotate(-360deg);
+}
 
-  header nav{
-    display: flex;
-    /* flex-direction: column; */
+.btn:hover{
+	background: #1f8fa0;
+}
+
+
+/* - - - - NAV - - - - */
+nav{
+	display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    padding-bottom: 10px;
+	margin-right: 20px;
 }
 
-header nav li a{
-    display: block;
-    /* display: inline-flex */
-}
-header nav > li {
-    float: left;
-}
-
-header li{
-    padding: 5px 10px;
+.nav1 li a{
+	color: black;
     text-decoration: none;
-    list-style-type: none;
-    font-weight: bold;
+	padding: 10px 15px;
+	display: block;
 }
 
-header li a{
-    text-decoration: none;
-    color: black;
+.nav1 > li{
+	float: left;
 }
 
-header li :hover{
-    color: #109BA8;
+nav li a:hover {
+	color: #109BA8;
 }
 
+.nav1 li ul{
+	display: none;
+}
+.nav1 li:hover > ul{
+	display: block;
+}
+
+#nav2{
+	position: absolute;
+	background-color: rgb(245, 245, 245);
+	border-radius: 8px;
+	box-shadow: 2px 4px 0px 0px #109BA8;
+	text-align: left;
+    padding-left: 0%;
+    padding-right: 5px;
+}
 
 /* - - - - HERO - - - - */
 #hero{
@@ -89,7 +160,7 @@ header li :hover{
         rgba(0,0,0,0.5)
     )
 
-    ,url("/static/img/autosfila.jpg");
+    ,url("/img/autosfila.jpg");
 
     background-repeat: no-repeat;
     background-size: cover;
@@ -97,6 +168,9 @@ header li :hover{
 }
 
 #hero h1{
+    color: white;
+}
+#hero h2 {
     color: white;
 }
 
@@ -108,7 +182,7 @@ header li :hover{
 
 
 #somos-buscar .img-container{
-    background-image: url("/static/img/somos-buscar.jpg");
+    background-image: url("/img/somos-buscar.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
@@ -251,30 +325,34 @@ footer .container{
 
 @media (min-width: 720px){
 
-
     /* - - - HEADER - - - */
     header{
-        position: fixed;
+        margin: auto;
+        margin-right: 10px;
         width: 100%;
+        height: 100px;
+        background-color: rgb(245, 245, 245);
     }
-
     header .container{
-        flex-direction: row;
+        display: flex;
+        flex-direction:row;
         justify-content: space-between;
     }
-
-    header nav{
-        flex-direction: row;
-        padding-bottom: 0;
-        padding-right: 30px;
+	header .logo{
+        justify-content: center;
+	   align-items: center;
     }
-
+    #nav2{
+       padding-left: 0%;
+       padding-right: 5px;
+    }
+    
 
     /* - - - SOMOS BUSCAR - - - */
 
   
     nav li a{
-        background-color: #109BA8;    
+            
         padding: 10px 15px;
         display: block;
     }
@@ -300,7 +378,7 @@ footer .container{
             0deg,
             rgba(19, 19, 19, 0.23),
             rgba(19, 19, 19, 0)
-        ), url("/static/img/somos-buscar.jpg");
+        ), url("/img/somos-buscar.jpg");
         background-size: cover;
         background-position: center center;
         height: 500px;

@@ -1,73 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/busCAR/src/main/resources/static/css/datosEstilos.css">
-    <title>Datos - Criptomoneda</title>
-</head>
-<body>
-    <header>
-        
-    </header>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/datosEstilos.css">
+        <title>Datos - Criptomoneda</title>
+    </head>
+    <body>
+        <header>
 
-    <main>
-        <div>
-            <h2>Ingrese sus datos para completar la reserva</h2>
-            <div class="formulario">
-            <form class="form-datos">
-                <div class="dato">
-                    <label for="nombre">Nombre y Apellido</label>
-                    <input type="text" id="nombre" class="form-padron" placeholder="Pedro Pérez" required>
-                </div>
-                <div class="dato">    
-                    <label for="domicilio">Domicilio</label>
-                    <input type="text" id="domicilio" class="form-padron" placeholder="Av. Belgrano XXXX" required>
-                </div>
-                <div class="dato">
-                    <label for="dni">DNI</label>
-                    <input type="text" id="dni" class="form-padron" placeholder="XX XXX XXX " required>
-                </div>
-                <div class="dato">
-                    <label for="cuil">CUIL/CUIT</label>
-                    <input type="text" id="cuil" class="form-padron" placeholder="XX-XXXXXXXX-X" required>
-                </div>
-                <div class="dato">
-                    <label for="correo">Correo Electrónico</label>
-                    <input type="email" id="correo" class="form-padron" required placeholder="correo@dominio.com">
-                </div>
-                <div class="dato">
-                    <label for="telefono">Teléfono</label>
-                    <input type="tel" id="telefono" class="form-padron" required placeholder="(XX) XXX XXXXXXX">
-                </div>
-                <div class="dato">
-                    <label for="telefono">Fecha</label>
-                    <input type="date" id="fecha" class="form-padron" required placeholder="DD-MM-AAAA">
-                </div>                
-                <div class="dato">
-                    <label for="wallet">Dirección de Wallet</label>
-                    <input type="text" id="wallet" class="form-padron" required placeholder="MetaMask">
-                </div>
-                <div class="dato">
-                    <label for="red">Red</label>
-                    <input type="text" id="red" class="form-padron" required placeholder="ERC20">
-                </div>
-                <div class="dato">
-                    <label for="cripto">Criptomoneda</label>
-                    <input type="text" id="cripto" class="form-padron" required placeholder="BTC">
-                </div>
-                    <input type="submit" value="Enviar" class="enviar">
-            </form>
-        </div>
-        </div>
-    </main>
+        </header>
 
-    <footer>
+        <main>
+            <div>
+                <h2>Ingrese sus datos para completar la reserva</h2>
+                <div class="formulario">
+                    <form class="form-datos" th:action="@{/transaccion/cripto}" method="POST">
+                        <div class="dato">
+                            <label for="nombre">Nombre y Apellido</label>
+                            <input name="nombre" type="text" id="nombre" class="form-padron" placeholder="Pedro Pérez" required>
+                        </div>
+                        <div class="dato">    
+                            <label for="domicilio">Domicilio</label>
+                            <input name="direccion" type="text" id="domicilio" class="form-padron" placeholder="Av. Belgrano XXXX" required>
+                        </div>
+                        <div class="dato">
+                            <label for="dni">DNI</label>
+                            <input name="dni" type="text" id="dni" class="form-padron" placeholder="XX XXX XXX " required>
+                        </div>
+                        <div class="dato">
+                            <label for="cuil">CUIL/CUIT</label>
+                            <input name="cuil" type="text" id="cuil" class="form-padron" placeholder="XX-XXXXXXXX-X" required>
+                        </div>
+                        <div class="dato">
+                            <label for="correo">Correo Electrónico</label>
+                            <input name="email" type="email" id="correo" class="form-padron" required placeholder="correo@dominio.com">
+                        </div>
+                        <div class="dato">
+                            <label for="telefono">Teléfono</label>
+                            <input name="telefono" type="tel" id="telefono" class="form-padron" required placeholder="(XX) XXX XXXXXXX">
+                        </div>
+                        <!--                        <div class="dato">
+                                                    <label for="telefono">Fecha</label>
+                                                    <input type="date" id="fecha" class="form-padron" required placeholder="DD-MM-AAAA">
+                                                </div>                -->
+                        <div class="dato">
+                            <label for="wallet">Dirección de Wallet</label>
+                            <input name="direccionWallet" type="text" id="wallet" class="form-padron" required placeholder="MetaMask">
+                        </div>
+                        <div class="dato">
+                            <label for="red">Red</label>
+                            <input name="red" type="text" id="red" class="form-padron" required placeholder="ERC20">
+                        </div>
+                        <div class="dato">
+                            <label for="cripto">Criptomoneda</label>
+                            <input name="moneda" type="text" id="cripto" class="form-padron" required placeholder="BTC">
+                        </div>
+                        <input type="hidden" name="precio" th:value="${precio}">
+                        <input type="hidden" name="id_v" th:value="${vehiculo}">
+                        <input type="hidden" name="id_u" th:value="${session.usuariosession.id}">
+                        <input type="submit" value="Enviar" class="enviar">
+                    </form>
+                </div>
+            </div>
+        </main>
 
-    </footer>        
-</body>
+        <footer>
+
+        </footer>        
+    </body>
 </html>

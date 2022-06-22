@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vehiculo a registrar</title>
-    <link rel="stylesheet" href="/Vehiculo-a-registrar.css">
+    <link rel="stylesheet" href="/css/Vehiculo-a-registrar.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 </head>
 
@@ -15,7 +15,7 @@
     <header>
         <div class="container">
 
-            <img src="/media/Logo_Nombre.png" alt="logo" class="logo">
+            <img src="/img/Logo_Nombre.png" alt="logo" class="logo">
 
             <div class="search">
                 <input type="text" placeholder=" Que desea busCAR?">
@@ -24,18 +24,41 @@
                 </div>
             </div>
 
-            <nav>
+        <!--    <nav>
                 <ul class="nav1">
-                    <li><a href="#"> Contacto</a></li>
-                    <li><a href="">Comprar</a></li>
+                    <li><a href="/contacto"> Contacto</a></li>
+                    <li><a href="/catalogo">Comprar</a></li>
                     <li><a href="">Mi cuenta</a>
                         <ul id="nav2">
-                            <li id="inicia"><a href="">Iniciar Sesion</a></li>
-                            <li id="regis"><a href="">Registrarte</a></li>
+                            <li id="inicia"><a href="/login">Iniciar Sesion</a></li>
+                            <li id="regis"><a href="/usuarioRegistro">Registrarte</a></li>
                         </ul>
                     </li>
                 </ul>
-            </nav>
+            </nav>--><nav>
+                    <ul class="nav1">
+                        <li><a href="/contacto"> Contacto</a></li>
+                        <li><a href="/catalogo">Comprar</a></li>
+                        <!--<ul id="nav2">-->
+                        <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')" >
+                            <li><a href="">Mi cuenta</a>
+                           <a href="/"  th:text="${nombreUsuario}"></a>
+                            <ul id="nav2">
+                                <a href="/usuario/editar-perfil">Editar perfil</a>
+                                <a  href="/usuario/editar-clave">Cambiar contraseña</a>
+                                <a  href="/vehiculo/registro"> Registrar Vehiculo</a>
+                                <a  href="/vehiculo/modificar_vehiculo">Modificar Vehiculo</a>
+                                <a  href="/logout">Logout</a>                              
+                            </ul>
+                        </li>
+                        <!--</ul>-->
+                        <!--<li id="inicia"><a href="/login">Iniciar Sesion</a></li>
+                            <li id="regis"><a href="/registroUsuario">Registrarte</a></li>-->
+                        <!--<lu th:if="${session.usuariosession != null}"><a href="/usuario/modDatosUsuario">Mi cuenta</a>-->
+                        <li th:if="${session.usuariosession == null}"><a href="/login">Iniciar Sesion</a></li>
+                        <li><a th:if="${session.usuariosession == null}" href="/registroUsuario">Registrarte</a></li>
+                    </ul>
+                </nav>
         </div>
     </header>
 
@@ -53,21 +76,21 @@
 
                 <div class="categoria">
                     <div class="img-container">
-                        <a href="/catalogoAuto"><img src="/media/car_degra.png" alt="cat-auto"></a>
+                        <a href="/catalogoAuto"><img src="/img/car_degra.png" alt="cat-auto"></a>
                     </div>
                     <h3>Autos</h3>
                 </div>
 
                 <div class="categoria">
                     <div class="img-container">
-                        <a href="catalogoMoto"><img src="/media/moto_degra.png" alt="cat-moto"></a>
+                        <a href="catalogoMoto"><img src="/img/moto_degra.png" alt="cat-moto"></a>
                     </div>
                     <h3>Motos</h3>
                 </div>
 
                 <div class="categoria">
                     <div class="img-container">
-                        <a href="/catalogoCamioneta"><img src="/media/camioneta_degra.png" alt="cat-camioneta"></a>
+                        <a href="/catalogoCamioneta"><img src="/img/camioneta_degra.png" alt="cat-camioneta"></a>
                     </div>
                     <h3>Camionetas</h3>
                 </div>
@@ -80,12 +103,12 @@
 
     <footer>
         <div class="primerPiso">
-        <img src="/media/Logo_Nombre.png" class="logo-footer">
+        <img src="/img/Logo_Nombre.png" class="logo-footer">
         <p class="copyright">&copy Copyright BusCar - 2022</p>        
         <ul class="redes">
-            <li><img src="/media/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
-            <li><img src="/media/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
-            <li><img src="/media/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
+            <li><img src="/img/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
+            <li><img src="/img/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
+            <li><img src="/img/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
         </ul>      
     </div>  
     </footer>

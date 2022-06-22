@@ -26,6 +26,23 @@ public class UsuarioController {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
+    @GetMapping("/inicioOk")
+    public String inicioOk(HttpSession session) {
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        if (login == null) {
+            return "redirect:/login";
+        }
+        return "inicio";
+    }
+    @GetMapping("/index_logueado")
+    public String indexLogueado(HttpSession session, ModelMap model) {
+        Usuario login = (Usuario) session.getAttribute("usuariosession");
+        model.addAttribute("nombreUsuario", login.getNombre());
+        if (login == null) {
+            return "redirect:/login";
+        }
+        return "index";
+    }
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     @GetMapping("/editar-perfil")
     public String editarPerfil(HttpSession session, /*@RequestParam String id,*/ ModelMap model) {
@@ -45,6 +62,8 @@ public class UsuarioController {
         model.put("nombre", login.getNombre());
         model.put("apellido", login.getApellido());
         String fdn = login.getFechaDeNacimiento().toString().replaceAll("-", "/");
+        System.out.println(fdn);
+        System.out.println(login.getFechaDeNacimiento());
         model.put("fechaDeNacimiento", fdn);
         model.put("dni", login.getDni());
         model.put("email", login.getEmail());

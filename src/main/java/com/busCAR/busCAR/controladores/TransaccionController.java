@@ -30,22 +30,22 @@ public class TransaccionController {
     @Autowired
     private VehiculoRepositorio repositorioVehiculo;
 
-    @GetMapping("/producto")
-    public String producto(ModelMap modelo, @RequestParam("id_v") String idVehiculo) {
-        Optional<Vehiculo> respuesta = repositorioVehiculo.findById(idVehiculo);
-        Vehiculo vehiculo = respuesta.get();
-        modelo.put("vehiculo", vehiculo);
-
-        if (vehiculo.getNuevo()) {
-            modelo.put("estado", "Nuevo");
-        } else {
-            modelo.put("estado", "Usado");
-        }
-
-        List<Vehiculo> vehiculosRel = servicioTransaccion.buscarRelacionados(vehiculo.getTipoDeVehiculo(), vehiculo.getId());
-        modelo.put("vehiculosRel", vehiculosRel);
-        return "Producto";
-    }
+//    @GetMapping("/producto")
+//    public String producto(ModelMap modelo, @RequestParam("id_v") String idVehiculo) {
+//        Optional<Vehiculo> respuesta = repositorioVehiculo.findById(idVehiculo);
+//        Vehiculo vehiculo = respuesta.get();
+//        modelo.put("vehiculo", vehiculo);
+//
+//        if (vehiculo.getNuevo()) {
+//            modelo.put("estado", "Nuevo");
+//        } else {
+//            modelo.put("estado", "Usado");
+//        }
+//
+//        List<Vehiculo> vehiculosRel = servicioTransaccion.buscarRelacionados(vehiculo.getTipoDeVehiculo(), vehiculo.getId());
+//        modelo.put("vehiculosRel", vehiculosRel);
+//        return "Producto";
+//    }
 
     @GetMapping("/reserva")
     public String pagoReserva(ModelMap modelo, @RequestParam String id) {
@@ -185,5 +185,12 @@ public class TransaccionController {
     @GetMapping("/visita")
     public String visita() {
         return "visita";
+    }
+    
+    @PostMapping("/visita")
+    public String visita(ModelMap modelo, @RequestParam String turno, @RequestParam String contacto) {
+        modelo.put("titulo", "Listo!");
+        modelo.put("descripcion", "Nos comunicaremos con usted por la " + turno + ", por " + contacto + ".");
+        return "exito";
     }
 }

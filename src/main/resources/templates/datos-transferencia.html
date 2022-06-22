@@ -1,96 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/busCAR/src/main/resources/static/css/datosEstilos.css">
-    <title>Datos - Transferencia</title>
-</head>
-<body>
-    <header>
-        <div class="container">
-            <img src="/media/Logo_Nombre.png" alt="logo" class="logoNav">
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/datosEstilos.css">
+        <title>Datos - Transferencia</title>
+    </head>
+    <body>
+        <header>
 
-            <div class="search">
-                <input type="text" placeholder=" Que desea busCAR?" class="buscad or">
-                <div class="btn">
-                    <i class="fa fa-search"></i>
+        </header>
+
+        <main>
+            <div>
+                
+                <div>
+                    <p th:if="${error} != null" th:text="${error}"></p>
+                </div>
+                
+                <h2>Ingrese sus datos para completar la reserva</h2>
+                <div class="formulario">
+                    <form class="form-datos" th:action="@{/transaccion/transferencia}" method="POST">
+                        <div class="dato">
+                            <label for="nombre">Nombre y Apellido</label>
+                            <input name="nombre" type="text" id="nombre" class="form-padron" placeholder="Pedro Pérez" required>
+                        </div>
+                        <div class="dato">    
+                            <label for="domicilio">Domicilio</label>
+                            <input name="direccion" type="text" id="domicilio" class="form-padron" placeholder="Av. Belgrano XXXX" required>
+                        </div>
+                        <div class="dato">
+                            <label for="dni">DNI</label>
+                            <input name="dni" type="number" id="dni" class="form-padron" placeholder="XX XXX XXX " required>
+                        </div>
+                        <div class="dato">
+                            <label for="cuil">CUIL/CUIT</label>
+                            <input name="cuil" type="number" id="cuil" class="form-padron" placeholder="XX-XXXXXXXX-X" required>
+                        </div>
+                        <div class="dato">
+                            <label for="correo">Correo Electrónico</label>
+                            <input name="email" type="email" id="correo" class="form-padron" required placeholder="correo@dominio.com">
+                        </div>
+                        <div class="dato">
+                            <label for="telefono">Teléfono</label>
+                            <input name="telefono" type="tel" id="telefono" class="form-padron" required placeholder="(XX) XXX XXXXXXX">
+                        </div>
+                    <!--<div class="dato">
+                            <label for="fecha">Fecha de vencimiento:</label>
+                            <input name="fechaVenc" type="date" id="fecha" class="form-padron" required placeholder="DD-MM-AAAA">
+                        </div>-->
+                        <div class="dato">
+                            <label for="banco">Banco</label>
+                            <input name="banco" type="text" id="banco" class="form-padron" required placeholder="Macro">
+                        </div>
+                        <div class="dato">
+                            <label for="cbu">CBU/CVU</label>
+                            <input name="cbu" type="number" id="cbu" class="form-padron" required placeholder="XXXXXXXXX">
+                        </div>
+                        <div class="dato">
+                            <label for="alias">Alias</label>
+                            <input name="alias" type="text" id="alias" class="form-padron" required placeholder="sal.luz.agua">
+                        </div>
+                        <input type="hidden" name="precio" th:value="${precio}">
+                        <input type="hidden" name="id_v" th:value="${vehiculo}">
+                        <input type="hidden" name="id_u" th:if="${session.usuariosession} != null" th:value="${session.usuariosession.id}">
+                        <input type="submit" value="Enviar" class="enviar">
+                    </form>
                 </div>
             </div>
+        </main>
 
-           <nav>
-                <ul class="nav1">
-                    <li><a href="#">Contacto</a></li>
-                    <li><a href="">Comprar</a></li>
-                    <li><a href="">Mi cuenta</a>
-                            <ul id="nav2">
-                                <li><a href="">Iniciar Sesion</a></li>
-                                <li id="regi"><a href="">Registrarte</a></li>
-                            </ul>
-                    </li>
-                </ul>
-          </nav>
-   </div>
-        
-    </header>
+        <footer>
 
-    <main>
-        <div>
-            <h2>Ingrese sus datos para completar la reserva</h2>
-            <div class="formulario">
-            <form class="form-datos">
-                <div class="dato">
-                    <label for="nombre">Nombre y Apellido</label>
-                    <input type="text" id="nombre" class="form-padron" placeholder="Pedro Pérez" required>
-                </div>
-                <div class="dato">    
-                    <label for="domicilio">Domicilio</label>
-                    <input type="text" id="domicilio" class="form-padron" placeholder="Av. Belgrano XXXX" required>
-                </div>
-                <div class="dato">
-                    <label for="dni">DNI</label>
-                    <input type="text" id="dni" class="form-padron" placeholder="XX XXX XXX " required>
-                </div>
-                <div class="dato">
-                    <label for="cuil">CUIL/CUIT</label>
-                    <input type="text" id="cuil" class="form-padron" placeholder="XX-XXXXXXXX-X" required>
-                </div>
-                <div class="dato">
-                    <label for="correo">Correo Electrónico</label>
-                    <input type="email" id="correo" class="form-padron" required placeholder="correo@dominio.com">
-                </div>
-                <div class="dato">
-                    <label for="telefono">Teléfono</label>
-                    <input type="tel" id="telefono" class="form-padron" required placeholder="(XX) XXX XXXXXXX">
-                </div>
-                <div class="dato">
-                    <label for="telefono">Fecha</label>
-                    <input type="date" id="fecha" class="form-padron" required placeholder="DD-MM-AAAA">
-                </div>        
-                <div class="dato">
-                    <label for="banco">Banco</label>
-                    <input type="text" id="banco" class="form-padron" required placeholder="Macro">
-                </div>
-                <div class="dato">
-                    <label for="cbu">CBU/CVU</label>
-                    <input type="number" id="cbu" class="form-padron" required placeholder="XXXXXXXXX">
-                </div>
-                <div class="dato">
-                    <label for="alias">Alias</label>
-                    <input type="text" id="alias" class="form-padron" required placeholder="sal.luz.agua">
-                </div>
-                    <input type="submit" value="Enviar" class="enviar">
-            </form>
-        </div>
-        </div>
-    </main>
-
-    <footer>
-
-    </footer>        
-</body>
+        </footer>        
+    </body>
 </html>

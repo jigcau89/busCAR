@@ -28,13 +28,9 @@ public class ControladorPrincipal {
     private UsuarioServicio usuarioServicio;
     
     
-
     @GetMapping("")
-    public String index() {
-        
-        
-        return "index";
-        
+    public String index() {  
+        return "index";     
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")

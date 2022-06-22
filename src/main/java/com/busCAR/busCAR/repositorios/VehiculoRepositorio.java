@@ -1,5 +1,6 @@
 package com.busCAR.busCAR.repositorios;
 
+import com.busCAR.busCAR.entidades.Usuario;
 import com.busCAR.busCAR.entidades.Vehiculo;
 import com.busCAR.busCAR.enumeraciones.Color;
 import com.busCAR.busCAR.enumeraciones.TipoDeCombustible;
@@ -12,6 +13,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface VehiculoRepositorio extends JpaRepository<Vehiculo, String> {
+    
+   
+    @Query("SELECT a FROM Usuario a WHERE a.id LIKE :id AND a.activo = true")
+    public Usuario buscarIDusuario(@Param("id") String id);
 
     @Query("Select v From Vehiculo v where v.id LIKE :i")
     public Vehiculo vehiculoPorId(@Param("i") String i);

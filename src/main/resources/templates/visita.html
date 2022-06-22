@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/busCAR/src/main/resources/static/css/visitaEstilo.css">
+    <link rel="stylesheet" href="/css/visitaEstilo.css">
     <title>Turno - Sucursal</title>
 </head>
 <body>
@@ -41,16 +41,16 @@
     <main>
         <div class="mensaje">
             <h1>Reserva realizada correctamente</h1>
-            <p>Para terminar de realizar la compra, deberá acercarse a nuestra <a href="/busCAR/src/main/resources/templates/contacto.html" id="link-contacto">sucursal</a>.</p>
+            <p>Para terminar de realizar la compra, deberá acercarse a nuestra <a href="/contacto" id="link-contacto">sucursal</a>.</p>
         </div>
 
         <div class="turno">
             <h2>Elija un turno!</h2>
             
-            <form class="form-turno">
+            <form class="form-turno" th:action="@{/transaccion/visita}" method="POST">
                 <fieldset class="form-horario">
                     <legend>¿En qué horario desea ser atendido?</legend>
-                    <select class="opciones-horario">
+                    <select class="opciones-horario" name="turno">
                         <option class="opcion-horario">Mañana</option>
                         <option class="opcion-horario">Tarde</option>
                         <option class="opcion-horario">Noche</option>

@@ -111,6 +111,11 @@ public class ControladorPrincipal {
     public String contacto() {
         return "/contacto";
     }
+    
+    @GetMapping("/catalogo")
+    public String catalogo() {
+        return "/catalogo";
+    }
 
     @GetMapping("/catalogoAuto")
     public String catalogoAuto() {

@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/css/contacto.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/contacto.css" type="text/css"/>
 
     
 
@@ -18,10 +18,10 @@
    
     <header>  
         <div class="container">
-            <img src="/media/Logo_Nombre.png" alt="logo" class="logoNav">
+            <img src="/img/Logo_Nombre.png" alt="logo" class="logoNav">
 
             <div class="search">
-                <input type="text" placeholder=" Que desea busCAR?">
+                <input type="text" placeholder=" Que desea busCAR?" class="buscador">
                 <div class="btn">
                     <i class="fa fa-search"></i>
                 </div>
@@ -29,12 +29,12 @@
 
            <nav>
                 <ul class="nav1">
-                    <li><a href="#">Contacto</a></li>
-                    <li><a href="">Comprar</a></li>
+                    <li><a href="/contacto">Contacto</a></li>
+                    <li><a href="/catalogo">Comprar</a></li>
                     <li><a href="">Mi cuenta</a>
                             <ul id="nav2">
-                                <li><a href="">Iniciar Sesion</a></li>
-                                <li id="regi"><a href="">Registrarte</a></li>
+                                <li><a href="/login">Iniciar Sesion</a></li>
+                                <li id="regi"><a href="/registroUsuario">Registrarte</a></li>
                             </ul>
                     </li>
                 </ul>
@@ -49,11 +49,6 @@
                 <div class="product" style="margin-left: 3em">
                     <div class="img-container">
                     <img id="imageBox" th:src="${'/foto/vehiculo/' + vehiculo.id}">
-                    </div>
-                    <div class="product-small-img">
-                        <img th:src="${'/foto/vehiculo/' + vehiculo.id}" onmouseover="myFunction(this)">   
-                        <img th:src="${'/foto/vehiculo/' + vehiculo.id}" onmouseover="myFunction(this)">
-                        <img th:src="${'/foto/vehiculo/' + vehiculo.id}" onmouseover="myFunction(this)">
                     </div>
                 </div>  
             </section>
@@ -123,13 +118,15 @@
     </main>
     
     <footer>
+        <div class="primerPiso">
         <img src="/img/Logo_Nombre.png" class="logo">
+        <p class="copyright">&copy Copyright BusCar - 2022</p>        
         <ul class="redes">
-            <li><img src="\img\instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
-            <li><img src="\img\facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
-            <li><img src="\img\twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
-        </ul>
-        <p class="copyright">&copy Copyright BusCar - 2022</p>   
+            <li><img src="/img/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
+            <li><img src="/img/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
+            <li><img src="/img/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
+        </ul>      
+    </div>  
     </footer>
 </body>
 </html>

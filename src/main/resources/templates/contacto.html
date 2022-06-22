@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/busCAR/src/main/resources/static/css/contacto.css">
+    <link rel="stylesheet" href="/css/contacto.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
@@ -13,7 +13,52 @@
 
 <body>
     <header>
+        <div class="container">
+            <a href="/" ><img src="/img/Logo_Nombre.png" alt="logo" class="logoNav"></a>
 
+            <div class="search">
+                <input type="text" placeholder=" Que desea busCAR?" class="buscador">
+                <div class="btn">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+                
+          <!--  <nav>
+                <ul class="nav1">
+                    <li><a href="#">Contacto</a></li>
+                    <li><a href="">Comprar</a></li>
+                    <li><a href="">Mi cuenta</a>
+                            <ul id="nav2">
+                                <li><a href="/login">Iniciar Sesion</a></li>
+                                <li id="regi"><a href="/registroUsuario">Registrarte</a></li>
+                            </ul>
+                    </li>
+                </ul>
+            </nav>--><nav>
+                    <ul class="nav1">
+                        <li><a href="/contacto"> Contacto</a></li>
+                        <li><a href="/catalogo">Comprar</a></li>
+                        <!--<ul id="nav2">-->
+                        <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')" >
+                            <li><a href="">Mi cuenta</a>
+                           <a href="/"  th:text="${nombreUsuario}"></a>
+                            <ul id="nav2">
+                                <a href="/usuario/editar-perfil">Editar perfil</a>
+                                <a  href="/usuario/editar-clave">Cambiar contraseña</a>
+                                <a  href="/vehiculo/registro"> Registrar Vehiculo</a>
+                                <a  href="/vehiculo/modificar_vehiculo">Modificar Vehiculo</a>
+                                <a  href="/logout">Logout</a>                              
+                            </ul>
+                        </li>
+                        <!--</ul>-->
+                        <!--<li id="inicia"><a href="/login">Iniciar Sesion</a></li>
+                            <li id="regis"><a href="/registroUsuario">Registrarte</a></li>-->
+                        <!--<lu th:if="${session.usuariosession != null}"><a href="/usuario/modDatosUsuario">Mi cuenta</a>-->
+                        <li th:if="${session.usuariosession == null}"><a href="/login">Iniciar Sesion</a></li>
+                        <li><a th:if="${session.usuariosession == null}" href="/registroUsuario">Registrarte</a></li>
+                    </ul>
+                </nav>
+       </div>
     </header>
 
     <main>
@@ -43,7 +88,7 @@
             </form>
 
             <div class="foto">
-                <img src="\busCAR\src\main\resources\static\img\azul.png">
+                <img src="/img/azul.png">
             </div>         
         </section>       
 
@@ -52,27 +97,27 @@
             <p>Contactate con alguno de nuestros asesores a través de:</p>
             
             <ul class="logosContacto">
-                <li> <a rel="link" href="https://www.instagram.com/"><img src="\busCAR\src\main\resources\static\img\llamada.png" class="logos"></a></li>
-                <li> <a rel="link" href="https://www.instagram.com/"><img src="\busCAR\src\main\resources\static\img\gmail.png" class="logos"></a></li>
-                <li> <a rel="link" href="https://www.instagram.com/"><img src="\busCAR\src\main\resources\static\img\whatsapp.png" class="logos"></a></li>
+                <li> <a rel="link" href="https://www.instagram.com/"><img src="/img/llamada.png" class="logos"></a></li>
+                <li> <a rel="link" href="https://www.instagram.com/"><img src="/img/gmail.png" class="logos"></a></li>
+                <li> <a rel="link" href="https://www.instagram.com/"><img src="/img/whatsapp.png" class="logos"></a></li>
             </ul>                               
         </section>
 
         <section class="ubicacion">
             <h1>¿Donde encontrarnos?</h1>
-            <p>Nuestra sucursal se encuentra en el centro de la bella Ciudad de Mendoza. En bla bla bla</p>
+            <p>Nuestra sucursal se encuentra en el centro de la bella Ciudad de Mendoza. Y ademas tenemos una sucursal en la ciudad de Santa Fe Capital</p>
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6701.413081574724!2d-68.86920570926095!3d-32.87948303434326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e093ec45179bf%3A0x205a78f6d20efa3a!2sMendoza%2C%20Capital%2C%20Mendoza!5e0!3m2!1ses-419!2sar!4v1653348898390!5m2!1ses-419!2sar"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="mapa"></iframe>
         </section>
     </main>    
 
     <footer>
         <div class="primerPiso">
-        <img src="/busCAR/src/main/resources/static/img/Logo_Nombre.png" class="logo">
+        <img src="/img/Logo_Nombre.png" class="logo">
         <p class="copyright">&copy Copyright BusCar - 2022</p>        
         <ul class="redes">
-            <li><img src="\busCAR\src\main\resources\static\img\instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
-            <li><img src="\busCAR\src\main\resources\static\img\facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
-            <li><img src="\busCAR\src\main\resources\static\img\twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
+            <li><img src="/img/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
+            <li><img src="/img/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
+            <li><img src="/img/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
         </ul>      
     </div>  
     </footer>

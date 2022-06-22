@@ -262,8 +262,8 @@ public class TransaccionServicio {
         return repositorioTransaccion.buscarPorPatenteVehiculo(patente);
     }
 
-    @Transactional(readOnly = true)
-    public List<Vehiculo> buscarRelacionados(TipoDeVehiculo tipoVehiculo, String idVehiculo) {
-        return repositorioTransaccion.buscarRelacionados(tipoVehiculo, idVehiculo).subList(0, 3);
-    }
+//    @Transactional(readOnly = true)
+//    public List<Vehiculo> buscarRelacionados(TipoDeVehiculo tipoVehiculo, String idVehiculo) {
+//        return repositorioTransaccion.buscarRelacionados(tipoVehiculo, idVehiculo).subList(0, 3);
+//    }
 }

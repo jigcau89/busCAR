@@ -260,6 +260,12 @@ public class UsuarioServicio implements UserDetailsService {
             throw new ErrorServicio(("el usuario solicitado no existe."));
         }
     }
+    
+    public Usuario buscarPorIdUsuario(String id) throws ErrorServicio {
+        
+        return usuarioRepositorio.buscarPorIdUsuario(id);
+       
+    }
 
     public Usuario getById(String id) {
         return usuarioRepositorio.getById(id);

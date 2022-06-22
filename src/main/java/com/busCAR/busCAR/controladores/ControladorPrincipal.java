@@ -28,13 +28,9 @@ public class ControladorPrincipal {
     private UsuarioServicio usuarioServicio;
     
     
-
     @GetMapping("")
-    public String index() {
-        
-        
-        return "index";
-        
+    public String index() {  
+        return "index";     
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
@@ -114,6 +110,11 @@ public class ControladorPrincipal {
     @GetMapping("/contacto")
     public String contacto() {
         return "/contacto";
+    }
+    
+    @GetMapping("/catalogo")
+    public String catalogo() {
+        return "/catalogo";
     }
 
     @GetMapping("/catalogoAuto")

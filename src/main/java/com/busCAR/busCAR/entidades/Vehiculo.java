@@ -171,11 +171,11 @@ public class Vehiculo {
         this.fotos = fotos;
     }
 
-    public Usuario getId_usuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setId_usuario(Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

@@ -234,3 +234,17 @@ nav li a:hover {
     background-color: #E3E4E3;        
 }
 
+/* - - - - -  FOOTER - - - -  */
+footer{
+    height: 140px;
+    background-color: black;
+}
+footer p{
+    color: rgb(245, 245, 245);
+}
+footer .container{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: flex-end;
+}

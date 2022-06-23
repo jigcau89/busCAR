@@ -118,13 +118,17 @@ public class VehiculoController {
             Boolean alta, TipoDeVehiculo tdv) throws ErrorServicio {
         
         Usuario login = (Usuario) session.getAttribute("usuariosession");
+        String id_usuario ;
+        
         Vehiculo vehiculo = new Vehiculo();    
         Usuario usuario = (Usuario)session.getAttribute("usuariosession");
-        if (login == null)
+        id_usuario = serviciovehiculo.buscarVehiculoPorIdUsuario(login.getId());
+        
+        /*if (login == null)
         {
             login = usuarioservicio.buscarPorIdUsuario(id);
-            String id2 = "655210d7-669a-4e32-a0ab-ccb3ff5ce410";
-            serviciovehiculo.modificar(id2,id, archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv);
+            usuario.setId("29238c70-e7d0-4754-85fe-9ce9f05ae554");
+            serviciovehiculo.modificar(usuario,id, archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv);
             vista.put("exito", "Vehículo modificado correctamente");
             
             vista.addAttribute("Colores", Color.values());
@@ -134,12 +138,22 @@ public class VehiculoController {
             return "Mis-Datos_vehiculo";
             
         }
-  
+  */
         try{
-            vehiculo = serviciovehiculo.buscarPorId(id);
-            serviciovehiculo.modificar(login.getId(),id, archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv);
-            vista.put("exito", "Vehículo modificado correctamente");
-             return "Registro";
+           
+            if(id_usuario==null)
+            {
+               
+                vista.put("error", "falló la modificación");
+                vista.put("error", vehiculo.getId());
+                return "index";
+            }
+            else{
+            
+            serviciovehiculo.modificar(id_usuario,id, archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv);
+            vista.put("descripcion", "Vehículo modificado correctamente");
+             return "exito";
+            }
             
         } 
         catch (ErrorServicio e) {
@@ -196,8 +210,10 @@ public class VehiculoController {
 
         serviciovehiculo.guardar(archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv, login);
         model.put("exito", "Vehículo guardado correctamente");
+        model.put("descripcion", "Vehículo cargado correctamente");
+            return "exito";
         
-        return "Registro_auto";
+       
         } catch (ErrorServicio e) {
 
             e.printStackTrace();

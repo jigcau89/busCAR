@@ -78,15 +78,17 @@ public class VehiculoController {
     /*ABMS*/
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     @GetMapping("/modificar_vehiculo")
-    public String editarPerfil(@RequestParam(required = false) String id, ModelMap vista, HttpSession session) throws ErrorServicio {
+    public String editarPerfil(@RequestParam ("id_u")String idu,@RequestParam (required = false)String id, ModelMap vista, HttpSession session) throws ErrorServicio {
         
-        Usuario login = (Usuario)session.getAttribute("usuariosession");
+        Usuario login = usuarioservicio.buscarPorId(idu);
         if(login == null)
         {
             vista.addAttribute("Colores", Color.values());
             vista.addAttribute("Tdc", TipoDeCombustible.values());
             vista.addAttribute("Marcas", Marca.values());
             vista.addAttribute("Tdv", TipoDeVehiculo.values());
+            vista.addAttribute("id_u", idu);
+            vista.addAttribute("usuario", login);
             return "Mis-Datos_vehiculo";
         }
         
@@ -101,64 +103,31 @@ public class VehiculoController {
         vista.addAttribute("Marcas", Marca.values());
         vista.addAttribute("Tdv", TipoDeVehiculo.values());
         
-        /*
-        session.getAttribute("usuariosession");
-        id = session.getId();       
-        vista.put("prueba", id);
-        
-            vista.addAttribute("Colores", Color.values());
-            vista.addAttribute("Tdc", TipoDeCombustible.values());
-            vista.addAttribute("Marcas", Marca.values());
-            vista.addAttribute("Tdv", TipoDeVehiculo.values());
-        */
+      
         return "Mis-Datos_vehiculo";
 
 
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")
     @PostMapping("/actualizar_vehiculo")
-    public String actualizar(HttpSession session, ModelMap vista, @RequestParam(required = false) String id, MultipartFile archivo, String patente, String modelo, String marca, Integer anio,
+    public String actualizar(HttpSession session, ModelMap vista, @RequestParam ("id_u") String id, MultipartFile archivo, String patente, String modelo, String marca, Integer anio,
             Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, String descripcion,
             Boolean alta, TipoDeVehiculo tdv) throws ErrorServicio {
         
-        Usuario login = (Usuario) session.getAttribute("usuariosession");
-        String id_usuario ;
-        
-        Vehiculo vehiculo = new Vehiculo();    
-        Usuario usuario = (Usuario)session.getAttribute("usuariosession");
-        id_usuario = serviciovehiculo.buscarVehiculoPorIdUsuario(login.getId());
-        
-        /*if (login == null)
-        {
-            login = usuarioservicio.buscarPorIdUsuario(id);
-            usuario.setId("29238c70-e7d0-4754-85fe-9ce9f05ae554");
-            serviciovehiculo.modificar(usuario,id, archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv);
-            vista.put("exito", "Vehículo modificado correctamente");
-            
-            vista.addAttribute("Colores", Color.values());
-            vista.addAttribute("Tdc", TipoDeCombustible.values());
-            vista.addAttribute("Marcas", Marca.values());
-            vista.addAttribute("Tdv", TipoDeVehiculo.values());
-            return "Mis-Datos_vehiculo";
-            
-        }
-  */
-        try{
-           
-            if(id_usuario==null)
-            {
+        Usuario usuario = null;
+         try {
+            Usuario login = (Usuario) session.getAttribute("usuario");
+            if (login == null || !login.getId().equals(id)) { 
                
-                vista.put("error", "falló la modificación");
-                vista.put("error", vehiculo.getId());
                 return "index";
             }
-            else{
+            usuario = usuarioservicio.buscarPorId(id);
             
-            serviciovehiculo.modificar(id_usuario,id, archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv);
+            serviciovehiculo.modificar(usuario.getId(),id, archivo, patente, modelo, marca, anio, color, precio, nuevo, kilometraje, tdc, descripcion, true, tdv);
             vista.put("descripcion", "Vehículo modificado correctamente");
              return "exito";
-            }
+            
             
         } 
         catch (ErrorServicio e) {

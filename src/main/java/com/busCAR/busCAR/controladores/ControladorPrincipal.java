@@ -41,7 +41,7 @@ public class ControladorPrincipal {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/inicio")
-    public String inicio(HttpSession session,ModelMap model) {
+    public String inicio(HttpSession session,ModelMap model,@RequestParam ("id_u")String id_u ) {
         
         return "inicio";
     }
@@ -50,9 +50,9 @@ public class ControladorPrincipal {
     public String login(HttpSession session, Authentication usuario, ModelMap modelo, @RequestParam(required = false) String error) {
         try {
             if (usuario.getName() != null) {              
-                modelo.addAttribute("session",session);
-                
-                return "redirect:/";
+             
+               
+                return "inicioSesion";
             } else {
 
                 if (error != null && !error.isEmpty()) {

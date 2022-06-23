@@ -114,15 +114,15 @@ public class VehiculoServicio {
         try {
             validar(patente, modelo, marca, anioFabricacion, color, precio, nuevo, kilometraje, tdc, tdv);
             Usuario usuario = usuarioservicio.buscarPorIdUsuario(id_usuario);
-            //String id2 = vehiculorepositorio.buscarVehiculoPorIdUsuario(id_usuario);
+            
             String id2 = "3f04e8a0-7a67-4081-a75b-bf9b0c5634a9";
-            Optional<Vehiculo> respuesta = vehiculorepositorio.findById(id2);
+            Optional<Vehiculo> respuesta = vehiculorepositorio.findById(id_usuario);
             
             if (respuesta.isPresent()) {
 
                 Vehiculo vehiculo = respuesta.get();
 
-                if (id2.equals(id_usuario)) {
+                if (vehiculo.getUsuario().getId().equals(id_usuario)) {
                     vehiculo.setPatente(patente);
                     vehiculo.setModelo(modelo);
                     vehiculo.setMarca(marca);

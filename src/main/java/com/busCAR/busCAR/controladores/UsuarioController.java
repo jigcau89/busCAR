@@ -27,8 +27,9 @@ public class UsuarioController {
     private UsuarioServicio usuarioServicio;
 
     @GetMapping("/inicioOk")
-    public String inicioOk(HttpSession session) {
+    public String inicioOk(HttpSession session, ModelMap model) {
         Usuario login = (Usuario) session.getAttribute("usuariosession");
+       model.put("usuario", login);
         if (login == null) {
             return "redirect:/login";
         }
@@ -39,9 +40,11 @@ public class UsuarioController {
     public String indexLogueado(HttpSession session, ModelMap model) {
         Usuario login = (Usuario) session.getAttribute("usuariosession");
         model.addAttribute("nombreUsuario", login.getNombre());
+        model.addAttribute("id_u", login.getId());
         if (login == null) {
             return "redirect:/login";
         }
+        
         return "index";
     }
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USUARIO')")

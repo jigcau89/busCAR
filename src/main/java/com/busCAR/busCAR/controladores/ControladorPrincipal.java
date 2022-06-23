@@ -1,10 +1,13 @@
 package com.busCAR.busCAR.controladores;
 
-import com.busCAR.busCAR.entidades.Usuario;
+import com.busCAR.busCAR.entidades.Vehiculo;
+import com.busCAR.busCAR.enumeraciones.Marca;
+import com.busCAR.busCAR.enumeraciones.TipoDeVehiculo;
 import com.busCAR.busCAR.errores.ErrorServicio;
 import com.busCAR.busCAR.servicios.UsuarioServicio;
 import com.busCAR.busCAR.servicios.VehiculoServicio;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
@@ -26,6 +29,9 @@ public class ControladorPrincipal {
    
     @Autowired
     private UsuarioServicio usuarioServicio;
+   
+    @Autowired
+    private VehiculoServicio vehiculoServicio;
     
     
     @GetMapping("")
@@ -113,52 +119,72 @@ public class ControladorPrincipal {
     }
     
     @GetMapping("/catalogo")
-    public String catalogo() {
-        return "/catalogo";
+    public String catalogo(ModelMap modelo) {
+        List<Vehiculo> vehiculos = vehiculoServicio.buscarTodos();
+        modelo.put("vehiculos", vehiculos);
+        return "catalogo";
     }
 
     @GetMapping("/catalogoAuto")
-    public String catalogoAuto() {
+    public String catalogoAuto(ModelMap modelo) {
+        List<Vehiculo> vehiculos = vehiculoServicio.TraerPorTipov(TipoDeVehiculo.AUTO);
+        modelo.put("vehiculos", vehiculos);
         return "catalogo";
     }
 
     @GetMapping("/catalogoMoto")
-    public String catalogoMoto() {
+    public String catalogoMoto(ModelMap modelo) {
+        List<Vehiculo> vehiculos = vehiculoServicio.TraerPorTipov(TipoDeVehiculo.MOTO);
+        modelo.put("vehiculos", vehiculos);
         return "catalogo";
     }
 
     @GetMapping("/catalogoCamioneta")
-    public String catalogoCamioneta() {
+    public String catalogoCamioneta(ModelMap modelo) {
+        List<Vehiculo> vehiculos = vehiculoServicio.TraerPorTipov(TipoDeVehiculo.CAMIONETA);
+        modelo.put("vehiculos", vehiculos);
         return "catalogo";
     }
     /*Marcas*/
     @GetMapping("/catalogoChevrolet")
-    public String catalogoChevrolet() {
+    public String catalogoChevrolet(ModelMap modelo) {
+        List<Vehiculo> vehiculos = vehiculoServicio.TraerPorMarca(Marca.CHEVROLET.toString());
+        modelo.put("vehiculos", vehiculos);
         return "catalogo";
     }
 
     @GetMapping("/catalogoPeugeot")
-    public String catalogoPeugeot() {
+    public String catalogoPeugeot(ModelMap modelo) {
+        List<Vehiculo> vehiculos = vehiculoServicio.TraerPorMarca(Marca.PEUGEOT.toString());
+        modelo.put("vehiculos", vehiculos);
         return "catalogo";
     }
 
     @GetMapping("/catalogoRenault")
-    public String catalogoRenault() {
+    public String catalogoRenault(ModelMap modelo) {
+        List<Vehiculo> vehiculos = vehiculoServicio.TraerPorMarca(Marca.RENAULT.toString());
+        modelo.put("vehiculos", vehiculos);
         return "catalogo";
     }
 
     @GetMapping("/catalogoToyota")
-    public String catalogoToyota() {
+    public String catalogoToyota(ModelMap modelo) {
+        List<Vehiculo> vehiculos = vehiculoServicio.TraerPorMarca(Marca.TOYOTA.toString());
+        modelo.put("vehiculos", vehiculos);
         return "catalogo";
     }
 
     @GetMapping("/catalogoVolkswagen")
-    public String catalogoVolkswagen() {
+    public String catalogoVolkswagen(ModelMap modelo) {
+        List<Vehiculo> vehiculos = vehiculoServicio.TraerPorMarca(Marca.VOLKSWAGEN.toString());
+        modelo.put("vehiculos", vehiculos);
         return "catalogo";
     }
 
     @GetMapping("/catalogoFiat")
-    public String catalogoFiat() {
+    public String catalogoFiat(ModelMap modelo) {
+        List<Vehiculo> vehiculos = vehiculoServicio.TraerPorMarca(Marca.FIAT.toString());
+        modelo.put("vehiculos", vehiculos);
         return "catalogo";
     }
 

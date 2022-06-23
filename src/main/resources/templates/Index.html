@@ -26,13 +26,15 @@
                     </div>
                 </div>
 
-               <nav>
+         <!--      <nav>
                     <ul class="nav1">
                         <li><a href="/contacto"> Contacto</a></li>
-                        <li><a href="/catalogo">Comprar</a></li>
+                        <li><a href="/catalogo">Comprar</a></li>-->
                         <!--<ul id="nav2">-->
-                        <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')" >
-                           <a href="/"  th:text="${nombreUsuario}"> </a>
+                   <!--     <li sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')" >-->
+                        <!--  th:if="${session != null}" th:text="${nombreUsuario}" -->
+                      <!--       <a href="">Mi cuenta</a>
+                           <a href="/"  th:if="${session}" th:text="${nombreUsuario}"></a>
                             <ul id="nav2">
                                 <a href="/usuario/editar-perfil">Editar perfil</a>
                                 <a  href="/usuario/editar-clave">Cambiar contraseña</a>
@@ -40,15 +42,32 @@
                                 <a  href="/vehiculo/modificar_vehiculo">Modificar Vehiculo</a>
                                 <a  href="/logout">Logout</a>                              
                             </ul>
-                        </li>
+                        </li>-->
                         <!--</ul>-->
                         <!--<li id="inicia"><a href="/login">Iniciar Sesion</a></li>
                             <li id="regis"><a href="/registroUsuario">Registrarte</a></li>-->
                         <!--<lu th:if="${session.usuariosession != null}"><a href="/usuario/modDatosUsuario">Mi cuenta</a>-->
-                        <li th:if="${session.usuariosession == null}"><a href="/login">Iniciar Sesion</a></li>
+               <!--         <li th:if="${session.usuariosession == null}"><a href="/login">Iniciar Sesion</a></li>
                         <li><a th:if="${session.usuariosession == null}" href="/registroUsuario">Registrarte</a></li>
                     </ul>
-                </nav>
+                </nav>-->
+                <nav>
+                                            <ul class="nav1">
+                                                <li><a href="#">Contacto</a></li>
+                                                <li><a href="">Comprar</a></li>
+                                                <li><a href="">Mi cuenta</a>
+                                                    <ul id="nav2">
+                                                        <li th:if="${session.usuariosession} == null"><a href="/login">Iniciar Sesion</a></li>
+                                                        <li th:if="${session.usuariosession} == null" id="regi"><a href="/registroUsuario">Registrarte</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/usuario/editar-perfil">Editar perfil</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/usuario/editar-clave">Cambiar contraseña</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/vehiculo/registro"> Registrar Vehiculo</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/vehiculo/modificar_vehiculo">Modificar Vehiculo</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/logout">Logout</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </nav>
        </div>
 </header>
                                         </nav>
@@ -57,9 +76,8 @@
 
                             <!-- - - - SECTION HERO - - - -->
                             <section id="hero">
-                                <h1></h1>
-                                <br><br><br><br>
-                                                <h1>Bienvenidos a BusCar! donde podrás encontrar las mejores ofertas de los mejores vehículos de Argentina.</h1>
+
+                                <h1>Bienvenidos a BusCar! <br>Donde podrás encontrar increibles ofertas de los mejores vehículos de Argentina.</h1>
                                                 </section>
 
 

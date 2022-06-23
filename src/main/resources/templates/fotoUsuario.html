@@ -16,7 +16,7 @@
     <header>
         <div class="container">
 
-            <img src="/img/Logo_Nombre.png" alt="logo" class="logo">
+            <a href="/">    <img src="/img/Logo_Nombre.png" alt="logo" class="logo"></a>
 
             <div class="search">
                 <input type="text" placeholder=" Que desea busCAR?">
@@ -25,18 +25,23 @@
                 </div>
             </div>
 
-           <nav>
-                   <ul class="nav1">
-                        <li><a href="#">Contacto</a></li>
-                        <li><a href="">Comprar</a></li>
-                        <li><a href="">Mi cuenta</a>
-                             <ul id="nav2">
-                                 <li><a href="">Iniciar Sesion</a></li>
-                                 <li id="regi"><a href="">Registrarte</a></li>
-                             </ul>
-                      </li>
-                   </ul>
-          </nav>
+            <nav>
+                                            <ul class="nav1">
+                                                <li><a href="#">Contacto</a></li>
+                                                <li><a href="">Comprar</a></li>
+                                                <li><a href="">Mi cuenta</a>
+                                                    <ul id="nav2">
+                                                        <li th:if="${session.usuariosession} == null"><a href="/login">Iniciar Sesion</a></li>
+                                                        <li th:if="${session.usuariosession} == null" id="regi"><a href="/registroUsuario">Registrarte</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/usuario/editar-perfil">Editar perfil</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/usuario/editar-clave">Cambiar contraseña</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/vehiculo/registro"> Registrar Vehiculo</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/vehiculo/modificar_vehiculo">Modificar Vehiculo</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/logout">Logout</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </nav>
     </header>
     <section class="home">
         <div class="login">
@@ -57,12 +62,12 @@
     </section>
     <footer>
         <div class="container">
-        <img src="/static/img/Logo_Nombre.png" class="logo">
+        <img src="/img/Logo_Nombre.png" class="logo">
         <p class="copyright">&copy Copyright BusCar - 2022</p>        
         <ul class="redes">
-            <li><img src="/static/img/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
-            <li><img src="/static/img/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
-            <li><img src="/static/img/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
+            <li><img src="/img/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
+            <li><img src="/img/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
+            <li><img src="/img/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
         </ul>      
     </div>  
     </footer> 

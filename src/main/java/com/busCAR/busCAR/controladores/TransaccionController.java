@@ -7,7 +7,6 @@ import com.busCAR.busCAR.errores.ErrorServicio;
 import com.busCAR.busCAR.repositorios.VehiculoRepositorio;
 import com.busCAR.busCAR.servicios.TransaccionServicio;
 import com.busCAR.busCAR.servicios.UsuarioServicio;
-import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

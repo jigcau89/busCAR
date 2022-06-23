@@ -17,7 +17,7 @@
     <header>
             <div class="container">
 
-                    <img src="/img/Logo_Nombre.png" alt="logo" class="logo">
+                <a href="/">   <img src="/img/Logo_Nombre.png" alt="logo" class="logo"></a>
 
                     <div class="search">
                         <input type="text" placeholder=" Que desea busCAR?">
@@ -26,10 +26,10 @@
                         </div>
                     </div>
 
-                   <nav>
+            <!--       <nav>
                            <ul class="nav1">
-                                <li><a href="#">Contacto</a></li>
-                                <li><a href="">Comprar</a></li>
+                                <li><a href="/contacto">Contacto</a></li>
+                                <li><a href="/catalogo">Comprar</a></li>
                                 <li><a href="">Mi cuenta</a>
                                      <ul id="nav2">
                                          <li><a href="">Iniciar Sesión</a></li>
@@ -37,7 +37,24 @@
                                      </ul>
                               </li>
                            </ul>
-                  </nav>
+                  </nav>--> <nav>
+                                            <ul class="nav1">
+                                                <li><a href="#">Contacto</a></li>
+                                                <li><a href="">Comprar</a></li>
+                                                <li><a href="">Mi cuenta</a>
+                                                    <ul id="nav2">
+                                                        <li th:if="${session.usuariosession} == null"><a href="/login">Iniciar Sesion</a></li>
+                                                        <li th:if="${session.usuariosession} == null" id="regi"><a href="/registroUsuario">Registrarte</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/usuario/editar-perfil">Editar perfil</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/usuario/editar-clave">Cambiar contraseña</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/vehiculo/registro"> Registrar Vehiculo</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/vehiculo/modificar_vehiculo">Modificar Vehiculo</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/logout">Logout</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </nav>
+            
            </div>
     </header>
     <br>
@@ -142,7 +159,8 @@
                 <input type="file" name="archivo">
                 <br>
             </div>
-
+  <p th:if="${exito != null}" th:text="${exito}" style="color:green"></p> 
+    <p th:if="${error != null}" th:text="${error}" style="color:red"></p> 
             <input id="submit" type="submit" ><br><br>
 
 
@@ -155,14 +173,14 @@
        
     </section>
 </center>
-    
+   <!-- 
 <div  align="center" th:if="${exito}!=null" class=" header_content" >
                     <div >
                         <h5 >Exito </h5>
                         <p  th:text="${exito}"></p>
                         <a href="/"> Volver ></a>
                     </div>
-                    
+             <p th:if="${error != null}" th:text="${error}" style="color:red"></p>       
                 </div>
 
                 <div  th:if="${error}!=null" class="header_content" >
@@ -174,7 +192,7 @@
                     </div>
 
                 </div>
-
+-->
 </body>
 
                 

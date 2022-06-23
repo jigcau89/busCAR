@@ -26,8 +26,8 @@
 
                 <nav>
                                             <ul class="nav1">
-                                                <li><a href="#">Contacto</a></li>
-                                                <li><a href="">Comprar</a></li>
+                                                <li><a href="/contacto">Contacto</a></li>
+                                                <li><a href="/catalogo">Comprar</a></li>
                                                 <li><a href="">Mi cuenta</a>
                                                     <ul id="nav2">
                                                         <li th:if="${session.usuariosession} == null"><a href="/login">Iniciar Sesion</a></li>
@@ -53,7 +53,7 @@
                         <h2 th:text="${vehiculo.marca + ' ' + vehiculo.modelo}">Marca - Modelo</h2>
                         <h3 th:text="${vehiculo.anioFabricacion + ', ' + vehiculo.kilometraje + 'Km'}">Año/km</h3><hr>
                         <section class="precio">
-                            <p id="parrafo-reserva">La reserva es el 5% del monto total</p> <!--Hay que modificar lo que dice acá, esto es compra, no reserva-->
+                            <p id="parrafo-reserva">Monto a pagar</p> <!--Hay que modificar lo que dice acá, esto es compra, no reserva-->
                             <p id="precio" th:text="${'$' + vehiculo.precio}">$$$$$</p>
                         </section>
                     </section>

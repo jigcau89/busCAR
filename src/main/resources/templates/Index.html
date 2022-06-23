@@ -62,7 +62,7 @@
                                                         <li th:if="${session.usuariosession} != null"><a href="/usuario/editar-perfil">Editar perfil</a></li>
                                                         <li th:if="${session.usuariosession} != null"><a href="/usuario/editar-clave">Cambiar contraseña</a></li>
                                                         <li th:if="${session.usuariosession} != null"><a href="/vehiculo/registro"> Registrar Vehiculo</a></li>
-                                                        <li th:if="${session.usuariosession} != null"><a th:href="@{/vehiculo/producto(id_u=__${usuario.id}__)}">Modificar Vehiculo</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a th:href="@{/vehiculo/modificar_vehiculo(id_u=__${usuario.id}__)}">Modificar Vehiculo</a></li>
                                                         <li th:if="${session.usuariosession} != null"><a href="/logout">Logout</a></li>
                                                     </ul>
                                                 </li>

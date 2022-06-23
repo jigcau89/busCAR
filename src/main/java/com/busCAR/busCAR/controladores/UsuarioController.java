@@ -39,8 +39,11 @@ public class UsuarioController {
     @GetMapping("/index_logueado")
     public String indexLogueado(HttpSession session, ModelMap model) {
         Usuario login = (Usuario) session.getAttribute("usuariosession");
-        model.addAttribute("nombreUsuario", login.getNombre());
+       
         model.addAttribute("id_u", login.getId());
+        model.put("id_u", login.getId());
+        model.put("usuario", login);
+        
         if (login == null) {
             return "redirect:/login";
         }

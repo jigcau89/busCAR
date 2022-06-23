@@ -257,7 +257,7 @@ public class UsuarioServicio implements UserDetailsService {
         if (respuesta.isPresent()) {
             return respuesta.get();
         } else {
-            throw new ErrorServicio(("el usuario solicitado no existe."));
+            throw new ErrorServicio(("el usuario solicitado no existe." + id));
         }
     }
     

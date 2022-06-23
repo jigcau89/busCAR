@@ -116,7 +116,7 @@ public class VehiculoServicio {
             Usuario usuario = usuarioservicio.buscarPorIdUsuario(id_usuario);
             
             String id2 = "3f04e8a0-7a67-4081-a75b-bf9b0c5634a9";
-            Optional<Vehiculo> respuesta = vehiculorepositorio.findById(id_usuario);
+            Optional<Vehiculo> respuesta = vehiculorepositorio.findById("e9107d86-1a99-4186-96e1-ae86e139d907");
             
             if (respuesta.isPresent()) {
 

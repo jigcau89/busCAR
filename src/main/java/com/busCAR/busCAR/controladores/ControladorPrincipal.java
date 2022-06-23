@@ -41,7 +41,7 @@ public class ControladorPrincipal {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/inicio")
-    public String inicio(HttpSession session,ModelMap model,@RequestParam ("id_u")String id_u ) {
+    public String inicio(HttpSession session,ModelMap model ) {
         
         return "inicio";
     }

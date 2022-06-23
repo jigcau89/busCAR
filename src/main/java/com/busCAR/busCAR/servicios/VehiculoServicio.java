@@ -23,6 +23,10 @@ public class VehiculoServicio {
 
     @Autowired
     private VehiculoRepositorio vehiculorepositorio;
+    @Autowired
+    private UsuarioRepositorio usuariorepositorio;
+    
+    @Autowired UsuarioServicio usuarioservicio;
 
     @Autowired
     private FotoServicio fotoServicio;
@@ -106,15 +110,19 @@ public class VehiculoServicio {
     }
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
-    public void modificar(String id_u, String id, MultipartFile archivo, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, String descripcion, boolean alta, TipoDeVehiculo tdv) throws ErrorServicio {
+    public void modificar(String id_usuario, String id, MultipartFile archivo, String patente, String modelo, String marca, Integer anioFabricacion, Color color, Double precio, Boolean nuevo, String kilometraje, TipoDeCombustible tdc, String descripcion, boolean alta, TipoDeVehiculo tdv) throws ErrorServicio {
         try {
             validar(patente, modelo, marca, anioFabricacion, color, precio, nuevo, kilometraje, tdc, tdv);
-            Optional<Vehiculo> respuesta = vehiculorepositorio.findById(id);
+            Usuario usuario = usuarioservicio.buscarPorIdUsuario(id_usuario);
+            //String id2 = vehiculorepositorio.buscarVehiculoPorIdUsuario(id_usuario);
+            String id2 = "3f04e8a0-7a67-4081-a75b-bf9b0c5634a9";
+            Optional<Vehiculo> respuesta = vehiculorepositorio.findById(id2);
+            
             if (respuesta.isPresent()) {
 
                 Vehiculo vehiculo = respuesta.get();
 
-                if (vehiculo.getUsuario().getId().equals(id_u)) {
+                if (id2.equals(id_usuario)) {
                     vehiculo.setPatente(patente);
                     vehiculo.setModelo(modelo);
                     vehiculo.setMarca(marca);
@@ -127,6 +135,7 @@ public class VehiculoServicio {
                     vehiculo.setDescripcion(descripcion);
                     vehiculo.setAlta(alta);
                     vehiculo.setTipoDeVehiculo(tdv);
+                    vehiculo.setUsuario(usuario);
                     String idFoto = null;
                     if (vehiculo.getFotos() != null) {
                         idFoto = vehiculo.getFotos().getId();
@@ -136,7 +145,8 @@ public class VehiculoServicio {
                     vehiculo.setFotos(foto);
 
                     vehiculorepositorio.save(vehiculo);
-                } else {
+                } 
+                else {
                     throw new ErrorServicio("MODIFICAR: IDS no coinciden");
                 }
 
@@ -203,16 +213,35 @@ public class VehiculoServicio {
         if (respuesta.isPresent()) {
             return respuesta.get();
         } else {
-            throw new ErrorServicio("La mascota solicitada no existe");
+            throw new ErrorServicio("El usuario no existe" + id);
                     
         }
 
     }
+    @Transactional(readOnly = true)
+    public String buscarVehiculoPorIdUsuario(String id)throws ErrorServicio {
+
+           
+            String id2 = "d46b1fe3-9615-478d-b4fd-92483705fecd";
+            return vehiculorepositorio.buscarVehiculoPorIdUsuario(id2);   
+
+    }
+    
+    
+    
+    
+    
+     @Transactional(readOnly = true)
+    public List<Vehiculo> buscarTodos() {
+        return vehiculorepositorio.findAll();
+        /*Traer todos*/
+    }
+    
 
     /*Listas de todos los vehículos */
     @Transactional(readOnly = true)
-    public List<Vehiculo> buscarTodos() {
-        return vehiculorepositorio.findAll();
+    public List<Vehiculo> buscarRelacionados(TipoDeVehiculo tv, String id_vehiculo) {
+        return vehiculorepositorio.buscarRelacionados(tv, id_vehiculo);
         /*Traer todos*/
     }
 

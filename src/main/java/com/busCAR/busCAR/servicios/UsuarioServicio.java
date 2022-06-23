@@ -263,6 +263,7 @@ public class UsuarioServicio implements UserDetailsService {
     
     public Usuario buscarPorIdUsuario(String id) throws ErrorServicio {
         
+ 
         return usuarioRepositorio.buscarPorIdUsuario(id);
        
     }

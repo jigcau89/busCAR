@@ -15,22 +15,33 @@
      <header>
                                 <div class="container">
 
-                                    <a href="/" ><img src="/img/Logo_Nombre.png" alt="logo" class="logo"></a>
-                    
-                <div class="search">
-                    <input type="text" placeholder=" Que desea busCAR?">
-                    <div class="btn">
-                        <i class="fa fa-search"></i>
-                    </div>
-                </div>
+            <a href="/">    <img src="/img/Logo_Nombre.png" alt="logo" class="logo-nav"></a>
 
-               <nav>
-                       <ul class="nav1">
-                            <li><a href="/contacto"> Contacto</a></li>
-                            
-                       </ul>
-              </nav>
-       </div>
+            <div class="search">
+                <input type="text" placeholder=" Que desea busCAR?">
+                <div class="btn">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+
+           <nav>
+                                            <ul class="nav1">
+                                                <li><a href="/contacto">Contacto</a></li>
+                                                <li><a href="/catalogo">Comprar</a></li>
+                                                <li><a href="">Mi cuenta</a>
+                                                    <ul id="nav2">
+                                                        <li th:if="${session.usuariosession} == null"><a href="/login">Iniciar Sesion</a></li>
+                                                        <li th:if="${session.usuariosession} == null" id="regi"><a href="/registroUsuario">Registrarte</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/usuario/editar-perfil">Editar perfil</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/usuario/editar-clave">Cambiar contraseña</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/vehiculo/registro"> Registrar Vehiculo</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/vehiculo/modificar_vehiculo">Modificar Vehiculo</a></li>
+                                                        <li th:if="${session.usuariosession} != null"><a href="/logout">Logout</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </nav>
+    </div>  
 </header>
     <section class="home">
     <div class="login">

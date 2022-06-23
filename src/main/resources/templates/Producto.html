@@ -41,8 +41,8 @@
           </nav>-->
          <nav>
                                             <ul class="nav1">
-                                                <li><a href="#">Contacto</a></li>
-                                                <li><a href="">Comprar</a></li>
+                                                <li><a href="/contacto">Contacto</a></li>
+                                                <li><a href="/catalogo">Comprar</a></li>
                                                 <li><a href="">Mi cuenta</a>
                                                     <ul id="nav2">
                                                         <li th:if="${session.usuariosession} == null"><a href="/login">Iniciar Sesion</a></li>
@@ -124,9 +124,9 @@
         <div class="relacionados"> 
             <h1>Productos Relacionados</h1>
             <ul class="prod-relacionados">
-                <li th:each="rel : ${vehiculosRel}">
+                <li th:if="${vehiculoRel} != null" th:each="rel : ${vehiculosRel}">
                     <h2 th:text="${rel.marca} + ' ' + ${rel.modelo}">Título 1</h2>
-                    <a th:href="@{/transaccion/producto(__${rel.id}__)}"><img th:src="${'/foto/vehiculo/' + rel.id}" class="fotos"></a>
+                    <a th:href="@{/vehiculo/producto(id_v=__${rel.id}__)}"><img th:src="${'/foto/vehiculo/' + rel.id}" class="fotos"></a>
                     <p class="prDescripcion" th:text="${rel.kilometraje} + 'KM'">Kilometros, Nuevo/Usado, Transmisión</p>
                     <p class="prPrecio" th:text="${rel.precio}">$ 1000.00</p>
                 </li>

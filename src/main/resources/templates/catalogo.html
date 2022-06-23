@@ -1,27 +1,27 @@
 <!--HTML-->
 <html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/extras/spring-security">
-<head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-    <script src="scripts.js"></script>
-</head>
-<body>
-    <header>
-        <div class="container">
+    <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
+                    <link rel="stylesheet" href="/css/styles.css" />
+                    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+                        <script src="scripts.js"></script>
+                        </head>
+                        <body>
+                            <header>
+                                <div class="container">
 
-            <img src="/img/Logo_Nombre.png" alt="logo" class="logo_nav">
+                                    <img src="/img/Logo_Nombre.png" alt="logo" class="logo_nav">
 
-            <div class="search">
-                <input type="text" placeholder=" Que desea busCAR?">
-                <div class="btn">
-                    <i class="fa fa-search"></i>
-                </div>
-            </div>
+                                        <div class="search">
+                                            <input type="text" placeholder=" Que desea busCAR?">
+                                                <div class="btn">
+                                                    <i class="fa fa-search"></i>
+                                                </div>
+                                        </div>
 
-          <nav>
+                                        <nav>
                                             <ul class="nav1">
                                                 <li><a href="/contacto">Contacto</a></li>
                                                 <li><a href="/catalogo">Comprar</a></li>
@@ -38,160 +38,178 @@
                                                 </li>
                                             </ul>
                                         </nav>
-    </div>  
-</header>
-    <section class="home">
-        <div class="filtro-contenedor">
-            <input type="checkbox" name="filtro" id="todo" checked>
-            <label for="todo">Todo</label>
-            <br>
-            <input type="checkbox" name="filtro" id="laptop">
-            <label for="autos">Autos</label>
-            <br>
-            <input type="checkbox" name="filtro" id="tablet">
-            <label for="camionetas">Camionetas</label>
-            <br>
-            <input type="checkbox" name="filtro" id="movil">
-            <label for="motos">Motos</label>
-            
-            <div id="imagenes">
-                <div class="autos">
-                    <div class="product-container">
-                        <h3>Chevrolet Aveo</h3>
-                        <img src="/img/chevrolet-aveo.jpeg" />
-                        <h1>$500.000</h1>
-                        <button class="button-add" onclick="add('product-1', 50)">Comprar</button>
-                    </div>
-                    <div class="product-container">
-                        <h3>Chevrolet Cruze</h3>
-                        <img src="/img/chevrolet-cruze.jpeg" />
-                        <h1>$300.000</h1>
-                        <button class="button-add" onclick="add('product-2', 300)">Comprar</button>
-                    </div>
-                    <div class="product-container">
-                        <h3>Fiat Cronos</h3>
-                        <img src="/img/fiat-cronos.jpeg" />
-                        <h1>$200.000</h1>
-                        <button class="button-add" onclick="add('product-4', 200)">Comprar</button>
-                    </div>
-                
-                </div>
-                <div class="camionetas">
-                    <div class="product-container">
-                        <h3>Dodge Ram</h3>
-                        <img src="/img/dodge-ram.jpeg" />
-                        <h1>$250.000</h1>
-                        <button class="button-add" onclick="add('product-3', 250)">Comprar</button>
-                    </div>
-                    <div class="product-container">
-                        <h3>Fiat Toro</h3>
-                        <img src="/img/fiat-toro.jpeg" />
-                        <h1>$100.000</h1>
-                        <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
-                    </div>
-                    
-                    <div class="product-container">
-                        <h3>Renaul Duster</h3>
-                        <img src="/img/renaul-duster.jpeg" />
-                        <h1>$650.000</h1>
-                        <button class="button-add" onclick="add('product-6', 650)">Comprar</button>
-                    </div>
-                </div>
-                <div class="motos">
-                    <div class="product-container">
-                        <h3>Honda Wave NF110 </h3>
-                        <img src="/img/moto1.jpeg" />
-                        <h1>$100.000</h1>
-                        <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
-                    </div>
-                    <div class="product-container">
-                        <h3>Rouser NS125 </h3>
-                        <img src="/img/moto2.jpeg" />
-                        <h1>$210.000</h1>
-                        <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
-                    </div>
-                    <div class="product-container">
-                        <h3>Ktm Duke NS200 </h3>
-                        <img src="/img/moto3.jpeg" />
-                        <h1>$280.000</h1>
-                        <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <div class="login">
-        <div class="product-container">
-            <h3>Chevrolet Aveo</h3>
-            <img src="/img/chevrolet-aveo.jpeg" />
-            <h1>$950.000</h1>
-            <button class="button-add" onclick="add('product-1', 50)">Comprar</button>
-        </div>
+                                </div>  
+                            </header>
+                            <div>
+                                <table>
+                                    <tr>
+                                        <td class="product-container" th:each="vehiculo : ${vehiculos}">
+                                            <h3 th:text="${vehiculo.marca + ' ' + vehiculo.modelo}">Chevrolet Aveo</h3>
+                                            <img th:src="${'/foto/vehiculo/' + vehiculo.id}" />
+                                            <h1 th:text="${'$' + vehiculo.precio}" style="text-align: left">$500.000</h1>
+                                            <a class="button-add" th:href="@{/vehiculo/producto(id_v=__${vehiculo.id}__)}">Comprar</a>
+                                        </td>
+                                    </tr>
+                                </table>
 
-        <div class="product-container">
-            <h3>Chevrolet Cruze</h3>
-            <img src="/img/chevrolet-cruze.jpeg" />
-            <h1>$1.600.000</h1>
-            <button class="button-add" onclick="add('product-2', 300)">Comprar</button>
-        </div>
-        <div class="product-container">
-            <h3>Ktm Duke NS200 </h3>
-            <img src="/img/moto3.jpeg" />
-            <h1>$280.000</h1>
-            <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
-        </div>
+                            </div>
+                            <section class="home">
 
-        <div class="product-container">
-            <h3>Dodge Ram</h3>
-            <img src="/img/dodge-ram.jpeg" />
-            <h1>$4.250.000</h1>
-            <button class="button-add" onclick="add('product-3', 250)">Comprar</button>
-        </div>
+                                <div class="filtro-contenedor">
+                                    <input type="checkbox" name="filtro" id="todo" checked>
+                                        <label for="todo">Todo</label>
+                                        <br>
+                                            <input type="checkbox" name="filtro" id="laptop">
+                                                <label for="autos">Autos</label>
+                                                <br>
+                                                    <input type="checkbox" name="filtro" id="tablet">
+                                                        <label for="camionetas">Camionetas</label>
+                                                        <br>
+                                                            <input type="checkbox" name="filtro" id="movil">
+                                                                <label for="motos">Motos</label>
 
-        <div class="product-container">
-            <h3>Fiat Cronos</h3>
-            <img src="/img/fiat-cronos.jpeg" />
-            <h1>$1.200.000</h1>
-            <button class="button-add" onclick="add('product-4', 200)">Comprar</button>
-        </div>
 
-        <div class="product-container">
-            <h3>Fiat Toro</h3>
-            <img src="/img/fiat-toro.jpeg" />
-            <h1>$1.900.000</h1>
-            <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
-        </div>
-        <div class="product-container">
-            <h3>Rouser NS125 </h3>
-            <img src="/img/moto2.jpeg" />
-            <h1>$210.000</h1>
-            <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
-        </div>
 
-        <div class="product-container">
-            <h3>Renaul Duster</h3>
-            <img src="/img/renaul-duster.jpeg" />
-            <h1>$850.000</h1>
-            <button class="button-add" onclick="add('product-6', 650)">Comprar</button>
-        </div>
-        <div class="product-container">
-            <h3>Honda Wave NF110 </h3>
-            <img src="/img/moto1.jpeg" />
-            <h1>$100.000</h1>
-            <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
-        </div>
-    </div>
-  
-</section>
-<footer>
-    <div class="container">
-    <img src="/img/Logo_Nombre.png" class="logo">
-    <p class="copyright">&copy Copyright BusCar - 2022</p>        
-    <ul class="redes">
-        <li><img src="/img/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
-        <li><img src="/img/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
-        <li><img src="/img/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
-    </ul>      
-</div>  
-</footer>
-</body>
-</html>
+                                                                <div id="imagenes">
+
+
+                                                                    <div class="autos">
+                                                                        <div class="product-container" th:each="vehiculo : ${vehiculos}">
+                                                                            <h3 th:text="${vehiculo.marca + ' ' + vehiculo.modelo}">Chevrolet Aveo</h3>
+                                                                            <img th:src="${'/foto/vehiculo/' + vehiculo.id}" />
+                                                                            <h1 th:text="${vehiculo.precio}">$500.000</h1>
+                                                                            <button class="button-add" th:href="@{/transaccion/producto(id_v=__${vehiculo.id}__)}">Comprar</button>
+                                                                        </div>
+                                                                        <!--                    <div class="product-container">
+                                                                                                <h3>Chevrolet Cruze</h3>
+                                                                                                <img src="/img/chevrolet-cruze.jpeg" />
+                                                                                                <h1>$300.000</h1>
+                                                                                                <button class="button-add" onclick="add('product-2', 300)">Comprar</button>
+                                                                                            </div>
+                                                                                            <div class="product-container">
+                                                                                                <h3>Fiat Cronos</h3>
+                                                                                                <img src="/img/fiat-cronos.jpeg" />
+                                                                                                <h1>$200.000</h1>
+                                                                                                <button class="button-add" onclick="add('product-4', 200)">Comprar</button>
+                                                                                            </div>-->
+
+                                                                    </div>
+                                                                    <!--                <div class="camionetas">
+                                                                                        <div class="product-container">
+                                                                                            <h3>Dodge Ram</h3>
+                                                                                            <img src="/img/dodge-ram.jpeg" />
+                                                                                            <h1>$250.000</h1>
+                                                                                            <button class="button-add" onclick="add('product-3', 250)">Comprar</button>
+                                                                                        </div>
+                                                                                        <div class="product-container">
+                                                                                            <h3>Fiat Toro</h3>
+                                                                                            <img src="/img/fiat-toro.jpeg" />
+                                                                                            <h1>$100.000</h1>
+                                                                                            <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
+                                                                                        </div>
+                                                                                        
+                                                                                        <div class="product-container">
+                                                                                            <h3>Renaul Duster</h3>
+                                                                                            <img src="/img/renaul-duster.jpeg" />
+                                                                                            <h1>$650.000</h1>
+                                                                                            <button class="button-add" onclick="add('product-6', 650)">Comprar</button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="motos">
+                                                                                        <div class="product-container">
+                                                                                            <h3>Honda Wave NF110 </h3>
+                                                                                            <img src="/img/moto1.jpeg" />
+                                                                                            <h1>$100.000</h1>
+                                                                                            <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
+                                                                                        </div>
+                                                                                        <div class="product-container">
+                                                                                            <h3>Rouser NS125 </h3>
+                                                                                            <img src="/img/moto2.jpeg" />
+                                                                                            <h1>$210.000</h1>
+                                                                                            <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
+                                                                                        </div>
+                                                                                        <div class="product-container">
+                                                                                            <h3>Ktm Duke NS200 </h3>
+                                                                                            <img src="/img/moto3.jpeg" />
+                                                                                            <h1>$280.000</h1>
+                                                                                            <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
+                                                                                        </div>
+                                                                                    </div>-->
+                                                                </div>
+                                                                </div>
+                                                                <!--    <div class="login">
+                                                                        <div class="product-container">
+                                                                            <h3>Chevrolet Aveo</h3>
+                                                                            <img src="/img/chevrolet-aveo.jpeg" />
+                                                                            <h1>$950.000</h1>
+                                                                            <button class="button-add" onclick="add('product-1', 50)">Comprar</button>
+                                                                        </div>
+                                                                
+                                                                        <div class="product-container">
+                                                                            <h3>Chevrolet Cruze</h3>
+                                                                            <img src="/img/chevrolet-cruze.jpeg" />
+                                                                            <h1>$1.600.000</h1>
+                                                                            <button class="button-add" onclick="add('product-2', 300)">Comprar</button>
+                                                                        </div>
+                                                                        <div class="product-container">
+                                                                            <h3>Ktm Duke NS200 </h3>
+                                                                            <img src="/img/moto3.jpeg" />
+                                                                            <h1>$280.000</h1>
+                                                                            <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
+                                                                        </div>
+                                                                
+                                                                        <div class="product-container">
+                                                                            <h3>Dodge Ram</h3>
+                                                                            <img src="/img/dodge-ram.jpeg" />
+                                                                            <h1>$4.250.000</h1>
+                                                                            <button class="button-add" onclick="add('product-3', 250)">Comprar</button>
+                                                                        </div>
+                                                                
+                                                                        <div class="product-container">
+                                                                            <h3>Fiat Cronos</h3>
+                                                                            <img src="/img/fiat-cronos.jpeg" />
+                                                                            <h1>$1.200.000</h1>
+                                                                            <button class="button-add" onclick="add('product-4', 200)">Comprar</button>
+                                                                        </div>
+                                                                
+                                                                        <div class="product-container">
+                                                                            <h3>Fiat Toro</h3>
+                                                                            <img src="/img/fiat-toro.jpeg" />
+                                                                            <h1>$1.900.000</h1>
+                                                                            <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
+                                                                        </div>
+                                                                        <div class="product-container">
+                                                                            <h3>Rouser NS125 </h3>
+                                                                            <img src="/img/moto2.jpeg" />
+                                                                            <h1>$210.000</h1>
+                                                                            <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
+                                                                        </div>
+                                                                
+                                                                        <div class="product-container">
+                                                                            <h3>Renaul Duster</h3>
+                                                                            <img src="/img/renaul-duster.jpeg" />
+                                                                            <h1>$850.000</h1>
+                                                                            <button class="button-add" onclick="add('product-6', 650)">Comprar</button>
+                                                                        </div>
+                                                                        <div class="product-container">
+                                                                            <h3>Honda Wave NF110 </h3>
+                                                                            <img src="/img/moto1.jpeg" />
+                                                                            <h1>$100.000</h1>
+                                                                            <button class="button-add" onclick="add('product-5', 10)">Comprar</button>
+                                                                        </div>
+                                                                    </div>-->
+
+                                                                </section>
+                                                                <footer>
+                                                                    <div class="container">
+                                                                        <img src="/img/Logo_Nombre.png" class="logo">
+                                                                            <p class="copyright">&copy Copyright BusCar - 2022</p>        
+                                                                            <ul class="redes">
+                                                                                <li><img src="/img/instagram.png" class="iconos"> <a rel="link" href="https://www.instagram.com/">Instagram</a></li>
+                                                                                <li><img src="/img/facebook.png" class="iconos"> <a rel="link" href="https://www.facebook.com/">Facebook</a></li>
+                                                                                <li><img src="/img/twitter.png" class="iconos"> <a rel="link" href="https://www.twitter.com/">Twitter</a></li>
+                                                                            </ul>      
+                                                                    </div>  
+                                                                </footer>
+                                                                </body>
+                                                                </html>

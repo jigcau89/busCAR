@@ -141,7 +141,8 @@
                 <input type="file" name="archivo">
                 <br>
             </div>
-
+<p th:if="${exito != null}" th:text="${exito}" style="color:green"></p> 
+    <p th:if="${error != null}" th:text="${error}" style="color:red"></p> 
             <input id="submit" type="submit" ><br><br>
 
 
@@ -153,7 +154,7 @@
 
        
     </section>
-        
+     <!--   
               <div   th:if="${exito}!=null" class=" header_content" >
         <div >
             <h5 >Exito </h5>
@@ -171,7 +172,7 @@
             <a href="/"> Volver ></a>
         </div>
 
-    </div>
+    </div>-->
 </center>
     
   

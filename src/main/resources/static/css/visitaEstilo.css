@@ -33,7 +33,7 @@ ul {
 	padding: 10px;
 	top: 0px;
 }
-input {
+.buscador {
 	display: flex;
 	align-items: center;
 	outline: none;

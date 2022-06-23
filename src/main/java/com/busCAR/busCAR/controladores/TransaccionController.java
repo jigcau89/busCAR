@@ -120,6 +120,8 @@ public class TransaccionController {
             servicioTransaccion.guardar(precio, FormaDePago.DEBITO, usuario, vehiculo.get());
             return "redirect://localhost:8080/transaccion/visita";
         } catch (ErrorServicio e) {
+            modelo.put("precio", precio);
+            modelo.put("vehiculo", idVehiculo);
             e.printStackTrace();
             modelo.put("error", e.getMessage());
         }
@@ -140,6 +142,8 @@ public class TransaccionController {
             servicioTransaccion.guardar(precio, FormaDePago.TARJETA, usuario, vehiculo.get());
             return "redirect://localhost:8080/transaccion/visita";
         } catch (ErrorServicio e) {
+            modelo.put("precio", precio);
+            modelo.put("vehiculo", idVehiculo);
             e.printStackTrace();
             modelo.put("error", e.getMessage());
         }
@@ -158,6 +162,8 @@ public class TransaccionController {
             return "redirect://localhost:8080/transaccion/visita";
         } catch (ErrorServicio e) {
             e.printStackTrace();
+            modelo.put("precio", precio);
+            modelo.put("vehiculo", idVehiculo);
             modelo.put("error", e.getMessage());
         }
         return "datos-efectivo";
@@ -176,6 +182,8 @@ public class TransaccionController {
             return "redirect://localhost:8080/transaccion/visita";
         } catch (ErrorServicio e) {
             e.printStackTrace();
+            modelo.put("precio", precio);
+            modelo.put("vehiculo", idVehiculo);
             modelo.put("error", e.getMessage());
         }
         return "datos-cripto";
